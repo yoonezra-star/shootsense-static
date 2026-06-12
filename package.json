@@ -1,0 +1,14 @@
+{
+  "name": "shootsense-static",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "publish:post": "node scripts/publish-static-post.mjs",
+    "publish:queue": "node scripts/run-scheduled-publish.mjs",
+    "notify:telegram": "node scripts/notify-telegram.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "slugify": "^1.6.6"
+  }
+}

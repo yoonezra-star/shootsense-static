@@ -1,0 +1,5 @@
+node_modules/
+publish-log.json
+content/queue/*.done.json
+content/queue/*.error.json
+.publish.env
