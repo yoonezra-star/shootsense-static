@@ -293,6 +293,11 @@ export async function updateCategoryPage(rootDir, categoryKey, posts) {
   const categoryPath = path.join(rootDir, category.path);
   const html = await readHtml(categoryPath);
   const $ = load(html, { decodeEntities: false });
+  setMeta($, 'meta[name="robots"]', "content", "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large");
+  setMeta($, 'link[rel="canonical"]', "href", `${SITE_URL}/${categoryKey}/`);
+  setMeta($, 'meta[property="og:url"]', "content", `${SITE_URL}/${categoryKey}/`);
+  setMeta($, 'meta[property="og:description"]', "content", category.description);
+  setMeta($, 'meta[name="twitter:description"]', "content", category.description);
   const main = $("main.site-main").first();
   const cards = posts
     .filter((post) => post.category === categoryKey)
@@ -311,6 +316,9 @@ export async function updateHomePage(rootDir, posts) {
   const homePath = path.join(rootDir, HOME_PAGE);
   const html = await readHtml(homePath);
   const $ = load(html, { decodeEntities: false });
+  setMeta($, 'meta[name="robots"]', "content", "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large");
+  setMeta($, 'link[rel="canonical"]', "href", `${SITE_URL}/`);
+  setMeta($, 'meta[property="og:url"]', "content", `${SITE_URL}/`);
   const homeRoot = $(".ss-expert-home").first();
   const latestSectionHtml = `
     <div class="wp-block-group ss-expert-band ss-auto-latest-posts is-layout-flow wp-block-group-is-layout-flow">

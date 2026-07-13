@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "harden:adsense": "node scripts/harden-adsense-readiness.mjs",
     "publish:post": "node scripts/publish-static-post.mjs",
     "publish:queue": "node scripts/run-scheduled-publish.mjs",
     "notify:telegram": "node scripts/notify-telegram.mjs"
