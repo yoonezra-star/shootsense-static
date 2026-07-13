@@ -5,7 +5,9 @@
   "scripts": {
     "clean:adsense": "node scripts/clean-adsense-inventory.mjs",
     "harden:adsense": "node scripts/harden-adsense-readiness.mjs",
+    "repair:legacy-links": "node scripts/repair-legacy-post-links.mjs",
     "strengthen:trust": "node scripts/strengthen-trust-signals.mjs",
+    "strengthen:author": "node scripts/strengthen-author-signals.mjs",
     "publish:post": "node scripts/publish-static-post.mjs",
     "publish:queue": "node scripts/run-scheduled-publish.mjs",
     "notify:telegram": "node scripts/notify-telegram.mjs"

@@ -615,6 +615,31 @@ body.search .site-content{}
   .ss-page-table td{padding-top:0;}
 }
 /* ss-trust-signals:end */
+
+
+/* ss-author-signals:start */
+.ss-author-box{margin:18px 0 18px;padding:18px 20px;border:1px solid #d8e4ef;border-radius:8px;background:#fff;color:#213044;box-shadow:0 8px 22px rgba(15,23,42,.035);}
+.ss-author-box h2{margin:0 0 10px;font-size:20px;line-height:1.35;color:#10213a;}
+.ss-author-box p{margin:0 0 10px;color:#475569;line-height:1.65;}
+.ss-author-box strong{color:#10213a;}
+.ss-author-meta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:0;list-style:none;}
+.ss-author-meta li{margin:0;padding:5px 10px;border:1px solid #dbe5f0;border-radius:999px;background:#f8fbff;color:#0f5b99;font-size:12px;font-weight:800;}
+.ss-author-box a,.ss-author-profile a{font-weight:900;color:#0f5b99;text-decoration:underline;text-underline-offset:3px;}
+.ss-author-profile{max-width:980px;margin:0 auto;color:#1f2d3d;word-break:keep-all;overflow-wrap:break-word;}
+.ss-author-profile .ss-page-hero{margin-bottom:22px;}
+.ss-author-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 24px;}
+.ss-author-fact{padding:18px;border:1px solid #dbe5f0;border-radius:8px;background:#fff;}
+.ss-author-fact span{display:block;margin-bottom:7px;color:#0f5b99;font-size:12px;font-weight:900;letter-spacing:.06em;}
+.ss-author-fact strong{display:block;color:#10213a;font-size:17px;line-height:1.45;}
+.ss-author-process{counter-reset:authorstep;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 24px;}
+.ss-author-step{position:relative;padding:18px;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;}
+.ss-author-step:before{counter-increment:authorstep;content:counter(authorstep, decimal-leading-zero);display:block;margin-bottom:8px;color:#0f5b99;font-weight:900;}
+.ss-author-step h3{margin:0 0 8px;font-size:17px;color:#10213a;}
+.ss-author-step p{margin:0;color:#475569;line-height:1.65;}
+@media (max-width:720px){
+  .ss-author-facts,.ss-author-process{grid-template-columns:1fr;}
+}
+/* ss-author-signals:end */
 </style>
 <style>body.archive .ast-row article, body.search .ast-row article{display:none !important;}</style><script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7777714451388445" crossorigin="anonymous"></script>
 
@@ -759,8 +784,8 @@ body.search .site-content{}
 <li id="menu-item-1295" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1295"><a href="../asia-travel/index.html" class="menu-link">아시아</a></li>
 <li id="menu-item-1296" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1296"><a href="../southeast-asia-travel/index.html" class="menu-link">동남아</a></li>
 <li id="menu-item-1297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1297"><a href="../middle-east-travel/index.html" class="menu-link">중동</a></li>
-<li id="menu-item-1298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a href="../index.html%3Fp=1150.html" class="menu-link">소개</a></li>
-<li id="menu-item-1299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1299"><a href="../index.html%3Fp=1148.html" class="menu-link">문의</a></li>
+<li id="menu-item-1298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a href="/about/" class="menu-link">소개</a></li>
+<li id="menu-item-1299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1299"><a href="/contact/" class="menu-link">문의</a></li>
 </ul></div></nav></div></div>		</div>
 									</div>
 												</div>
@@ -808,8 +833,8 @@ body.search .site-content{}
 <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1295"><a href="../asia-travel/index.html" class="menu-link">아시아</a></li>
 <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1296"><a href="../southeast-asia-travel/index.html" class="menu-link">동남아</a></li>
 <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1297"><a href="../middle-east-travel/index.html" class="menu-link">중동</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a href="../index.html%3Fp=1150.html" class="menu-link">소개</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1299"><a href="../index.html%3Fp=1148.html" class="menu-link">문의</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a href="/about/" class="menu-link">소개</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1299"><a href="/contact/" class="menu-link">문의</a></li>
 </ul></div></nav></div></div>		</div>
 					</div>
 			</div>
@@ -824,7 +849,7 @@ body.search .site-content{}
 
 					<main id="main" class="site-main">
 				<header class="ss-archive-hero"><span class="pill">카테고리</span><h1>유럽</h1><p></p><p>유럽 여행 중 관광지 한복판보다 외곽 동네와 작은 도시에서 느낀 체류감을 기록한 글입니다. 이동 동선, 조용한 산책 구간, 기대와 달랐던 장면을 함께 적어 여행지를 더 입체적으로 판단할 수 있게 돕습니다.</p>
-<p></p></header><div class="ss-archive-grid"><article class="ss-archive-card"><a class="cover" href="../index.html%3Fp=1212.html"><img src="../wp-content/uploads/2026/03/unnamed-13-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="../index.html%3Fp=1212.html">그리스 아르타 혼자 여행: 관광객이 적은 도시를 안정적으로 걷는 법</a><span class="dt">2026-03-28</span></div></article><article class="ss-archive-card"><a class="cover" href="../index.html%3Fp=1119.html"><img src="../wp-content/uploads/2026/03/unnamed-1-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="../index.html%3Fp=1119.html">이탈리아 치비타 디 반뇨레조 근처 마을 혼자 여행: 보는 여행보다 머무는 여행</a><span class="dt">2026-03-07</span></div></article><article class="ss-archive-card"><a class="cover" href="../index.html%3Fp=1114.html"><img src="../wp-content/uploads/2026/03/unnamed-7-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="../index.html%3Fp=1114.html">스페인 베사루 혼자 여행: 중세 마을을 조용히 걷는 법</a><span class="dt">2026-03-05</span></div></article><article class="ss-archive-card"><a class="cover" href="../index.html%3Fp=1111.html"><img src="../wp-content/uploads/2026/03/unnamed-4-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="../index.html%3Fp=1111.html">오스트리아 크렘스 혼자 여행: 도나우 강변에서 머무는 일정 기준</a><span class="dt">2026-03-03</span></div></article><article class="ss-archive-card"><a class="cover" href="../index.html%3Fp=1108.html"><img src="../wp-content/uploads/2026/03/unnamed-3-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="../index.html%3Fp=1108.html">프랑스 안시 근교 마을 혼자 여행: 생활권처럼 머무는 하루 설계</a><span class="dt">2026-03-01</span></div></article><article class="ss-archive-card"><a class="cover" href="../index.html%3Fp=519.html"></a><div class="body"><span class="cat">유럽</span><a class="ti" href="../index.html%3Fp=519.html">혼자 유럽 여행: 파리와 로마를 고를 때 보는 기준</a><span class="dt">2025-05-19</span></div></article></div><div class="ast-row"></div>			</main><!-- #main -->
+<p></p></header><div class="ss-archive-grid"><article class="ss-archive-card"><a class="cover" href="/관광객이-적어-현지의-속도를-느낀-아르타/"><img src="../wp-content/uploads/2026/03/unnamed-13-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="/관광객이-적어-현지의-속도를-느낀-아르타/">그리스 아르타 혼자 여행: 관광객이 적은 도시를 안정적으로 걷는 법</a><span class="dt">2026-03-28</span></div></article><article class="ss-archive-card"><a class="cover" href="/이탈리아-치비타-디-반뇨레조-근처-마을/"><img src="../wp-content/uploads/2026/03/unnamed-1-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="/이탈리아-치비타-디-반뇨레조-근처-마을/">이탈리아 치비타 디 반뇨레조 근처 마을 혼자 여행: 보는 여행보다 머무는 여행</a><span class="dt">2026-03-07</span></div></article><article class="ss-archive-card"><a class="cover" href="/유명-관광지에서-느끼지-못한-스페인-베사루/"><img src="../wp-content/uploads/2026/03/unnamed-7-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="/유명-관광지에서-느끼지-못한-스페인-베사루/">스페인 베사루 혼자 여행: 중세 마을을 조용히 걷는 법</a><span class="dt">2026-03-05</span></div></article><article class="ss-archive-card"><a class="cover" href="/구경이-아니라-머무름에-가까웠던-오스트리아/"><img src="../wp-content/uploads/2026/03/unnamed-4-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="/구경이-아니라-머무름에-가까웠던-오스트리아/">오스트리아 크렘스 혼자 여행: 도나우 강변에서 머무는 일정 기준</a><span class="dt">2026-03-03</span></div></article><article class="ss-archive-card"><a class="cover" href="/여행과-생활의-경계가-흐려진-프랑스-안시-근교-마을/"><img src="../wp-content/uploads/2026/03/unnamed-3-768x768.webp" loading="lazy" alt=""></a><div class="body"><span class="cat">유럽</span><a class="ti" href="/여행과-생활의-경계가-흐려진-프랑스-안시-근교-마을/">프랑스 안시 근교 마을 혼자 여행: 생활권처럼 머무는 하루 설계</a><span class="dt">2026-03-01</span></div></article><article class="ss-archive-card"><a class="cover" href="/honja-europe-yeohaeng-paris-rome/"></a><div class="body"><span class="cat">유럽</span><a class="ti" href="/honja-europe-yeohaeng-paris-rome/">혼자 유럽 여행: 파리와 로마를 고를 때 보는 기준</a><span class="dt">2025-05-19</span></div></article></div><div class="ast-row"></div>			</main><!-- #main -->
 
 
 
@@ -839,7 +864,7 @@ body.search .site-content{}
       <p class="brand">여행정보엑스퍼트</p>
       <p class="tagline">현지 발걸음에서 시작된 여행 정보. 동네 골목 산책기와 숙소·동선·안전 기준 등 실용 가이드를 정리합니다.</p>
       <p class="meta">운영 · 여행엑스퍼트</p>
-      <p class="meta">이메일 · <a href="https://shootsense.com/cdn-cgi/l/email-protection#0d7462626368777f6c4d6a606c6461236e6260"><span class="__cf_email__" data-cfemail="21584e4e4f445b534061464c40484d0f424e4c">[email&nbsp;protected]</span></a></p>
+      <p class="meta">이메일 · <a href="mailto:contact@shootsense.com">contact@shootsense.com</a></p>
       <p class="meta">운영 시작 · 2018년 9월</p>
     </div>
     <div>
@@ -855,28 +880,28 @@ body.search .site-content{}
     <div>
       <h4>사이트 안내</h4>
       <ul>
-        <li><a href="../index.html%3Fp=1150.html">사이트 소개</a></li>
-        <li><a href="../index.html%3Fp=1148.html">문의하기</a></li>
-        <li><a href="../index.html%3Fp=1265.html">이용약관</a></li>
-        <li><a href="../index.html%3Fp=1144.html">개인정보 처리방침</a></li>
-      </ul>
+        <li><a href="/about/">사이트 소개</a></li>
+        <li><a href="/contact/">문의하기</a></li>
+        <li><a href="/terms-of-service/">이용약관</a></li>
+        <li><a href="/privacy-policy/">개인정보 처리방침</a></li>
+      <li><a href="/author/">작성자/검수자 소개</a></li></ul>
     </div>
     <div>
       <h4>구독·연결</h4>
       <ul>
 
         <li><a href="../sitemap_index.xml">사이트맵</a></li>
-        <li><a href="https://shootsense.com/cdn-cgi/l/email-protection#235a4c4c4d4659514263444e424a4f0d404c4e1c505641494640571ecfb48fceb5aa03cf83b6c8909703c88f9bcfbebb">여행 정보 문의</a></li>
-        <li><a href="https://shootsense.com/cdn-cgi/l/email-protection#ed9482828388979f8cad8a808c8481c38e8280d29e988f87888e99d0014d78065e59cd014d78014d78cd014d71065e59">정보 정정 제보</a></li>
+        <li><a href="mailto:contact@shootsense.com">contact@shootsense.com</a></li>
+        <li><a href="mailto:contact@shootsense.com">contact@shootsense.com</a></li>
       </ul>
     </div>
   </div>
   <div class="ss-footer-bottom">
     <p class="copyright">© 2026 여행정보엑스퍼트 · shootsense.com — All rights reserved.</p>
     <div class="legal">
-      <a href="../index.html%3Fp=1144.html">개인정보 처리방침</a>
-      <a href="../index.html%3Fp=1265.html">이용약관</a>
-      <a href="../index.html%3Fp=1148.html">문의</a>
+      <a href="/privacy-policy/">개인정보 처리방침</a>
+      <a href="/terms-of-service/">이용약관</a>
+      <a href="/contact/">문의</a>
     </div>
   </div>
 </section>

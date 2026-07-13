@@ -110,6 +110,18 @@ export function buildPostBodyHtml(post) {
           AUTHOR_NAME
         )} · 오류 제보와 수정 요청은 <a href="/contact/">문의하기</a>에서 받습니다.</p>
       </div>`;
+  const authorBox = `<div class="ss-author-box" itemscope itemtype="https://schema.org/Person">
+        <h2>작성자와 검수 기준</h2>
+        <p><strong itemprop="name">${escapeHtml(
+          AUTHOR_NAME
+        )}</strong>는 혼자 여행자가 실제로 결정해야 하는 숙소 위치, 이동 동선, 식사 난이도, 야간 도착 가능성, 현장 확인 필요 정보를 중심으로 글을 정리합니다.</p>
+        <p>새 정보나 오류 제보가 들어오면 공식 안내, 지도 정보, 교통 정보, 현지 운영 정보와 비교해 본문을 다시 검토합니다. 자세한 운영 기준은 <a href="/author/">작성자/검수자 소개</a>에서 확인할 수 있습니다.</p>
+        <ul class="ss-author-meta">
+          <li>혼자 여행 기준</li>
+          <li>출발 전 확인 중심</li>
+          <li>오류 제보 반영</li>
+        </ul>
+      </div>`;
 
   return `
     <div class="ss-post">
@@ -127,6 +139,7 @@ export function buildPostBodyHtml(post) {
       </div>
       ${summary}
       ${trustBox}
+      ${authorBox}
       ${buildTocHtml(sections)}
       <div class="ss-post-body">
         ${body}

@@ -633,6 +633,31 @@ body.search .site-content{}
   .ss-page-table td{padding-top:0;}
 }
 /* ss-trust-signals:end */
+
+
+/* ss-author-signals:start */
+.ss-author-box{margin:18px 0 18px;padding:18px 20px;border:1px solid #d8e4ef;border-radius:8px;background:#fff;color:#213044;box-shadow:0 8px 22px rgba(15,23,42,.035);}
+.ss-author-box h2{margin:0 0 10px;font-size:20px;line-height:1.35;color:#10213a;}
+.ss-author-box p{margin:0 0 10px;color:#475569;line-height:1.65;}
+.ss-author-box strong{color:#10213a;}
+.ss-author-meta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:0;list-style:none;}
+.ss-author-meta li{margin:0;padding:5px 10px;border:1px solid #dbe5f0;border-radius:999px;background:#f8fbff;color:#0f5b99;font-size:12px;font-weight:800;}
+.ss-author-box a,.ss-author-profile a{font-weight:900;color:#0f5b99;text-decoration:underline;text-underline-offset:3px;}
+.ss-author-profile{max-width:980px;margin:0 auto;color:#1f2d3d;word-break:keep-all;overflow-wrap:break-word;}
+.ss-author-profile .ss-page-hero{margin-bottom:22px;}
+.ss-author-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 24px;}
+.ss-author-fact{padding:18px;border:1px solid #dbe5f0;border-radius:8px;background:#fff;}
+.ss-author-fact span{display:block;margin-bottom:7px;color:#0f5b99;font-size:12px;font-weight:900;letter-spacing:.06em;}
+.ss-author-fact strong{display:block;color:#10213a;font-size:17px;line-height:1.45;}
+.ss-author-process{counter-reset:authorstep;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 24px;}
+.ss-author-step{position:relative;padding:18px;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;}
+.ss-author-step:before{counter-increment:authorstep;content:counter(authorstep, decimal-leading-zero);display:block;margin-bottom:8px;color:#0f5b99;font-weight:900;}
+.ss-author-step h3{margin:0 0 8px;font-size:17px;color:#10213a;}
+.ss-author-step p{margin:0;color:#475569;line-height:1.65;}
+@media (max-width:720px){
+  .ss-author-facts,.ss-author-process{grid-template-columns:1fr;}
+}
+/* ss-author-signals:end */
 </style>
 <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7777714451388445" crossorigin="anonymous"></script>
 
@@ -745,7 +770,7 @@ body.search .site-content{}
 
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="wp-singular page-template-default page page-id-1770 wp-theme-astra ast-desktop ast-no-sidebar astra-4.11.1 group-blog ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-normal-title-enabled">
 
-<a class="skip-link screen-reader-text" href="../index.html%3Fp=1770.html#content" title="콘텐츠로 건너뛰기">
+<a class="skip-link screen-reader-text" href="/editorial-policy/" title="콘텐츠로 건너뛰기">
 		콘텐츠로 건너뛰기</a>
 
 <div class="hfeed site" id="page">
@@ -777,8 +802,8 @@ body.search .site-content{}
 <li id="menu-item-1295" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1295"><a href="../asia-travel/index.html" class="menu-link">아시아</a></li>
 <li id="menu-item-1296" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1296"><a href="../southeast-asia-travel/index.html" class="menu-link">동남아</a></li>
 <li id="menu-item-1297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1297"><a href="../middle-east-travel/index.html" class="menu-link">중동</a></li>
-<li id="menu-item-1298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a href="../index.html%3Fp=1150.html" class="menu-link">소개</a></li>
-<li id="menu-item-1299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1299"><a href="../index.html%3Fp=1148.html" class="menu-link">문의</a></li>
+<li id="menu-item-1298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a href="/about/" class="menu-link">소개</a></li>
+<li id="menu-item-1299" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1299"><a href="/contact/" class="menu-link">문의</a></li>
 </ul></div></nav></div></div>		</div>
 									</div>
 												</div>
@@ -826,8 +851,8 @@ body.search .site-content{}
 <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1295"><a href="../asia-travel/index.html" class="menu-link">아시아</a></li>
 <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1296"><a href="../southeast-asia-travel/index.html" class="menu-link">동남아</a></li>
 <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1297"><a href="../middle-east-travel/index.html" class="menu-link">중동</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a href="../index.html%3Fp=1150.html" class="menu-link">소개</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1299"><a href="../index.html%3Fp=1148.html" class="menu-link">문의</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1298"><a href="/about/" class="menu-link">소개</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1299"><a href="/contact/" class="menu-link">문의</a></li>
 </ul></div></nav></div></div>		</div>
 					</div>
 			</div>
@@ -893,7 +918,7 @@ body.search .site-content{}
       <p class="brand">여행정보엑스퍼트</p>
       <p class="tagline">현지 발걸음에서 시작된 여행 정보. 동네 골목 산책기와 숙소·동선·안전 기준 등 실용 가이드를 정리합니다.</p>
       <p class="meta">운영 · 여행엑스퍼트</p>
-      <p class="meta">이메일 · <a href="https://shootsense.com/cdn-cgi/l/email-protection#a1d8cececfc4dbd3c0e1c6ccc0c8cd8fc2cecc"><span class="__cf_email__" data-cfemail="90e9fffffef5eae2f1d0f7fdf1f9fcbef3fffd">[email&nbsp;protected]</span></a></p>
+      <p class="meta">이메일 · <a href="mailto:contact@shootsense.com">contact@shootsense.com</a></p>
       <p class="meta">운영 시작 · 2018년 9월</p>
     </div>
     <div>
@@ -909,28 +934,28 @@ body.search .site-content{}
     <div>
       <h4>사이트 안내</h4>
       <ul>
-        <li><a href="../index.html%3Fp=1150.html">사이트 소개</a></li>
-        <li><a href="../index.html%3Fp=1148.html">문의하기</a></li>
-        <li><a href="../index.html%3Fp=1265.html">이용약관</a></li>
-        <li><a href="../index.html%3Fp=1144.html">개인정보 처리방침</a></li>
-      </ul>
+        <li><a href="/about/">사이트 소개</a></li>
+        <li><a href="/contact/">문의하기</a></li>
+        <li><a href="/terms-of-service/">이용약관</a></li>
+        <li><a href="/privacy-policy/">개인정보 처리방침</a></li>
+      <li><a href="/author/">작성자/검수자 소개</a></li></ul>
     </div>
     <div>
       <h4>구독·연결</h4>
       <ul>
 
         <li><a href="../sitemap_index.xml">사이트맵</a></li>
-        <li><a href="https://shootsense.com/cdn-cgi/l/email-protection#1f667070717a656d7e5f78727e7673317c7072206c6a7d757a7c6b22f388b3f289963ff3bf8af4acab3ff4b3a7f38287">여행 정보 문의</a></li>
-        <li><a href="https://shootsense.com/cdn-cgi/l/email-protection#c2bbadadaca7b8b0a382a5afa3abaeeca1adaffdb1b7a0a8a7a1b6ff2e6257297176e22e62572e6257e22e625e297176">정보 정정 제보</a></li>
+        <li><a href="mailto:contact@shootsense.com">contact@shootsense.com</a></li>
+        <li><a href="mailto:contact@shootsense.com">contact@shootsense.com</a></li>
       </ul>
     </div>
   </div>
   <div class="ss-footer-bottom">
     <p class="copyright">© 2026 여행정보엑스퍼트 · shootsense.com — All rights reserved.</p>
     <div class="legal">
-      <a href="../index.html%3Fp=1144.html">개인정보 처리방침</a>
-      <a href="../index.html%3Fp=1265.html">이용약관</a>
-      <a href="../index.html%3Fp=1148.html">문의</a>
+      <a href="/privacy-policy/">개인정보 처리방침</a>
+      <a href="/terms-of-service/">이용약관</a>
+      <a href="/contact/">문의</a>
     </div>
   </div>
 </section>

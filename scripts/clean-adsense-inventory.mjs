@@ -17,6 +17,7 @@ const legacyPageTargets = new Map([
 const pageDirs = [
   "",
   "about",
+  "author",
   "contact",
   "editorial-policy",
   "privacy-policy",
