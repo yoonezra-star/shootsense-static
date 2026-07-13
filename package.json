@@ -8,6 +8,7 @@
     "repair:legacy-links": "node scripts/repair-legacy-post-links.mjs",
     "strengthen:trust": "node scripts/strengthen-trust-signals.mjs",
     "strengthen:author": "node scripts/strengthen-author-signals.mjs",
+    "strengthen:categories": "node scripts/strengthen-category-pages.mjs",
     "publish:post": "node scripts/publish-static-post.mjs",
     "publish:queue": "node scripts/run-scheduled-publish.mjs",
     "notify:telegram": "node scripts/notify-telegram.mjs"
