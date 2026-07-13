@@ -97,6 +97,19 @@ export function buildPostBodyHtml(post) {
   const summary = `<div class="ss-post-summary"><span class="lbl">핵심 요약</span><p>${escapeHtml(
     post.summary
   )}</p></div>`;
+  const reviewedAt = formatDate(post.modifiedAt || post.publishedAt || new Date());
+  const trustBox = `<div class="ss-trust-box">
+        <span class="ss-trust-kicker">검수 기준</span>
+        <h2>이 글은 이렇게 검토했습니다</h2>
+        <ul>
+          <li>혼자 여행자가 실제로 판단해야 하는 숙소 위치, 이동 동선, 식사 난이도, 야간 도착 가능성을 우선 확인했습니다.</li>
+          <li>교통, 영업시간, 요금처럼 바뀔 수 있는 정보는 현장 확인이 필요하다는 전제를 함께 표시했습니다.</li>
+          <li>특정 업체 추천보다 독자가 스스로 비교할 수 있는 기준과 예외 상황을 먼저 정리했습니다.</li>
+        </ul>
+        <p class="ss-trust-note">최종 검토일: ${escapeHtml(reviewedAt)} · 작성/검수: ${escapeHtml(
+          AUTHOR_NAME
+        )} · 오류 제보와 수정 요청은 <a href="/contact/">문의하기</a>에서 받습니다.</p>
+      </div>`;
 
   return `
     <div class="ss-post">
@@ -113,6 +126,7 @@ export function buildPostBodyHtml(post) {
         <img src="${escapeHtml(post.image || DEFAULT_IMAGE)}" alt="${escapeHtml(post.title)}">
       </div>
       ${summary}
+      ${trustBox}
       ${buildTocHtml(sections)}
       <div class="ss-post-body">
         ${body}
