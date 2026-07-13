@@ -34,6 +34,7 @@ for (const file of files) {
   $('link[rel="https://api.w.org/"]').remove();
   $('link[rel="shortlink"]').remove();
   $('link[rel="alternate"][href*="/feed/"]').remove();
+  $('link[rel="alternate"][href*="feed/index.html"]').remove();
   $('link[rel="alternate"][href*="comments/feed"]').remove();
   $('link[rel="alternate"][href*="wp-json"]').remove();
   $('link[href*="/wp-json/"]').remove();

@@ -72,6 +72,7 @@ for (const file of htmlFiles) {
   $('link[rel="shortlink"]').remove();
   $('link[href*="/wp-json/"]').remove();
   $('link[href*="/feed/"]').remove();
+  $('link[href*="feed/index.html"]').remove();
   $('link[href*="comments/feed"]').remove();
   $('a[href*="index.html@p="], a[href*="index.html_p="]').each((_, node) => {
     const anchor = $(node);
@@ -88,7 +89,7 @@ for (const file of htmlFiles) {
       anchor.removeAttr("href");
     }
   });
-  $('a[href*="/feed/"]').each((_, node) => {
+  $('a[href*="/feed/"], a[href*="feed/index.html"]').each((_, node) => {
     const anchor = $(node);
     const listItem = anchor.closest("li");
     if (listItem.length && listItem.text().replace(/\s+/g, " ").trim() === anchor.text().trim()) {
