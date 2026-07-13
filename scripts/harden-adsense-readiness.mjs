@@ -31,9 +31,12 @@ for (const file of files) {
   setCanonical($, publicUrl);
   setProperty($, "og:url", publicUrl);
 
+  $('link[rel="https://api.w.org/"]').remove();
+  $('link[rel="shortlink"]').remove();
   $('link[rel="alternate"][href*="/feed/"]').remove();
   $('link[rel="alternate"][href*="comments/feed"]').remove();
   $('link[rel="alternate"][href*="wp-json"]').remove();
+  $('link[href*="/wp-json/"]').remove();
   $('link[rel="EditURI"]').remove();
   $('meta[name="generator"]').remove();
 
@@ -74,9 +77,6 @@ function toPublicUrl(rel) {
   }
   if (rel.endsWith("/index.html")) {
     return `${SITE_URL}/${rel.slice(0, -"/index.html".length)}/`;
-  }
-  if (rel.startsWith("index.html_p=")) {
-    return `${SITE_URL}/${rel}`;
   }
   return `${SITE_URL}/${rel}`;
 }
