@@ -23,6 +23,10 @@ const trustCss = `
 .ss-page-card{padding:18px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;}
 .ss-page-card h3{margin:0 0 8px;font-size:17px;color:#10213a;}
 .ss-page-card p,.ss-page-card li{color:#475569;line-height:1.65;}
+.ss-contact-email{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:16px 0 24px;padding:18px 20px;border:1px solid #bfdbfe;border-radius:8px;background:#eff6ff;}
+.ss-contact-email strong{display:block;margin-bottom:4px;color:#10213a;font-size:17px;}
+.ss-contact-email span{display:block;color:#475569;line-height:1.6;}
+.ss-contact-email a{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:8px;background:#0f5b99;color:#fff !important;text-decoration:none !important;font-weight:900;}
 .ss-page-table{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0 24px;border:1px solid #dbe5f0;border-radius:8px;overflow:hidden;background:#fff;}
 .ss-page-table th,.ss-page-table td{padding:12px 14px;border-bottom:1px solid #e6edf5;text-align:left;vertical-align:top;line-height:1.65;}
 .ss-page-table tr:last-child th,.ss-page-table tr:last-child td{border-bottom:0;}
@@ -87,7 +91,7 @@ const pages = new Map([
     {
       title: "문의하기 - 여행정보엑스퍼트",
       description:
-        "여행정보엑스퍼트 문의 페이지입니다. 콘텐츠 오류 제보, 수정 요청, 광고와 제휴 문의, 개인정보 관련 요청의 처리 기준을 안내합니다.",
+        "여행정보엑스퍼트 공식 문의 페이지입니다. contact@shootsense.com으로 콘텐츠 오류 제보, 수정 요청, 광고와 제휴 문의, 개인정보 관련 요청을 보낼 수 있습니다.",
       body: `
 <div class="ss-page">
   <section class="ss-page-hero">
@@ -95,6 +99,13 @@ const pages = new Map([
     <h1>문의하기</h1>
     <p class="ss-page-lead">여행정보엑스퍼트는 여행 정보의 정확성과 독자 신뢰를 중요하게 봅니다. 본문 오류, 최신 정보 반영 요청, 권리 침해 우려, 광고와 제휴 문의는 아래 기준에 따라 검토합니다.</p>
   </section>
+  <div class="ss-contact-email">
+    <div>
+      <strong>공식 문의 이메일</strong>
+      <span>콘텐츠 오류 제보, 수정 요청, 광고·제휴 문의, 개인정보 관련 요청은 이 주소로 보내주세요.</span>
+    </div>
+    <a href="mailto:contact@shootsense.com">contact@shootsense.com</a>
+  </div>
   <h2>접수 가능한 문의</h2>
   <div class="ss-page-grid">
     <div class="ss-page-card"><h3>콘텐츠 오류 제보</h3><p>교통편, 요금, 영업시간, 위치 설명, 안전 관련 표현이 실제와 다르거나 오래된 경우 알려주세요.</p></div>
@@ -118,7 +129,7 @@ const pages = new Map([
     <li>확인 가능한 공식 안내, 현장 사진, 지도 정보, 운영 공지 등 근거 자료</li>
     <li>광고와 제휴 문의의 경우 상품, 지역, 노출 방식, 독자에게 제공되는 실제 가치</li>
   </ul>
-  <p class="ss-page-callout">현재 이 페이지는 문의 유형과 처리 기준을 안내하는 공식 창구입니다. 공개 연락처를 추가할 경우 전용 운영 이메일을 별도로 연결해 개인정보 노출을 최소화하겠습니다.</p>
+  <p class="ss-page-callout">이 페이지와 contact@shootsense.com은 여행정보엑스퍼트의 공식 문의 창구입니다. 오류 제보는 근거 자료와 함께 보내주시면 더 빠르게 확인할 수 있으며, 광고와 제휴 제안은 편집 독립성을 해치지 않는 경우에만 검토합니다.</p>
 </div>`
     }
   ],
@@ -266,7 +277,7 @@ for (const file of files) {
     postCount += 1;
   }
 
-  const next = $.html();
+  const next = normalizeHtml($.html());
   if (next !== html) {
     await fs.writeFile(file, next, "utf8");
   }
@@ -395,4 +406,8 @@ function setProperty($, property, content) {
   } else {
     $("head").append(`\n<meta property="${property}" content="${content}">`);
   }
+}
+
+function normalizeHtml(html) {
+  return html.replace(/[ \t]+$/gm, "");
 }
