@@ -20,19 +20,5 @@ for (const legacySlug of EXCLUDED_POST_SLUGS) {
   await writeFileUtf8(legacyPath, $.html());
 }
 
-const redirectsPath = path.join(rootDir, "_redirects");
-let redirects = "";
-try {
-  redirects = await fs.readFile(redirectsPath, "utf8");
-} catch {}
-
-for (const legacySlug of EXCLUDED_POST_SLUGS) {
-  const rule = `${encodeURI(`/${legacySlug}/`)} /${preferredSlug}/ 301`;
-  if (!redirects.split(/\r?\n/).includes(rule)) {
-    redirects = `${redirects.trimEnd()}${redirects.trim() ? "\n" : ""}${rule}\n`;
-  }
-}
-await writeFileUtf8(redirectsPath, redirects);
-
 await updateSitemaps(rootDir, await loadPosts(rootDir));
 console.log(JSON.stringify({ ok: true, preferredUrl, excluded: [...EXCLUDED_POST_SLUGS] }, null, 2));
