@@ -262,6 +262,7 @@ export async function buildPostPage(rootDir, post) {
   const templatePath = path.join(rootDir, TEMPLATE_POST);
   const html = await readHtml(templatePath);
   const $ = load(html, { decodeEntities: false });
+  ensureStaticHeaderCss($);
   const pageUrl = `${SITE_URL}/${post.slug}/`;
   const title = `${post.title} - ${SITE_NAME}`;
 
@@ -322,6 +323,7 @@ export async function updateCategoryPage(rootDir, categoryKey, posts) {
   const categoryPath = path.join(rootDir, category.path);
   const html = await readHtml(categoryPath);
   const $ = load(html, { decodeEntities: false });
+  ensureStaticHeaderCss($);
   setMeta($, 'meta[name="robots"]', "content", "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large");
   setMeta($, 'link[rel="canonical"]', "href", `${SITE_URL}/${categoryKey}/`);
   setMeta($, 'meta[property="og:url"]', "content", `${SITE_URL}/${categoryKey}/`);
@@ -344,6 +346,38 @@ export async function updateCategoryPage(rootDir, categoryKey, posts) {
   );
   removeWpRemnants($);
   await writeFileUtf8(categoryPath, $.html());
+}
+
+export function ensureStaticHeaderCss($) {
+  if ($("#ss-static-header-layout").length) {
+    return;
+  }
+
+  $("head").append(`<style id="ss-static-header-layout">
+@media (min-width:922px) {
+  #ast-desktop-header { display:block !important; }
+  #ast-mobile-header { display:none !important; }
+  .site-primary-header-wrap { max-width:1200px !important; margin:0 auto !important; padding:0 20px !important; }
+  .ast-builder-grid-row { min-height:72px; display:flex !important; align-items:center !important; justify-content:space-between !important; }
+  .site-header-primary-section-left, .site-header-primary-section-right, .ast-builder-menu-1,
+  .ast-main-header-bar-alignment, .main-header-bar-navigation, .main-navigation, .main-header-menu {
+    display:flex !important; align-items:center !important;
+  }
+  .site-header-primary-section-right { margin-left:auto !important; }
+  .main-header-menu { gap:2px; list-style:none !important; margin:0 !important; padding:0 !important; }
+  .main-header-menu > li { display:flex !important; flex:0 0 auto !important; width:auto !important; height:auto !important; }
+  .main-header-menu > li > a { display:block !important; white-space:nowrap; text-decoration:none !important; }
+}
+@media (max-width:921px) {
+  #ast-desktop-header { display:none !important; }
+  #ast-mobile-header { display:block !important; }
+  #ast-mobile-header .ast-builder-grid-row { min-height:64px; display:flex !important; align-items:center !important; justify-content:space-between !important; padding:0 18px; }
+  #ast-mobile-header .site-header-primary-section-left, #ast-mobile-header .site-header-primary-section-right { display:flex !important; align-items:center !important; }
+  #ast-mobile-header .site-header-primary-section-right { margin-left:auto !important; }
+  #ast-mobile-header .main-header-menu { list-style:none; margin:0; padding:10px 18px 18px; }
+  #ast-mobile-header .main-header-menu > li > a { display:block; padding:10px 0; text-decoration:none; }
+}
+</style>`);
 }
 
 function buildCategoryGuide(categoryKey, category, posts) {

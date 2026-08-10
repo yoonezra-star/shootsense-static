@@ -9,6 +9,7 @@
     "strengthen:trust": "node scripts/strengthen-trust-signals.mjs",
     "strengthen:author": "node scripts/strengthen-author-signals.mjs",
     "strengthen:categories": "node scripts/strengthen-category-pages.mjs",
+    "fix:header-layout": "node scripts/fix-static-header-layout.mjs",
     "publish:post": "node scripts/publish-static-post.mjs",
     "publish:queue": "node scripts/run-scheduled-publish.mjs",
     "notify:telegram": "node scripts/notify-telegram.mjs"

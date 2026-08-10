@@ -879,7 +879,31 @@ body.search .site-content{}
 }
 }
 }		</style>
-		</head>
+		<style id="ss-static-header-layout">
+@media (min-width:922px) {
+  #ast-desktop-header { display:block !important; }
+  #ast-mobile-header { display:none !important; }
+  .site-primary-header-wrap { max-width:1200px !important; margin:0 auto !important; padding:0 20px !important; }
+  .ast-builder-grid-row { min-height:72px; display:flex !important; align-items:center !important; justify-content:space-between !important; }
+  .site-header-primary-section-left, .site-header-primary-section-right, .ast-builder-menu-1,
+  .ast-main-header-bar-alignment, .main-header-bar-navigation, .main-navigation, .main-header-menu {
+    display:flex !important; align-items:center !important;
+  }
+  .site-header-primary-section-right { margin-left:auto !important; }
+  .main-header-menu { gap:2px; list-style:none !important; margin:0 !important; padding:0 !important; }
+  .main-header-menu > li { display:flex !important; flex:0 0 auto !important; width:auto !important; height:auto !important; }
+  .main-header-menu > li > a { display:block !important; white-space:nowrap; text-decoration:none !important; }
+}
+@media (max-width:921px) {
+  #ast-desktop-header { display:none !important; }
+  #ast-mobile-header { display:block !important; }
+  #ast-mobile-header .ast-builder-grid-row { min-height:64px; display:flex !important; align-items:center !important; justify-content:space-between !important; padding:0 18px; }
+  #ast-mobile-header .site-header-primary-section-left, #ast-mobile-header .site-header-primary-section-right { display:flex !important; align-items:center !important; }
+  #ast-mobile-header .site-header-primary-section-right { margin-left:auto !important; }
+  #ast-mobile-header .main-header-menu { list-style:none; margin:0; padding:10px 18px 18px; }
+  #ast-mobile-header .main-header-menu > li > a { display:block; padding:10px 0; text-decoration:none; }
+}
+</style></head>
 
 <body itemtype="https://schema.org/Blog" itemscope="itemscope" class="wp-singular post-template-default single single-post postid-1234 single-format-standard wp-theme-astra ast-desktop ast-no-sidebar astra-4.11.1 group-blog ast-blog-single-style-1 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-normal-title-enabled">
 
