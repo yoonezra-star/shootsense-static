@@ -42,3 +42,8 @@ export const TEMPLATE_POST = "honja-yeohaeng-junbi-gijun/index.html";
 export const HOME_PAGE = "index.html";
 export const POST_SITEMAP = "post-sitemap.xml";
 export const PAGE_SITEMAP = "page-sitemap.xml";
+
+// Consolidated legacy pages must not return to the sitemap on later rebuilds.
+export const EXCLUDED_POST_SLUGS = new Set([
+  "혼자-여행-야간-도착-체크리스트-숙소-들어가기-전과"
+]);

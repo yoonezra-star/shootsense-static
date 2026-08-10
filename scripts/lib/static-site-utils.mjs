@@ -6,6 +6,7 @@ import {
   CATEGORY_MAP,
   DEFAULT_IMAGE,
   DEFAULT_LOGO,
+  EXCLUDED_POST_SLUGS,
   HOME_PAGE,
   PAGE_SITEMAP,
   POST_SITEMAP,
@@ -255,7 +256,9 @@ export async function loadPosts(rootDir) {
     const key = post.slug || post.href || post.title;
     deduped.set(key, { ...deduped.get(key), ...post });
   }
-  return [...deduped.values()].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+  return [...deduped.values()]
+    .filter((post) => !EXCLUDED_POST_SLUGS.has(post.slug))
+    .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
 }
 
 export async function buildPostPage(rootDir, post) {
