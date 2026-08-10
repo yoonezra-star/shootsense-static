@@ -11,6 +11,7 @@
     "strengthen:categories": "node scripts/strengthen-category-pages.mjs",
     "consolidate:duplicates": "node scripts/consolidate-duplicate-posts.mjs",
     "rewrite:high-risk-destinations": "node scripts/rewrite-high-risk-destinations.mjs",
+    "rewrite:oman-guides": "node scripts/rewrite-oman-guides.mjs",
     "fix:header-layout": "node scripts/fix-static-header-layout.mjs",
     "publish:post": "node scripts/publish-static-post.mjs",
     "publish:queue": "node scripts/run-scheduled-publish.mjs",
