@@ -15,6 +15,7 @@
     "rewrite:matsudai-guide": "node scripts/rewrite-matsudai-guide.mjs",
     "rewrite:jeju-no-car-guide": "node scripts/rewrite-jeju-no-car-guide.mjs",
     "rewrite:busan-guide": "node scripts/rewrite-busan-guide.mjs",
+    "rewrite:tokyo-osaka-guide": "node scripts/rewrite-tokyo-osaka-guide.mjs",
     "fix:header-layout": "node scripts/fix-static-header-layout.mjs",
     "publish:post": "node scripts/publish-static-post.mjs",
     "publish:queue": "node scripts/run-scheduled-publish.mjs",
