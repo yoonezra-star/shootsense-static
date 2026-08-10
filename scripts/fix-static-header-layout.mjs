@@ -28,7 +28,7 @@ let updated = 0;
 for (const filePath of files) {
   const html = await fs.readFile(filePath, "utf8");
   const $ = load(html, { decodeEntities: false });
-  if (!$("#masthead").length || $("#ss-static-header-layout").length) {
+  if (!$("#masthead").length) {
     continue;
   }
   ensureStaticHeaderCss($);

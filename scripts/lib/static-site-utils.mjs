@@ -349,11 +349,11 @@ export async function updateCategoryPage(rootDir, categoryKey, posts) {
 }
 
 export function ensureStaticHeaderCss($) {
-  if ($("#ss-static-header-layout").length) {
-    return;
-  }
-
-  $("head").append(`<style id="ss-static-header-layout">
+  const css = `
+/* Static export baseline: WordPress theme assets are no longer available. */
+.site-content > .ast-container { width:min(100%, 1200px) !important; margin-left:auto !important; margin-right:auto !important; }
+#primary { width:100%; min-width:0; }
+.home .entry-content .ss-expert-home { margin-left:auto !important; margin-right:auto !important; }
 @media (min-width:922px) {
   #ast-desktop-header { display:block !important; }
   #ast-mobile-header { display:none !important; }
@@ -377,7 +377,13 @@ export function ensureStaticHeaderCss($) {
   #ast-mobile-header .main-header-menu { list-style:none; margin:0; padding:10px 18px 18px; }
   #ast-mobile-header .main-header-menu > li > a { display:block; padding:10px 0; text-decoration:none; }
 }
-</style>`);
+`;
+  const existingStyle = $("#ss-static-header-layout");
+  if (existingStyle.length) {
+    existingStyle.html(css);
+  } else {
+    $("head").append(`<style id="ss-static-header-layout">${css}</style>`);
+  }
 }
 
 function buildCategoryGuide(categoryKey, category, posts) {
