@@ -1,14 +1,12 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { load } from "cheerio";
-import { EXCLUDED_POST_SLUGS, SITE_URL } from "./lib/site-config.mjs";
+import { CONSOLIDATED_POST_REDIRECTS, SITE_URL } from "./lib/site-config.mjs";
 import { loadPosts, updateSitemaps, writeFileUtf8 } from "./lib/static-site-utils.mjs";
 
 const rootDir = process.cwd();
-const preferredSlug = "honja-yagan-docak-checklist";
-const preferredUrl = `${SITE_URL}/${preferredSlug}/`;
-
-for (const legacySlug of EXCLUDED_POST_SLUGS) {
+for (const [legacySlug, preferredSlug] of CONSOLIDATED_POST_REDIRECTS) {
+  const preferredUrl = `${SITE_URL}/${preferredSlug}/`;
   const legacyPath = path.join(rootDir, legacySlug, "index.html");
   const html = await fs.readFile(legacyPath, "utf8");
   const $ = load(html, { decodeEntities: false });
@@ -21,4 +19,4 @@ for (const legacySlug of EXCLUDED_POST_SLUGS) {
 }
 
 await updateSitemaps(rootDir, await loadPosts(rootDir));
-console.log(JSON.stringify({ ok: true, preferredUrl, excluded: [...EXCLUDED_POST_SLUGS] }, null, 2));
+console.log(JSON.stringify({ ok: true, redirects: [...CONSOLIDATED_POST_REDIRECTS] }, null, 2));
