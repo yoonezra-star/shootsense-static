@@ -6,7 +6,7 @@ import { AUTHOR_NAME, SITE_NAME, SITE_TAGLINE, SITE_URL } from "./lib/site-confi
 const rootDir = process.cwd();
 const authorPath = "author/index.html";
 const authorUrl = `${SITE_URL}/author/`;
-const contactEmail = "contact@shootsense.com";
+const contactEmail = "replyleaders01@gmail.com";
 const skipSegments = new Set(["node_modules", ".git", "feed", "comments", "wp-json"]);
 
 const authorCss = `

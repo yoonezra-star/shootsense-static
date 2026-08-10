@@ -91,7 +91,7 @@ const pages = new Map([
     {
       title: "문의하기 - 여행정보엑스퍼트",
       description:
-        "여행정보엑스퍼트 공식 문의 페이지입니다. contact@shootsense.com으로 콘텐츠 오류 제보, 수정 요청, 광고와 제휴 문의, 개인정보 관련 요청을 보낼 수 있습니다.",
+        "여행정보엑스퍼트 공식 문의 페이지입니다. replyleaders01@gmail.com으로 콘텐츠 오류 제보, 수정 요청, 광고와 제휴 문의, 개인정보 관련 요청을 보낼 수 있습니다.",
       body: `
 <div class="ss-page">
   <section class="ss-page-hero">
@@ -104,7 +104,7 @@ const pages = new Map([
       <strong>공식 문의 이메일</strong>
       <span>콘텐츠 오류 제보, 수정 요청, 광고·제휴 문의, 개인정보 관련 요청은 이 주소로 보내주세요.</span>
     </div>
-    <a href="mailto:contact@shootsense.com">contact@shootsense.com</a>
+    <a href="mailto:replyleaders01@gmail.com">replyleaders01@gmail.com</a>
   </div>
   <h2>접수 가능한 문의</h2>
   <div class="ss-page-grid">
@@ -129,7 +129,7 @@ const pages = new Map([
     <li>확인 가능한 공식 안내, 현장 사진, 지도 정보, 운영 공지 등 근거 자료</li>
     <li>광고와 제휴 문의의 경우 상품, 지역, 노출 방식, 독자에게 제공되는 실제 가치</li>
   </ul>
-  <p class="ss-page-callout">이 페이지와 contact@shootsense.com은 여행정보엑스퍼트의 공식 문의 창구입니다. 오류 제보는 근거 자료와 함께 보내주시면 더 빠르게 확인할 수 있으며, 광고와 제휴 제안은 편집 독립성을 해치지 않는 경우에만 검토합니다.</p>
+  <p class="ss-page-callout">이 페이지와 replyleaders01@gmail.com은 여행정보엑스퍼트의 공식 문의 창구입니다. 오류 제보는 근거 자료와 함께 보내주시면 더 빠르게 확인할 수 있으며, 광고와 제휴 제안은 편집 독립성을 해치지 않는 경우에만 검토합니다.</p>
 </div>`
     }
   ],
