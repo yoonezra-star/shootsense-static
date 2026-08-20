@@ -199,9 +199,12 @@ function repairFooterAndNav($) {
     const connectHeading = footer.find("h4").filter((_, el) => $(el).text().trim() === "구독·연결").first();
     const connectList = connectHeading.next("ul");
     if (connectList.length) {
-      const emailItems = connectList.find(`a[href="mailto:${contactEmail}"]`).parent("li");
+      const emailItems = connectList.find('a[href^="mailto:"]').parent("li");
+      const firstEmail = emailItems.first().find("a").first();
+      firstEmail.attr("href", `mailto:${contactEmail}`);
+      firstEmail.text(contactEmail);
       emailItems.slice(1).remove();
-      if (emailItems.length > 1) {
+      if (emailItems.length !== 1 || firstEmail.attr("href") !== `mailto:${contactEmail}`) {
         changed = true;
       }
     }

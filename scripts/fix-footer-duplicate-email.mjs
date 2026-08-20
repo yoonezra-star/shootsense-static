@@ -14,11 +14,25 @@ for (const file of files) {
   const footer = $(".ss-site-footer").first();
   const heading = footer.find("h4").filter((_, el) => $(el).text().trim() === "구독·연결").first();
   const list = heading.next("ul");
-  const emailItems = list.find(`a[href="mailto:${contactEmail}"]`).parent("li");
+  const footerEmailLinks = footer.find('a[href^="mailto:"]');
+  footerEmailLinks.each((_, node) => {
+    $(node).attr("href", `mailto:${contactEmail}`);
+    $(node).text(contactEmail);
+  });
 
-  if (emailItems.length > 1) {
+  const emailItems = list.find('a[href^="mailto:"]').parent("li");
+
+  if (emailItems.length) {
+    const primaryEmail = emailItems.first().find("a").first();
+    primaryEmail.attr("href", `mailto:${contactEmail}`);
+    primaryEmail.text(contactEmail);
     emailItems.slice(1).remove();
-    await writeFileUtf8(file, $.html());
+  } else if (list.length) {
+    list.append(`<li><a href="mailto:${contactEmail}">${contactEmail}</a></li>`);
+  }
+
+  if ($.html() !== html) {
+    await writeFileUtf8(file, $.html().replace(/[ \t]+$/gm, ""));
     changed += 1;
   }
 }
