@@ -196,6 +196,16 @@ function repairFooterAndNav($) {
 
   const footer = $(".ss-site-footer").first();
   if (footer.length) {
+    const connectHeading = footer.find("h4").filter((_, el) => $(el).text().trim() === "구독·연결").first();
+    const connectList = connectHeading.next("ul");
+    if (connectList.length) {
+      const emailItems = connectList.find(`a[href="mailto:${contactEmail}"]`).parent("li");
+      emailItems.slice(1).remove();
+      if (emailItems.length > 1) {
+        changed = true;
+      }
+    }
+
     const siteGuideHeading = footer.find("h4").filter((_, el) => $(el).text().trim() === "사이트 안내").first();
     const list = siteGuideHeading.next("ul");
     if (list.length && !list.find('a[href="/author/"]').length) {

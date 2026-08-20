@@ -17,6 +17,7 @@
     "rewrite:busan-guide": "node scripts/rewrite-busan-guide.mjs",
     "rewrite:tokyo-osaka-guide": "node scripts/rewrite-tokyo-osaka-guide.mjs",
     "fix:header-layout": "node scripts/fix-static-header-layout.mjs",
+    "fix:footer-email": "node scripts/fix-footer-duplicate-email.mjs",
     "publish:post": "node scripts/publish-static-post.mjs",
     "publish:queue": "node scripts/run-scheduled-publish.mjs",
     "notify:telegram": "node scripts/notify-telegram.mjs"
