@@ -20,16 +20,9 @@ for (const file of files) {
     $(node).text(contactEmail);
   });
 
-  const emailItems = list.find('a[href^="mailto:"]').parent("li");
-
-  if (emailItems.length) {
-    const primaryEmail = emailItems.first().find("a").first();
-    primaryEmail.attr("href", `mailto:${contactEmail}`);
-    primaryEmail.text(contactEmail);
-    emailItems.slice(1).remove();
-  } else if (list.length) {
-    list.append(`<li><a href="mailto:${contactEmail}">${contactEmail}</a></li>`);
-  }
+  // The operator column already exposes the contact address. Keep the
+  // connection list focused on navigation so the same email is not repeated.
+  list.find('a[href^="mailto:"]').parent("li").remove();
 
   if ($.html() !== html) {
     await writeFileUtf8(file, $.html().replace(/[ \t]+$/gm, ""));

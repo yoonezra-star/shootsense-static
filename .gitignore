@@ -3,3 +3,6 @@ publish-log.json
 content/queue/*.done.json
 content/queue/*.error.json
 .publish.env
+adsense-readiness-report.json
+playwright-artifacts/
+test-results/

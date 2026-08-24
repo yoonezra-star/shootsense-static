@@ -3,6 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "audit:adsense": "node scripts/audit-adsense-readiness.mjs",
+    "curate:adsense": "node scripts/curate-adsense-core.mjs",
+    "validate:site": "node scripts/validate-static-site.mjs",
+    "repair:assets": "node scripts/repair-static-assets.mjs",
     "clean:adsense": "node scripts/clean-adsense-inventory.mjs",
     "harden:adsense": "node scripts/harden-adsense-readiness.mjs",
     "repair:legacy-links": "node scripts/repair-legacy-post-links.mjs",
