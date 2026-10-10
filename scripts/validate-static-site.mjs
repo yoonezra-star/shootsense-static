@@ -40,6 +40,29 @@ for (const filePath of files) {
   if (isIndexable) indexableFiles.push(filePath);
   if (isPost && isIndexable && $('.ss-editorial-application').length !== 1) issues.push(`${relative}: editorial application count`);
   if (isPost && isIndexable && $('.ss-toc a[href="#editorial-application"]').length !== 1) issues.push(`${relative}: application TOC count`);
+  if (isPost && isIndexable) {
+    for (const href of $('.ss-toc a[href]').map((_, node) => $(node).attr('href') || '').get()) {
+      const hash = href.split('#')[1];
+      if (!hash || !$(`[id="${hash}"]`).length) issues.push(`${relative}: TOC target missing ${href}`);
+    }
+    const modified = $('meta[property="article:modified_time"]').attr('content');
+    const updated = $('meta[property="og:updated_time"]').attr('content');
+    const visible = $('.ss-post-meta').text();
+    const review = $('.ss-trust-note').text();
+    let schemaDates = [];
+    try {
+      const schema = JSON.parse($('script[type="application/ld+json"]').first().html() || '{}');
+      schemaDates = (schema['@graph'] || []).filter((node) => node.dateModified).map((node) => node.dateModified);
+    } catch {
+      issues.push(`${relative}: invalid JSON-LD`);
+    }
+    if (!modified || updated !== modified || schemaDates.length < 2 || schemaDates.some((date) => date !== modified)) {
+      issues.push(`${relative}: modified dates disagree`);
+    }
+    if (modified && (!visible.includes(modified.slice(0, 10)) || !review.includes(modified.slice(0, 10)))) {
+      issues.push(`${relative}: visible review date disagrees`);
+    }
+  }
   if (isPost && !isIndexable && /pagead2|adsbygoogle|googlesyndication/.test(html)) issues.push(`${relative}: ad code on held page`);
   if (isIndexable && $('title').length !== 1) issues.push(`${relative}: title count ${$('title').length}`);
   if (isIndexable && $('link[rel="canonical"]').length !== 1) issues.push(`${relative}: canonical count ${$('link[rel="canonical"]').length}`);
