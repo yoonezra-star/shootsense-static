@@ -1,4 +1,5 @@
 node_modules/
+.wrangler/
 publish-log.json
 content/queue/*.done.json
 content/queue/*.error.json
