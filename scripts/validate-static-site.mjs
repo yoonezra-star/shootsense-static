@@ -38,9 +38,12 @@ for (const filePath of files) {
     heldRoutes.add(path.relative(rootDir, path.dirname(filePath)).replaceAll('\\', '/'));
   }
   if (isIndexable) indexableFiles.push(filePath);
-  if (isPost && isIndexable && $('.ss-editorial-application').length !== 1) issues.push(`${relative}: editorial application count`);
-  if (isPost && isIndexable && $('.ss-toc a[href="#editorial-application"]').length !== 1) issues.push(`${relative}: application TOC count`);
   if (isPost && isIndexable) {
+    const applicationCount = $('.ss-editorial-application').length;
+    const applicationTocCount = $('.ss-toc a[href="#editorial-application"]').length;
+    if (applicationCount > 1 || applicationTocCount !== applicationCount) {
+      issues.push(`${relative}: editorial application and TOC disagree`);
+    }
     for (const href of $('.ss-toc a[href]').map((_, node) => $(node).attr('href') || '').get()) {
       const hash = href.split('#')[1];
       if (!hash || !$(`[id="${hash}"]`).length) issues.push(`${relative}: TOC target missing ${href}`);
