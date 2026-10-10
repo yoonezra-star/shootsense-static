@@ -38,6 +38,7 @@ for (const filePath of files) {
     heldRoutes.add(path.relative(rootDir, path.dirname(filePath)).replaceAll('\\', '/'));
   }
   if (isIndexable) indexableFiles.push(filePath);
+  if (isIndexable && $('.ss-withheld-link-text').length) issues.push(`${relative}: unavailable navigation item`);
   if (isPost && isIndexable) {
     const applicationCount = $('.ss-editorial-application').length;
     const applicationTocCount = $('.ss-toc a[href="#editorial-application"]').length;
