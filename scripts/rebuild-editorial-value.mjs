@@ -194,3 +194,5 @@ const sitemapIndex = load(await fs.readFile(path.join(root, 'sitemap_index.xml')
 sitemapIndex('sitemap lastmod').text(modified);
 await writeFileUtf8(path.join(root, 'sitemap_index.xml'), sitemapIndex.xml().trimEnd() + '\n');
 console.log(JSON.stringify({ htmlPages: output.size, rewrittenPosts: posts.size, addedTool: toolRoute }, null, 2));
+// Keep the later article revision and homepage log when rebuilding the first batch.
+await import('./revise-predeparture-guides.mjs');
