@@ -3,6 +3,7 @@ import path from 'node:path';
 import { load } from 'cheerio';
 import { ensureMobileReadingLayout, writeFileUtf8 } from './lib/static-site-utils.mjs';
 import { HOME_CONTENT, LODGING_CONTENT, PACKING_CONTENT, toolContent } from './recovery-content.mjs';
+import { REGIONAL_REVISION } from './regional-access-content.mjs';
 
 const root = process.cwd();
 const modified = '2026-10-15T15:20:00+09:00';
@@ -195,4 +196,5 @@ sitemapIndex('sitemap lastmod').text(modified);
 await writeFileUtf8(path.join(root, 'sitemap_index.xml'), sitemapIndex.xml().trimEnd() + '\n');
 console.log(JSON.stringify({ htmlPages: output.size, rewrittenPosts: posts.size, addedTool: toolRoute }, null, 2));
 // Keep the later article revision and homepage log when rebuilding the first batch.
-await import('./revise-predeparture-guides.mjs');
+const { reviseEditorialBatch } = await import('./revise-predeparture-guides.mjs');
+await reviseEditorialBatch(REGIONAL_REVISION);

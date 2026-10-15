@@ -1,0 +1,7 @@
+.ss-regional-guide .ss-post-summary p{display:block;overflow:visible;-webkit-line-clamp:unset}
+.ss-regional-guide .ss-toc ol{padding-left:22px}
+.ss-regional-guide .ss-toc a{display:block;min-height:36px;padding:6px 0;line-height:1.7}
+.ss-regional-guide caption{caption-side:top;text-align:left;padding:10px 0;font-size:14px;line-height:1.7;color:#425c51}
+@media(max-width:640px){
+  .ss-regional-guide table.ss-mobile-comparison caption{display:block;width:100%;max-width:none;padding:12px 14px;box-sizing:border-box}
+}

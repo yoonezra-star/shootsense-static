@@ -6,6 +6,8 @@
     "audit:adsense": "node scripts/audit-adsense-readiness.mjs",
     "revise:editorial": "node scripts/rebuild-editorial-value.mjs",
     "revise:predeparture": "node scripts/revise-predeparture-guides.mjs",
+    "revise:regions": "node scripts/revise-predeparture-guides.mjs --regional",
+    "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",
     "curate:adsense": "node scripts/curate-adsense-core.mjs",
