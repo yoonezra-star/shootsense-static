@@ -901,7 +901,22 @@ body.search .site-content{}
 }
 </style><style id="ss-adsense-core-style">
 .ss-editorial-application{margin-top:42px;padding-top:34px;border-top:3px solid #0f766e}.ss-editorial-application h2{font-size:27px;line-height:1.4}.ss-editorial-application h3{margin-top:28px;font-size:19px}.ss-editorial-application table{width:100%;border-collapse:collapse;margin:14px 0 22px}.ss-editorial-application th,.ss-editorial-application td{padding:13px 14px;border:1px solid #dbe4e8;text-align:left;vertical-align:top}.ss-editorial-application th{width:88px;background:#f0fdfa;color:#115e59}.ss-application-lead,.ss-method-note{padding:18px 20px;background:#f8fafc;border-left:4px solid #0f766e}.ss-source-list li,.ss-related-list li{margin:8px 0}.ss-source-list span{display:block;color:#64748b;font-size:13px}.ss-method-note{margin-top:28px;font-size:14px;color:#334155}@media(max-width:640px){.ss-editorial-application h2{font-size:23px}.ss-editorial-application th{width:68px}.ss-editorial-application th,.ss-editorial-application td{padding:10px}}
-    </style></head>
+    </style><style id="ss-mobile-reading-layout">
+@media (max-width:921px) {
+  #ast-mobile-header .menu-toggle { min-width:44px; min-height:44px; }
+  .ss-toc a { display:inline-block; min-height:32px; padding:4px 0; line-height:24px; }
+}
+@media (max-width:640px) {
+  table.ss-mobile-comparison { display:block; width:100%; border:1px solid #dbe4e8; border-radius:8px; overflow:hidden; }
+  .ss-mobile-comparison thead { position:absolute !important; width:1px !important; height:1px !important; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  .ss-mobile-comparison tbody, .ss-mobile-comparison tbody tr { display:block; width:100%; }
+  .ss-mobile-comparison tbody tr + tr { border-top:1px solid #dbe4e8; }
+  .ss-mobile-comparison tbody td, .ss-mobile-comparison tbody th { display:block; width:auto !important; padding:8px 14px !important; border:0 !important; font-size:15px; line-height:1.65; text-align:left; white-space:normal; overflow-wrap:anywhere; word-break:keep-all; }
+  .ss-mobile-comparison tbody td:first-child, .ss-mobile-comparison tbody th:first-child { padding-top:12px !important; padding-bottom:12px !important; background:#f1f5f9; color:#10213a; font-weight:700; }
+  .ss-mobile-comparison tbody td:last-child, .ss-mobile-comparison tbody th:last-child { padding-bottom:16px !important; }
+  .ss-mobile-comparison tbody td:not(:first-child)::before, .ss-mobile-comparison tbody th:not(:first-child)::before { content:attr(data-label); display:block; margin-bottom:3px; color:#475569; font-size:13px; font-weight:700; line-height:1.5; }
+}
+</style></head>
 
 <body itemtype="https://schema.org/Blog" itemscope="itemscope" class="wp-singular post-template-default single single-post postid-1197 single-format-standard wp-theme-astra ast-desktop ast-no-sidebar astra-4.11.1 group-blog ast-blog-single-style-1 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-normal-title-enabled">
 
@@ -967,8 +982,8 @@ body.search .site-content{}
 																									<div class="site-header-primary-section-right site-header-section ast-flex ast-grid-right-section">
 										<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="section-header-mobile-trigger">
 						<div class="ast-button-wrap">
-				<button type="button" class="menu-toggle main-header-menu-toggle ast-mobile-menu-trigger-minimal" aria-expanded="false">
-					<span class="screen-reader-text">Main Menu</span>
+				<button type="button" class="menu-toggle main-header-menu-toggle ast-mobile-menu-trigger-minimal" aria-expanded="false" aria-label="사이트 메뉴" aria-controls="ast-mobile-site-navigation">
+					<span class="screen-reader-text">사이트 메뉴</span>
 					<span class="mobile-menu-toggle-icon">
 						<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex svg-baseline"><svg class="ast-mobile-svg ast-menu-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 13h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 7h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 19h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1z"></path></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex svg-baseline"><svg class="ast-mobile-svg ast-close-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.293 6.707l5.293 5.293-5.293 5.293c-0.391 0.391-0.391 1.024 0 1.414s1.024 0.391 1.414 0l5.293-5.293 5.293 5.293c0.391 0.391 1.024 0.391 1.414 0s0.391-1.024 0-1.414l-5.293-5.293 5.293-5.293c0.391-0.391 0.391-1.024 0-1.414s-1.024-0.391-1.414 0l-5.293 5.293-5.293-5.293c-0.391-0.391-1.024-0.391-1.414 0s-0.391 1.024 0 1.414z"></path></svg></span>					</span>
 									</button>
@@ -1043,14 +1058,14 @@ body.search .site-content{}
 <p>루산은 산악 지역 특성상 날씨와 이동 방식이 일정 품질을 좌우한다. 처음 방문이라면 숙소를 기준으로 동선을 좁히고, 핵심 구간 하나를 안정적으로 보는 방식이 맞다.</p>
 
 
-<figure class="wp-block-table"><table><thead><tr><th>판단 항목</th><th>확인 기준</th><th>혼자 여행에서 보는 이유</th></tr></thead><tbody><tr><td>방문 목적</td><td>UNESCO가 소개하는 산악 경관과 문화유산 중 우선할 대상을 고른다</td><td>실제 보고 싶은 구역에 따라 이동 경로가 달라진다</td></tr><tr><td>이동 방식</td><td>도착역·산 위 이동수단·숙소 접근성을 각각 확인한다</td><td>산 아래 도착과 숙소 체크인을 한 구간으로 계산하지 않는다</td></tr><tr><td>체류 시간</td><td>방문일 교통편과 복귀편이 확인되면 당일 방문과 숙박을 비교한다</td><td>날씨나 이동편을 확인하지 않고 1~2박을 필수로 단정할 수 없다</td></tr><tr><td>주의 변수</td><td>방문일 기상, 보행 상태, 내부 이동, 숙소 위치를 확인한다</td><td>UNESCO 등재 정보만으로 현장 운영 조건을 알 수 없다</td></tr></tbody></table></figure>
+<figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">판단 항목</th><th role="columnheader" scope="col">확인 기준</th><th role="columnheader" scope="col">혼자 여행에서 보는 이유</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="판단 항목" role="cell">방문 목적</td><td data-label="확인 기준" role="cell">UNESCO가 소개하는 산악 경관과 문화유산 중 우선할 대상을 고른다</td><td data-label="혼자 여행에서 보는 이유" role="cell">실제 보고 싶은 구역에 따라 이동 경로가 달라진다</td></tr><tr role="row"><td data-label="판단 항목" role="cell">이동 방식</td><td data-label="확인 기준" role="cell">도착역·산 위 이동수단·숙소 접근성을 각각 확인한다</td><td data-label="혼자 여행에서 보는 이유" role="cell">산 아래 도착과 숙소 체크인을 한 구간으로 계산하지 않는다</td></tr><tr role="row"><td data-label="판단 항목" role="cell">체류 시간</td><td data-label="확인 기준" role="cell">방문일 교통편과 복귀편이 확인되면 당일 방문과 숙박을 비교한다</td><td data-label="혼자 여행에서 보는 이유" role="cell">날씨나 이동편을 확인하지 않고 1~2박을 필수로 단정할 수 없다</td></tr><tr role="row"><td data-label="판단 항목" role="cell">주의 변수</td><td data-label="확인 기준" role="cell">방문일 기상, 보행 상태, 내부 이동, 숙소 위치를 확인한다</td><td data-label="혼자 여행에서 보는 이유" role="cell">UNESCO 등재 정보만으로 현장 운영 조건을 알 수 없다</td></tr></tbody></table></figure>
 
 
 
 <section data-ss-evidence="2026-10" aria-label="루산 자료 검증 범위">
   <h3>루산의 확정된 사실과 예약 전에 다시 확인할 정보</h3>
   <p>이 절은 방문 체험담이 아니라 공개 자료를 교차 확인한 여행 준비 안내다. <a href="https://whc.unesco.org/en/list/778">UNESCO 세계유산센터</a>는 루산 국립공원이 중국 장시성 주장시에 있고, 문화유산과 자연경관이 함께 보존된 곳이라고 설명한다. 최고봉 한양봉의 높이는 1,474m다. 이 정보는 장소의 성격을 이해하는 데 도움이 되지만, 오늘의 케이블카 운행이나 산 위 숙소 체크인 가능 여부까지 알려주지는 않는다.</p>
-  <figure class="wp-block-table"><table><thead><tr><th>확정해 둘 질문</th><th>예약 전 확인할 곳</th><th>확인이 안 되면</th></tr></thead><tbody><tr><td>주장 시내에서 산 위 숙소까지 어떻게 가는가</td><td>이용할 교통 운영사와 숙소의 최신 안내</td><td>도착일 산악 코스를 넣지 않는다.</td></tr><tr><td>구링 숙박 후 다음 날 어떻게 내려오는가</td><td>체크아웃 시간과 복귀 교통의 실제 운행 공지</td><td>당일 열차·항공편과 촘촘하게 연결하지 않는다.</td></tr><tr><td>전망 구간의 기상 악화 시 대안은 무엇인가</td><td>방문일의 현지 기상·관광구역 공지</td><td>먼 구간을 빼고 숙소 가까운 동선만 남긴다.</td></tr></tbody></table></figure>
+  <figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">확정해 둘 질문</th><th role="columnheader" scope="col">예약 전 확인할 곳</th><th role="columnheader" scope="col">확인이 안 되면</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="확정해 둘 질문" role="cell">주장 시내에서 산 위 숙소까지 어떻게 가는가</td><td data-label="예약 전 확인할 곳" role="cell">이용할 교통 운영사와 숙소의 최신 안내</td><td data-label="확인이 안 되면" role="cell">도착일 산악 코스를 넣지 않는다.</td></tr><tr role="row"><td data-label="확정해 둘 질문" role="cell">구링 숙박 후 다음 날 어떻게 내려오는가</td><td data-label="예약 전 확인할 곳" role="cell">체크아웃 시간과 복귀 교통의 실제 운행 공지</td><td data-label="확인이 안 되면" role="cell">당일 열차·항공편과 촘촘하게 연결하지 않는다.</td></tr><tr role="row"><td data-label="확정해 둘 질문" role="cell">전망 구간의 기상 악화 시 대안은 무엇인가</td><td data-label="예약 전 확인할 곳" role="cell">방문일의 현지 기상·관광구역 공지</td><td data-label="확인이 안 되면" role="cell">먼 구간을 빼고 숙소 가까운 동선만 남긴다.</td></tr></tbody></table></figure>
   <p>UNESCO의 등재 정보는 운행표가 아니다. 이 글은 요금·소요 시간·운행 빈도를 검증하지 못한 상태에서 특정 숫자로 단정하지 않는다. 산 아래 도착과 산 위 이동을 한 단계로 합치지 않는 것이 일정 실패를 줄이는 핵심이다.</p>
 </section>
 <h2 id="ss-h-2" class="wp-block-heading">루산에서 감정보다 기준이 필요한 이유</h2>
@@ -1072,7 +1087,7 @@ body.search .site-content{}
 <p>루산은 도착 지점과 실제 숙소 위치 사이 이동을 확인해야 한다. 산 아래에서 산 위로 이동하는 시간, 내부 교통, 마지막 복귀 가능 시간을 함께 봐야 한다.</p>
 
 
-<figure class="wp-block-table"><table><thead><tr><th>시간대</th><th>우선 행동</th><th>판단 기준</th></tr></thead><tbody><tr><td>도착 직후</td><td>역, 정류장, 숙소, 중심 거리 확인</td><td>돌아갈 기준점을 먼저 만든다</td></tr><tr><td>오전</td><td>핵심 산책 구간 먼저 보기</td><td>가장 체력이 좋고 길이 밝을 때 중요한 구간을 걷는다</td></tr><tr><td>오후</td><td>식사와 휴식, 보조 동선 배치</td><td>무리한 확장보다 컨디션 유지가 우선이다</td></tr><tr><td>해질 무렵</td><td>숙소 또는 출발지 방향으로 복귀</td><td>혼자라면 야간 외곽 이동을 줄인다</td></tr></tbody></table></figure>
+<figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">시간대</th><th role="columnheader" scope="col">우선 행동</th><th role="columnheader" scope="col">판단 기준</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="시간대" role="cell">도착 직후</td><td data-label="우선 행동" role="cell">역, 정류장, 숙소, 중심 거리 확인</td><td data-label="판단 기준" role="cell">돌아갈 기준점을 먼저 만든다</td></tr><tr role="row"><td data-label="시간대" role="cell">오전</td><td data-label="우선 행동" role="cell">핵심 산책 구간 먼저 보기</td><td data-label="판단 기준" role="cell">가장 체력이 좋고 길이 밝을 때 중요한 구간을 걷는다</td></tr><tr role="row"><td data-label="시간대" role="cell">오후</td><td data-label="우선 행동" role="cell">식사와 휴식, 보조 동선 배치</td><td data-label="판단 기준" role="cell">무리한 확장보다 컨디션 유지가 우선이다</td></tr><tr role="row"><td data-label="시간대" role="cell">해질 무렵</td><td data-label="우선 행동" role="cell">숙소 또는 출발지 방향으로 복귀</td><td data-label="판단 기준" role="cell">혼자라면 야간 외곽 이동을 줄인다</td></tr></tbody></table></figure>
 
 
 <h2 id="ss-h-4" class="wp-block-heading">전망보다 복귀를 남기는 하루 구성</h2>
@@ -1272,6 +1287,7 @@ var astra = {"break_point":"921","isRtl":"","is_scroll_to_id":"1","is_scroll_to_
 const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=https://shootsense.com/wp-includes/js/wp-emoji-loader.min.js
 </script>
+
 
 
 </body></html>

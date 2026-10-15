@@ -909,7 +909,22 @@ body.search .site-content{}
 }
 </style><style id="ss-adsense-core-style">
 .ss-editorial-application{margin-top:42px;padding-top:34px;border-top:3px solid #0f766e}.ss-editorial-application h2{font-size:27px;line-height:1.4}.ss-editorial-application h3{margin-top:28px;font-size:19px}.ss-editorial-application table{width:100%;border-collapse:collapse;margin:14px 0 22px}.ss-editorial-application th,.ss-editorial-application td{padding:13px 14px;border:1px solid #dbe4e8;text-align:left;vertical-align:top}.ss-editorial-application th{width:88px;background:#f0fdfa;color:#115e59}.ss-application-lead,.ss-method-note{padding:18px 20px;background:#f8fafc;border-left:4px solid #0f766e}.ss-source-list li,.ss-related-list li{margin:8px 0}.ss-source-list span{display:block;color:#64748b;font-size:13px}.ss-method-note{margin-top:28px;font-size:14px;color:#334155}@media(max-width:640px){.ss-editorial-application h2{font-size:23px}.ss-editorial-application th{width:68px}.ss-editorial-application th,.ss-editorial-application td{padding:10px}}
-    </style></head>
+    </style><style id="ss-mobile-reading-layout">
+@media (max-width:921px) {
+  #ast-mobile-header .menu-toggle { min-width:44px; min-height:44px; }
+  .ss-toc a { display:inline-block; min-height:32px; padding:4px 0; line-height:24px; }
+}
+@media (max-width:640px) {
+  table.ss-mobile-comparison { display:block; width:100%; border:1px solid #dbe4e8; border-radius:8px; overflow:hidden; }
+  .ss-mobile-comparison thead { position:absolute !important; width:1px !important; height:1px !important; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  .ss-mobile-comparison tbody, .ss-mobile-comparison tbody tr { display:block; width:100%; }
+  .ss-mobile-comparison tbody tr + tr { border-top:1px solid #dbe4e8; }
+  .ss-mobile-comparison tbody td, .ss-mobile-comparison tbody th { display:block; width:auto !important; padding:8px 14px !important; border:0 !important; font-size:15px; line-height:1.65; text-align:left; white-space:normal; overflow-wrap:anywhere; word-break:keep-all; }
+  .ss-mobile-comparison tbody td:first-child, .ss-mobile-comparison tbody th:first-child { padding-top:12px !important; padding-bottom:12px !important; background:#f1f5f9; color:#10213a; font-weight:700; }
+  .ss-mobile-comparison tbody td:last-child, .ss-mobile-comparison tbody th:last-child { padding-bottom:16px !important; }
+  .ss-mobile-comparison tbody td:not(:first-child)::before, .ss-mobile-comparison tbody th:not(:first-child)::before { content:attr(data-label); display:block; margin-bottom:3px; color:#475569; font-size:13px; font-weight:700; line-height:1.5; }
+}
+</style></head>
 
 <body itemtype="https://schema.org/Blog" itemscope="itemscope" class="wp-singular post-template-default single single-post postid-686 single-format-standard wp-theme-astra ast-desktop ast-no-sidebar astra-4.11.1 group-blog ast-blog-single-style-1 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-normal-title-enabled">
 
@@ -975,8 +990,8 @@ body.search .site-content{}
 																									<div class="site-header-primary-section-right site-header-section ast-flex ast-grid-right-section">
 										<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="section-header-mobile-trigger">
 						<div class="ast-button-wrap">
-				<button type="button" class="menu-toggle main-header-menu-toggle ast-mobile-menu-trigger-minimal" aria-expanded="false">
-					<span class="screen-reader-text">Main Menu</span>
+				<button type="button" class="menu-toggle main-header-menu-toggle ast-mobile-menu-trigger-minimal" aria-expanded="false" aria-label="사이트 메뉴" aria-controls="ast-mobile-site-navigation">
+					<span class="screen-reader-text">사이트 메뉴</span>
 					<span class="mobile-menu-toggle-icon">
 						<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex svg-baseline"><svg class="ast-mobile-svg ast-menu-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 13h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 7h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 19h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1z"></path></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex svg-baseline"><svg class="ast-mobile-svg ast-close-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.293 6.707l5.293 5.293-5.293 5.293c-0.391 0.391-0.391 1.024 0 1.414s1.024 0.391 1.414 0l5.293-5.293 5.293 5.293c0.391 0.391 1.024 0.391 1.414 0s0.391-1.024 0-1.414l-5.293-5.293 5.293-5.293c0.391-0.391 0.391-1.024 0-1.414s-1.024-0.391-1.414 0l-5.293 5.293-5.293-5.293c-0.391-0.391-1.024-0.391-1.414 0s-0.391 1.024 0 1.414z"></path></svg></span>					</span>
 									</button>
@@ -1052,7 +1067,7 @@ body.search .site-content{}
 
 
 
-<figure class="wp-block-table"><table><thead><tr><th>상황</th><th>첫 행동</th><th>다음 행동</th></tr></thead><tbody><tr><td>길을 잃음</td><td>밝고 사람 있는 곳에 멈춤</td><td>숙소 주소와 지도 캡처 확인</td></tr><tr><td>휴대폰 배터리 부족</td><td>이동 중단, 충전 가능한 장소 찾기</td><td>숙소나 주요 연락처를 종이에 확인</td></tr><tr><td>지갑 분실</td><td>카드 정지 가능 여부 확인</td><td>마지막 사용 장소와 예비 결제 수단 확인</td></tr><tr><td>몸 상태 악화</td><td>중증 또는 즉각 위험이면 현지 긴급서비스 요청</td><td>경미한 경우 일정 중단 후 의료기관·숙소에 도움 요청</td></tr><tr><td>숙소 문제</td><td>프런트·호스트에게 즉시 연락</td><td>사진 기록, 방 변경 또는 대체 숙소 검토</td></tr></tbody></table></figure>
+<figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">상황</th><th role="columnheader" scope="col">첫 행동</th><th role="columnheader" scope="col">다음 행동</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="상황" role="cell">길을 잃음</td><td data-label="첫 행동" role="cell">밝고 사람 있는 곳에 멈춤</td><td data-label="다음 행동" role="cell">숙소 주소와 지도 캡처 확인</td></tr><tr role="row"><td data-label="상황" role="cell">휴대폰 배터리 부족</td><td data-label="첫 행동" role="cell">이동 중단, 충전 가능한 장소 찾기</td><td data-label="다음 행동" role="cell">숙소나 주요 연락처를 종이에 확인</td></tr><tr role="row"><td data-label="상황" role="cell">지갑 분실</td><td data-label="첫 행동" role="cell">카드 정지 가능 여부 확인</td><td data-label="다음 행동" role="cell">마지막 사용 장소와 예비 결제 수단 확인</td></tr><tr role="row"><td data-label="상황" role="cell">몸 상태 악화</td><td data-label="첫 행동" role="cell">중증 또는 즉각 위험이면 현지 긴급서비스 요청</td><td data-label="다음 행동" role="cell">경미한 경우 일정 중단 후 의료기관·숙소에 도움 요청</td></tr><tr role="row"><td data-label="상황" role="cell">숙소 문제</td><td data-label="첫 행동" role="cell">프런트·호스트에게 즉시 연락</td><td data-label="다음 행동" role="cell">사진 기록, 방 변경 또는 대체 숙소 검토</td></tr></tbody></table></figure>
 
 
 
@@ -1060,7 +1075,7 @@ body.search .site-content{}
 <section data-ss-evidence="2026-10" aria-label="해외 비상 연락 순서">
   <h3>해외에서 연락 대상을 혼동하지 않는 순서</h3>
   <p>생명·신체에 즉각적인 위험이 있으면 목적지의 현지 긴급서비스가 우선이다. 그 번호는 나라별로 다르므로 출발 전에 공식 안내에서 찾아 오프라인에 저장한다. 영사안전콜센터는 현지 응급서비스의 대체물이 아니라, 해외 사건·사고 상담과 재외공관 연결을 위한 별도 연락처다.</p>
-  <figure class="wp-block-table"><table><thead><tr><th>상황</th><th>우선 연락</th><th>함께 남길 기록</th></tr></thead><tbody><tr><td>신체 안전에 즉각 위험</td><td>현지 긴급서비스, 이후 보험사·가족·영사안전콜센터</td><td>현재 위치와 연락 가능한 번호</td></tr><tr><td>여권 분실</td><td>현지 경찰 신고·관할 재외공관의 재발급 절차 확인</td><td>분실 확인서와 여권 사본</td></tr><tr><td>카드 분실</td><td>발급사 분실신고, 필요 시 현지 신고</td><td>정지 시각과 접수번호</td></tr><tr><td>숙소 예약 불일치</td><td>숙소·예약 플랫폼</td><td>확정서, 결제 내역, 현장 사진</td></tr></tbody></table></figure>
+  <figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">상황</th><th role="columnheader" scope="col">우선 연락</th><th role="columnheader" scope="col">함께 남길 기록</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="상황" role="cell">신체 안전에 즉각 위험</td><td data-label="우선 연락" role="cell">현지 긴급서비스, 이후 보험사·가족·영사안전콜센터</td><td data-label="함께 남길 기록" role="cell">현재 위치와 연락 가능한 번호</td></tr><tr role="row"><td data-label="상황" role="cell">여권 분실</td><td data-label="우선 연락" role="cell">현지 경찰 신고·관할 재외공관의 재발급 절차 확인</td><td data-label="함께 남길 기록" role="cell">분실 확인서와 여권 사본</td></tr><tr role="row"><td data-label="상황" role="cell">카드 분실</td><td data-label="우선 연락" role="cell">발급사 분실신고, 필요 시 현지 신고</td><td data-label="함께 남길 기록" role="cell">정지 시각과 접수번호</td></tr><tr role="row"><td data-label="상황" role="cell">숙소 예약 불일치</td><td data-label="우선 연락" role="cell">숙소·예약 플랫폼</td><td data-label="함께 남길 기록" role="cell">확정서, 결제 내역, 현장 사진</td></tr></tbody></table></figure>
   <p>외교부의 <a href="https://www.0404.go.kr/bbs/contsPst/MST0000000000105/5/detail">영사안전콜센터 안내</a>에는 국내 02-3210-0404, 해외 +82-2-3210-0404 및 연결 방법이 나와 있다. 통화 요금·연결 가능 방식은 이용 환경에 따라 다를 수 있다. 출발 전 <a href="https://www.0404.go.kr/bbs/contsPst/MST0000000000103/3/detail">해외안전여행 앱 안내</a>에서 공관 연락처와 위치 공유 기능도 확인할 수 있다.</p>
 </section>
 <h2 class="wp-block-heading" id="lost-route">길을 잃었을 때는 새 길을 만들지 않습니다</h2>
@@ -1083,7 +1098,7 @@ body.search .site-content{}
 
 
 
-<figure class="wp-block-table"><table><thead><tr><th>분실 대상</th><th>즉시 할 일</th><th>사전 준비</th></tr></thead><tbody><tr><td>카드</td><td>앱 또는 고객센터로 정지</td><td>예비 카드 분리 보관</td></tr><tr><td>현금</td><td>남은 현금과 카드 확인</td><td>하루치 현금만 따로 휴대</td></tr><tr><td>여권</td><td>현지 경찰 신고 후 재외공관의 재발급 요건 확인</td><td>여권 사본과 사진 보관</td></tr><tr><td>휴대폰</td><td>계정 잠금, 숙소·가족 연락</td><td>중요 정보 종이 메모와 백업</td></tr></tbody></table></figure>
+<figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">분실 대상</th><th role="columnheader" scope="col">즉시 할 일</th><th role="columnheader" scope="col">사전 준비</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="분실 대상" role="cell">카드</td><td data-label="즉시 할 일" role="cell">앱 또는 고객센터로 정지</td><td data-label="사전 준비" role="cell">예비 카드 분리 보관</td></tr><tr role="row"><td data-label="분실 대상" role="cell">현금</td><td data-label="즉시 할 일" role="cell">남은 현금과 카드 확인</td><td data-label="사전 준비" role="cell">하루치 현금만 따로 휴대</td></tr><tr role="row"><td data-label="분실 대상" role="cell">여권</td><td data-label="즉시 할 일" role="cell">현지 경찰 신고 후 재외공관의 재발급 요건 확인</td><td data-label="사전 준비" role="cell">여권 사본과 사진 보관</td></tr><tr role="row"><td data-label="분실 대상" role="cell">휴대폰</td><td data-label="즉시 할 일" role="cell">계정 잠금, 숙소·가족 연락</td><td data-label="사전 준비" role="cell">중요 정보 종이 메모와 백업</td></tr></tbody></table></figure>
 
 <p>외교부의 <a href="https://0404.go.kr/bbs/contsPst/MST0000000000125/25/detail">여권 분실 안내</a>에 따르면 현지 경찰서에서 분실 확인서를 발급받고 재외공관의 재발급 요건을 확인해야 합니다. 여권 분실 신고는 공관 방문 또는 온라인으로 할 수 있지만, 재발급은 공관 방문이 필요합니다. 분실 신고한 여권은 나중에 찾더라도 사용할 수 없으므로, 항공권과 입국·출국 절차도 새 여권 정보에 맞춰 다시 확인합니다.</p>
 
@@ -1272,6 +1287,7 @@ var astra = {"break_point":"921","isRtl":"","is_scroll_to_id":"1","is_scroll_to_
 const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=https://shootsense.com/wp-includes/js/wp-emoji-loader.min.js
 </script>
+
 
 
 </body></html>

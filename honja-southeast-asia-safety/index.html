@@ -909,7 +909,22 @@ body.search .site-content{}
 }
 </style><style id="ss-adsense-core-style">
 .ss-editorial-application{margin-top:42px;padding-top:34px;border-top:3px solid #0f766e}.ss-editorial-application h2{font-size:27px;line-height:1.4}.ss-editorial-application h3{margin-top:28px;font-size:19px}.ss-editorial-application table{width:100%;border-collapse:collapse;margin:14px 0 22px}.ss-editorial-application th,.ss-editorial-application td{padding:13px 14px;border:1px solid #dbe4e8;text-align:left;vertical-align:top}.ss-editorial-application th{width:88px;background:#f0fdfa;color:#115e59}.ss-application-lead,.ss-method-note{padding:18px 20px;background:#f8fafc;border-left:4px solid #0f766e}.ss-source-list li,.ss-related-list li{margin:8px 0}.ss-source-list span{display:block;color:#64748b;font-size:13px}.ss-method-note{margin-top:28px;font-size:14px;color:#334155}@media(max-width:640px){.ss-editorial-application h2{font-size:23px}.ss-editorial-application th{width:68px}.ss-editorial-application th,.ss-editorial-application td{padding:10px}}
-    </style></head>
+    </style><style id="ss-mobile-reading-layout">
+@media (max-width:921px) {
+  #ast-mobile-header .menu-toggle { min-width:44px; min-height:44px; }
+  .ss-toc a { display:inline-block; min-height:32px; padding:4px 0; line-height:24px; }
+}
+@media (max-width:640px) {
+  table.ss-mobile-comparison { display:block; width:100%; border:1px solid #dbe4e8; border-radius:8px; overflow:hidden; }
+  .ss-mobile-comparison thead { position:absolute !important; width:1px !important; height:1px !important; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  .ss-mobile-comparison tbody, .ss-mobile-comparison tbody tr { display:block; width:100%; }
+  .ss-mobile-comparison tbody tr + tr { border-top:1px solid #dbe4e8; }
+  .ss-mobile-comparison tbody td, .ss-mobile-comparison tbody th { display:block; width:auto !important; padding:8px 14px !important; border:0 !important; font-size:15px; line-height:1.65; text-align:left; white-space:normal; overflow-wrap:anywhere; word-break:keep-all; }
+  .ss-mobile-comparison tbody td:first-child, .ss-mobile-comparison tbody th:first-child { padding-top:12px !important; padding-bottom:12px !important; background:#f1f5f9; color:#10213a; font-weight:700; }
+  .ss-mobile-comparison tbody td:last-child, .ss-mobile-comparison tbody th:last-child { padding-bottom:16px !important; }
+  .ss-mobile-comparison tbody td:not(:first-child)::before, .ss-mobile-comparison tbody th:not(:first-child)::before { content:attr(data-label); display:block; margin-bottom:3px; color:#475569; font-size:13px; font-weight:700; line-height:1.5; }
+}
+</style></head>
 
 <body itemtype="https://schema.org/Blog" itemscope="itemscope" class="wp-singular post-template-default single single-post postid-502 single-format-standard wp-theme-astra ast-desktop ast-no-sidebar astra-4.11.1 group-blog ast-blog-single-style-1 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-normal-title-enabled">
 
@@ -975,8 +990,8 @@ body.search .site-content{}
 																									<div class="site-header-primary-section-right site-header-section ast-flex ast-grid-right-section">
 										<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="section-header-mobile-trigger">
 						<div class="ast-button-wrap">
-				<button type="button" class="menu-toggle main-header-menu-toggle ast-mobile-menu-trigger-minimal" aria-expanded="false">
-					<span class="screen-reader-text">Main Menu</span>
+				<button type="button" class="menu-toggle main-header-menu-toggle ast-mobile-menu-trigger-minimal" aria-expanded="false" aria-label="사이트 메뉴" aria-controls="ast-mobile-site-navigation">
+					<span class="screen-reader-text">사이트 메뉴</span>
 					<span class="mobile-menu-toggle-icon">
 						<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex svg-baseline"><svg class="ast-mobile-svg ast-menu-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 13h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 7h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 19h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1z"></path></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex svg-baseline"><svg class="ast-mobile-svg ast-close-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.293 6.707l5.293 5.293-5.293 5.293c-0.391 0.391-0.391 1.024 0 1.414s1.024 0.391 1.414 0l5.293-5.293 5.293 5.293c0.391 0.391 1.024 0.391 1.414 0s0.391-1.024 0-1.414l-5.293-5.293 5.293-5.293c0.391-0.391 0.391-1.024 0-1.414s-1.024-0.391-1.414 0l-5.293 5.293-5.293-5.293c-0.391-0.391-1.024-0.391-1.414 0s-0.391 1.024 0 1.414z"></path></svg></span>					</span>
 									</button>
@@ -1052,7 +1067,7 @@ body.search .site-content{}
 
 
 
-<figure class="wp-block-table"><table><thead><tr><th>확인 항목</th><th>안정적인 조건</th><th>주의가 필요한 조건</th></tr></thead><tbody><tr><td>도착 시간</td><td>낮 또는 이른 저녁 도착</td><td>심야 도착, 공항 이동 정보 부족</td></tr><tr><td>숙소 위치</td><td>중심지, 대중교통·앱택시 접근 쉬움</td><td>가격은 낮지만 외곽 또는 골목 안쪽</td></tr><tr><td>교통</td><td>공식 택시, 앱 호출, 호텔 픽업</td><td>흥정 중심 이동, 현장 즉흥 이동</td></tr><tr><td>결제</td><td>카드와 현금을 분리 보관</td><td>현금을 한 곳에 몰아 보관</td></tr><tr><td>통신</td><td>도착 직후 데이터 사용 가능</td><td>공항 밖에서 유심을 찾는 계획</td></tr></tbody></table></figure>
+<figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">확인 항목</th><th role="columnheader" scope="col">안정적인 조건</th><th role="columnheader" scope="col">주의가 필요한 조건</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="확인 항목" role="cell">도착 시간</td><td data-label="안정적인 조건" role="cell">낮 또는 이른 저녁 도착</td><td data-label="주의가 필요한 조건" role="cell">심야 도착, 공항 이동 정보 부족</td></tr><tr role="row"><td data-label="확인 항목" role="cell">숙소 위치</td><td data-label="안정적인 조건" role="cell">중심지, 대중교통·앱택시 접근 쉬움</td><td data-label="주의가 필요한 조건" role="cell">가격은 낮지만 외곽 또는 골목 안쪽</td></tr><tr role="row"><td data-label="확인 항목" role="cell">교통</td><td data-label="안정적인 조건" role="cell">공식 택시, 앱 호출, 호텔 픽업</td><td data-label="주의가 필요한 조건" role="cell">흥정 중심 이동, 현장 즉흥 이동</td></tr><tr role="row"><td data-label="확인 항목" role="cell">결제</td><td data-label="안정적인 조건" role="cell">카드와 현금을 분리 보관</td><td data-label="주의가 필요한 조건" role="cell">현금을 한 곳에 몰아 보관</td></tr><tr role="row"><td data-label="확인 항목" role="cell">통신</td><td data-label="안정적인 조건" role="cell">도착 직후 데이터 사용 가능</td><td data-label="주의가 필요한 조건" role="cell">공항 밖에서 유심을 찾는 계획</td></tr></tbody></table></figure>
 
 
 
@@ -1060,7 +1075,7 @@ body.search .site-content{}
 <section data-ss-evidence="2026-10" aria-label="국가별 안전 확인 자료">
   <h3>동남아 전체를 하나의 안전 등급으로 보지 않는 방법</h3>
   <p>같은 나라에서도 도착 도시, 계절, 이동 구간에 따라 판단이 달라진다. 예약 전에는 국가 이름만 검색하지 말고 <strong>방문 도시와 이동 날짜</strong>를 적은 뒤 아래 세 자료를 각각 확인한다. 한 자료로 다른 자료를 대신할 수 없다.</p>
-  <figure class="wp-block-table"><table><thead><tr><th>확인 자료</th><th>무엇을 결정하는가</th><th>한계</th></tr></thead><tbody><tr><td><a href="https://0404.go.kr/travelAlert/apntStatus/stepTravelAlert?index=1">외교부 여행경보</a></td><td>목적지의 경보 단계와 출국·체류 행동요령</td><td>숙소 주변의 실시간 상황을 대신하지 않는다.</td></tr><tr><td>현지 교통 운영사 공지</td><td>공항·역에서 숙소까지 첫 이동과 막차</td><td>예약 플랫폼의 예상 시간과 다를 수 있다.</td></tr><tr><td><a href="https://asmc.asean.org/asmc-haze-hotspot-daily/">ASEAN 기상센터의 연무·핫스팟 자료</a></td><td>일부 지역의 연무 상황을 추가 점검</td><td>위성 핫스팟은 지상 공기질 수치가 아니며 구름 등으로 탐지가 제한될 수 있다.</td></tr></tbody></table></figure>
+  <figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">확인 자료</th><th role="columnheader" scope="col">무엇을 결정하는가</th><th role="columnheader" scope="col">한계</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="확인 자료" role="cell"><a href="https://0404.go.kr/travelAlert/apntStatus/stepTravelAlert?index=1">외교부 여행경보</a></td><td data-label="무엇을 결정하는가" role="cell">목적지의 경보 단계와 출국·체류 행동요령</td><td data-label="한계" role="cell">숙소 주변의 실시간 상황을 대신하지 않는다.</td></tr><tr role="row"><td data-label="확인 자료" role="cell">현지 교통 운영사 공지</td><td data-label="무엇을 결정하는가" role="cell">공항·역에서 숙소까지 첫 이동과 막차</td><td data-label="한계" role="cell">예약 플랫폼의 예상 시간과 다를 수 있다.</td></tr><tr role="row"><td data-label="확인 자료" role="cell"><a href="https://asmc.asean.org/asmc-haze-hotspot-daily/">ASEAN 기상센터의 연무·핫스팟 자료</a></td><td data-label="무엇을 결정하는가" role="cell">일부 지역의 연무 상황을 추가 점검</td><td data-label="한계" role="cell">위성 핫스팟은 지상 공기질 수치가 아니며 구름 등으로 탐지가 제한될 수 있다.</td></tr></tbody></table></figure>
   <p>예를 들어 늦은 항공편에 야간 환승이 필요한 일정이라면 국가의 일반적인 여행 난이도보다 첫날 이동을 먼저 바꿔야 한다. 연무 자료에 변화가 보이면 현지 기상·대기질 공지까지 확인하고 야외 일정을 줄일지 판단한다. 이 문서는 특정 국가 전체가 안전하거나 위험하다고 판정하지 않는다.</p>
 </section>
 <h2 class="wp-block-heading" id="seasia-arrival">첫날은 공항에서 숙소까지가 핵심입니다</h2>
@@ -1079,7 +1094,7 @@ body.search .site-content{}
 
 
 
-<figure class="wp-block-table"><table><thead><tr><th>도시 유형</th><th>장점</th><th>주의할 점</th></tr></thead><tbody><tr><td>대도시</td><td>숙소와 식사 선택지, 앱 교통, 병원 접근성</td><td>교통 체증, 소매치기, 복잡한 거리</td></tr><tr><td>휴양지</td><td>동선이 단순하고 휴식 중심</td><td>외곽 숙소는 이동 수단이 제한될 수 있음</td></tr><tr><td>섬 지역</td><td>풍경과 휴식 만족도 높음</td><td>날씨, 배편, 의료 접근성을 확인해야 함</td></tr><tr><td>소도시</td><td>비용과 분위기 장점</td><td>언어, 교통, 비상 대응 선택지가 적을 수 있음</td></tr></tbody></table></figure>
+<figure class="wp-block-table"><table class="ss-mobile-comparison" role="table"><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">도시 유형</th><th role="columnheader" scope="col">장점</th><th role="columnheader" scope="col">주의할 점</th></tr></thead><tbody role="rowgroup"><tr role="row"><td data-label="도시 유형" role="cell">대도시</td><td data-label="장점" role="cell">숙소와 식사 선택지, 앱 교통, 병원 접근성</td><td data-label="주의할 점" role="cell">교통 체증, 소매치기, 복잡한 거리</td></tr><tr role="row"><td data-label="도시 유형" role="cell">휴양지</td><td data-label="장점" role="cell">동선이 단순하고 휴식 중심</td><td data-label="주의할 점" role="cell">외곽 숙소는 이동 수단이 제한될 수 있음</td></tr><tr role="row"><td data-label="도시 유형" role="cell">섬 지역</td><td data-label="장점" role="cell">풍경과 휴식 만족도 높음</td><td data-label="주의할 점" role="cell">날씨, 배편, 의료 접근성을 확인해야 함</td></tr><tr role="row"><td data-label="도시 유형" role="cell">소도시</td><td data-label="장점" role="cell">비용과 분위기 장점</td><td data-label="주의할 점" role="cell">언어, 교통, 비상 대응 선택지가 적을 수 있음</td></tr></tbody></table></figure>
 
 
 
@@ -1260,6 +1275,7 @@ var astra = {"break_point":"921","isRtl":"","is_scroll_to_id":"1","is_scroll_to_
 const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=https://shootsense.com/wp-includes/js/wp-emoji-loader.min.js
 </script>
+
 
 
 </body></html>

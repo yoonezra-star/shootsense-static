@@ -778,6 +778,21 @@ body.search .site-content{}
   #ast-mobile-header .main-header-menu { list-style:none; margin:0; padding:10px 18px 18px; }
   #ast-mobile-header .main-header-menu > li > a { display:block; padding:10px 0; text-decoration:none; }
 }
+</style><style id="ss-mobile-reading-layout">
+@media (max-width:921px) {
+  #ast-mobile-header .menu-toggle { min-width:44px; min-height:44px; }
+  .ss-toc a { display:inline-block; min-height:32px; padding:4px 0; line-height:24px; }
+}
+@media (max-width:640px) {
+  table.ss-mobile-comparison { display:block; width:100%; border:1px solid #dbe4e8; border-radius:8px; overflow:hidden; }
+  .ss-mobile-comparison thead { position:absolute !important; width:1px !important; height:1px !important; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  .ss-mobile-comparison tbody, .ss-mobile-comparison tbody tr { display:block; width:100%; }
+  .ss-mobile-comparison tbody tr + tr { border-top:1px solid #dbe4e8; }
+  .ss-mobile-comparison tbody td, .ss-mobile-comparison tbody th { display:block; width:auto !important; padding:8px 14px !important; border:0 !important; font-size:15px; line-height:1.65; text-align:left; white-space:normal; overflow-wrap:anywhere; word-break:keep-all; }
+  .ss-mobile-comparison tbody td:first-child, .ss-mobile-comparison tbody th:first-child { padding-top:12px !important; padding-bottom:12px !important; background:#f1f5f9; color:#10213a; font-weight:700; }
+  .ss-mobile-comparison tbody td:last-child, .ss-mobile-comparison tbody th:last-child { padding-bottom:16px !important; }
+  .ss-mobile-comparison tbody td:not(:first-child)::before, .ss-mobile-comparison tbody th:not(:first-child)::before { content:attr(data-label); display:block; margin-bottom:3px; color:#475569; font-size:13px; font-weight:700; line-height:1.5; }
+}
 </style></head>
 
 <body itemtype="https://schema.org/Blog" itemscope="itemscope" class="archive paged category category-southeast-asia-travel category-20 paged-2 category-paged-2 wp-theme-astra ast-desktop ast-no-sidebar astra-4.11.1 group-blog ast-inherit-site-logo-transparent ast-hfb-header">
@@ -844,8 +859,8 @@ body.search .site-content{}
 																									<div class="site-header-primary-section-right site-header-section ast-flex ast-grid-right-section">
 										<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="section-header-mobile-trigger">
 						<div class="ast-button-wrap">
-				<button type="button" class="menu-toggle main-header-menu-toggle ast-mobile-menu-trigger-minimal" aria-expanded="false">
-					<span class="screen-reader-text">Main Menu</span>
+				<button type="button" class="menu-toggle main-header-menu-toggle ast-mobile-menu-trigger-minimal" aria-expanded="false" aria-label="사이트 메뉴" aria-controls="ast-mobile-site-navigation">
+					<span class="screen-reader-text">사이트 메뉴</span>
 					<span class="mobile-menu-toggle-icon">
 						<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex svg-baseline"><svg class="ast-mobile-svg ast-menu-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 13h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 7h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1zM3 19h18c0.552 0 1-0.448 1-1s-0.448-1-1-1h-18c-0.552 0-1 0.448-1 1s0.448 1 1 1z"></path></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex svg-baseline"><svg class="ast-mobile-svg ast-close-svg" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.293 6.707l5.293 5.293-5.293 5.293c-0.391 0.391-0.391 1.024 0 1.414s1.024 0.391 1.414 0l5.293-5.293 5.293 5.293c0.391 0.391 1.024 0.391 1.414 0s0.391-1.024 0-1.414l-5.293-5.293 5.293-5.293c0.391-0.391 0.391-1.024 0-1.414s-1.024-0.391-1.414 0l-5.293 5.293-5.293-5.293c-0.391-0.391-1.024-0.391-1.414 0s-0.391 1.024 0 1.414z"></path></svg></span>					</span>
 									</button>
@@ -967,6 +982,7 @@ var astra = {"break_point":"921","isRtl":"","is_scroll_to_id":"1","is_scroll_to_
 const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=https://shootsense.com/wp-includes/js/wp-emoji-loader.min.js
 </script>
+
 
 
 </body></html>

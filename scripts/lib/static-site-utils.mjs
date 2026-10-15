@@ -302,6 +302,7 @@ export async function buildPostPage(rootDir, post) {
   );
 
   removeWpRemnants($);
+  ensureMobileReadingLayout($);
   return $.html();
 }
 
@@ -386,6 +387,52 @@ export function ensureStaticHeaderCss($) {
     existingStyle.html(css);
   } else {
     $("head").append(`<style id="ss-static-header-layout">${css}</style>`);
+  }
+  ensureMobileReadingLayout($);
+}
+
+export function ensureMobileReadingLayout($) {
+  $("#ast-mobile-header .menu-toggle")
+    .attr({ "aria-label": "사이트 메뉴", "aria-controls": "ast-mobile-site-navigation" })
+    .find(".screen-reader-text").text("사이트 메뉴");
+
+  $(".ss-post-body table, .ss-expert-home table").each((_, table) => {
+    const headers = $(table).find("thead tr").first().children("th, td").map((_, cell) => $(cell).text().trim()).get();
+    const rows = $(table).find("tbody tr");
+    if (headers.length < 3 || !rows.length || $(table).find("[colspan], [rowspan]").length) return;
+    if (rows.toArray().some(row => $(row).children("th, td").length !== headers.length)) return;
+
+    $(table).addClass("ss-mobile-comparison").attr("role", "table");
+    $(table).find("thead, tbody").attr("role", "rowgroup");
+    $(table).find("tr").attr("role", "row");
+    $(table).find("thead th").attr({ role: "columnheader", scope: "col" });
+    rows.each((_, row) => {
+      $(row).children("th, td").each((index, cell) => {
+        $(cell).attr({ "data-label": headers[index], role: "cell" });
+      });
+    });
+  });
+
+  const css = `
+@media (max-width:921px) {
+  #ast-mobile-header .menu-toggle { min-width:44px; min-height:44px; }
+  .ss-toc a { display:inline-block; min-height:32px; padding:4px 0; line-height:24px; }
+}
+@media (max-width:640px) {
+  table.ss-mobile-comparison { display:block; width:100%; border:1px solid #dbe4e8; border-radius:8px; overflow:hidden; }
+  .ss-mobile-comparison thead { position:absolute !important; width:1px !important; height:1px !important; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  .ss-mobile-comparison tbody, .ss-mobile-comparison tbody tr { display:block; width:100%; }
+  .ss-mobile-comparison tbody tr + tr { border-top:1px solid #dbe4e8; }
+  .ss-mobile-comparison tbody td, .ss-mobile-comparison tbody th { display:block; width:auto !important; padding:8px 14px !important; border:0 !important; font-size:15px; line-height:1.65; text-align:left; white-space:normal; overflow-wrap:anywhere; word-break:keep-all; }
+  .ss-mobile-comparison tbody td:first-child, .ss-mobile-comparison tbody th:first-child { padding-top:12px !important; padding-bottom:12px !important; background:#f1f5f9; color:#10213a; font-weight:700; }
+  .ss-mobile-comparison tbody td:last-child, .ss-mobile-comparison tbody th:last-child { padding-bottom:16px !important; }
+  .ss-mobile-comparison tbody td:not(:first-child)::before, .ss-mobile-comparison tbody th:not(:first-child)::before { content:attr(data-label); display:block; margin-bottom:3px; color:#475569; font-size:13px; font-weight:700; line-height:1.5; }
+}
+`;
+  if ($("#ss-mobile-reading-layout").length) {
+    $("#ss-mobile-reading-layout").html(css);
+  } else {
+    $("head").append(`<style id="ss-mobile-reading-layout">${css}</style>`);
   }
 }
 
