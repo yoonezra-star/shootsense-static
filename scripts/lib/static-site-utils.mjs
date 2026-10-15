@@ -392,6 +392,9 @@ export function ensureStaticHeaderCss($) {
 }
 
 export function ensureMobileReadingLayout($) {
+  $("script#wp-emoji-settings, script#wp-emoji-loader").remove();
+  $('script[type="module"]').filter((_, script) => $(script).text().includes("wp-emoji-settings")).remove();
+
   $("#ast-mobile-header .menu-toggle")
     .attr({ "aria-label": "사이트 메뉴", "aria-controls": "ast-mobile-site-navigation" })
     .find(".screen-reader-text").text("사이트 메뉴");
