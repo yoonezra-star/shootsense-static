@@ -1,9 +1,9 @@
 export const SITE_URL = "https://shootsense.com";
 export const SITE_NAME = "여행정보엑스퍼트";
-export const SITE_TAGLINE = "혼자 여행자를 위한 전문 여행 정보";
+export const SITE_TAGLINE = "혼자 여행의 예약·이동 준비";
 export const AUTHOR_NAME = "여행엑스퍼트";
 export const DEFAULT_IMAGE = `${SITE_URL}/wp-content/uploads/2025/05/38f8e38e-3aa7-4fa6-a852-bcd8e44e51b8.webp`;
-export const DEFAULT_LOGO = `${SITE_URL}/wp-content/uploads/2025/05/ChatGPT-Image-2025년-5월-5일-오후-01_33_00-1.png`;
+export const DEFAULT_LOGO = `${SITE_URL}/wp-content/uploads/2025/05/cropped-ChatGPT-Image-2025년-5월-5일-오후-01_56_24-192x192.png`;
 
 export const CATEGORY_MAP = {
   "travel-tips": {

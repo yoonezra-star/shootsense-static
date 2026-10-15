@@ -72,7 +72,7 @@ for (const filePath of files) {
   if (isIndexable && $('link[rel="canonical"]').length !== 1) issues.push(`${relative}: canonical count ${$('link[rel="canonical"]').length}`);
   if (isIndexable && $('h1').length !== 1) issues.push(`${relative}: h1 count ${$('h1').length}`);
 
-  if (isIndexable) {
+  if ($('body').length) {
     for (const href of $('a[href]').map((_, node) => $(node).attr('href') || '').get()) {
       if (!href || href.startsWith('#') || /^(mailto|tel|javascript):/i.test(href)) continue;
       let target = href;
@@ -126,21 +126,17 @@ if (new Set(sitemapUrls).size !== sitemapUrls.length) issues.push('post sitemap 
 const emailOccurrences = (await fs.readFile(path.join(rootDir, 'index.html'), 'utf8')).match(/mailto:replyleaders01@gmail\.com/g)?.length || 0;
 if (emailOccurrences !== 1) issues.push(`home footer email count ${emailOccurrences}`);
 
-const requiredPages = {
-  'index.html': 2500,
-  'about/index.html': 900,
-  'author/index.html': 900,
-  'contact/index.html': 500,
-  'editorial-policy/index.html': 900,
-  'privacy-policy/index.html': 900,
-  'terms-of-service/index.html': 900
-};
+const requiredPages = [
+  'index.html', 'about/index.html', 'author/index.html', 'contact/index.html',
+  'editorial-policy/index.html', 'privacy-policy/index.html', 'terms-of-service/index.html',
+  'tools/stay-compare/index.html'
+];
 const requiredPageChars = {};
-for (const [relative, minimum] of Object.entries(requiredPages)) {
+for (const relative of requiredPages) {
   const $ = load(await fs.readFile(path.join(rootDir, relative), 'utf8'), { decodeEntities: false });
   const chars = $('main').first().text().replace(/\s+/g, ' ').trim().length;
   requiredPageChars[relative] = chars;
-  if (chars < minimum) issues.push(`${relative}: required page has ${chars} chars, expected at least ${minimum}`);
+  if (!chars || !$('main h1').length) issues.push(`${relative}: main content or heading is missing`);
 }
 
 for (const category of ['travel-tips', 'asia-travel', 'europe-travel', 'middle-east-travel', 'southeast-asia-travel']) {

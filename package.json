@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "audit:adsense": "node scripts/audit-adsense-readiness.mjs",
+    "revise:editorial": "node scripts/rebuild-editorial-value.mjs",
+    "test:stay-math": "node --test scripts/test-stay-math.mjs",
     "curate:adsense": "node scripts/curate-adsense-core.mjs",
     "validate:site": "node scripts/validate-static-site.mjs",
     "repair:assets": "node scripts/repair-static-assets.mjs",

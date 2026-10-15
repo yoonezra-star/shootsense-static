@@ -31,10 +31,12 @@ function isExternalLink(href = "") {
 
 const files = await collectIndexFiles(rootDir);
 const posts = [];
+const publishedTools = [];
 
 for (const filePath of files) {
   const html = await fs.readFile(filePath, "utf8");
   const $ = load(html, { decodeEntities: false });
+  if ($('.ss-tool').length) publishedTools.push({ route: path.relative(rootDir, path.dirname(filePath)).replaceAll('\\', '/'), title: normalize($('h1').first().text()) });
   if (!$('.ss-post').length) continue;
 
   const body = $('.ss-post-body').first();
@@ -81,39 +83,34 @@ for (const post of posts) {
 }
 
 const indexedPosts = posts.filter((post) => post.indexed);
-const weakPosts = indexedPosts
-  .filter((post) => post.bodyChars < 3500 || post.sections < 6 || post.uniqueParagraphRatio < 0.8)
-  .sort((a, b) => a.bodyChars - b.bodyChars);
 const sourceLightPosts = indexedPosts.filter((post) => post.externalSources === 0);
 const navigationLightPosts = indexedPosts.filter((post) => post.internalLinks < 2);
-const score = Math.max(0, Math.round(
-  100
-  - (weakPosts.length / Math.max(indexedPosts.length, 1)) * 40
-  - (sourceLightPosts.length / Math.max(indexedPosts.length, 1)) * 15
-  - (navigationLightPosts.length / Math.max(indexedPosts.length, 1)) * 10
-  - posts.filter((post) => post.tocCount !== 1).length * 2
-));
 
 const report = {
   generatedAt: new Date().toISOString(),
   methodology: {
     bodyOnly: true,
-    strongBodyMinimumChars: 3500,
-    strongSectionMinimum: 6,
-    uniqueParagraphMinimumRatio: 0.8,
-    note: "This is an internal readiness score, not a Google score or approval prediction."
+    scoring: "none",
+    note: "Structural inventory only. Character counts, headings and exact paragraph matches do not establish original value or AdSense eligibility. Human editorial review is required."
   },
   summary: {
-    internalReadinessScore: score,
+    editorialAssessment: "manual-review-required",
     totalPosts: posts.length,
     indexedPosts: indexedPosts.length,
-    weakIndexedPosts: weakPosts.length,
+    publishedTools: publishedTools.length,
     postsWithoutExternalSources: sourceLightPosts.length,
     postsWithFewerThanTwoInternalLinks: navigationLightPosts.length,
     tocProblems: posts.filter((post) => post.tocCount !== 1).length
   },
   allPosts: [...posts].sort((a, b) => b.bodyChars - a.bodyChars),
-  weakestIndexedPosts: weakPosts.slice(0, 30),
+  tools: publishedTools,
+  manualReviewQuestions: [
+    "Can the reader complete a concrete task with the page?",
+    "What original calculation, analysis, comparison or verified reporting does it add?",
+    "Are examples and research clearly distinguished from firsthand experience?",
+    "Could repeated conclusions be removed without losing useful information?",
+    "Are traffic and usage claims supported by actual data?"
+  ],
   postsWithoutExternalSources: sourceLightPosts.map(({ slug, title, bodyChars }) => ({ slug, title, bodyChars })),
   postsWithFewerThanTwoInternalLinks: navigationLightPosts.map(({ slug, title, internalLinks }) => ({ slug, title, internalLinks }))
   ,repeatedParagraphs: [...paragraphFrequency.entries()]
@@ -125,7 +122,4 @@ const report = {
 
 await fs.writeFile(path.join(rootDir, 'adsense-readiness-report.json'), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 console.log(JSON.stringify(report.summary, null, 2));
-console.log('\nWeakest indexed posts:');
-for (const post of weakPosts.slice(0, 20)) {
-  console.log(`${String(post.bodyChars).padStart(5)} chars | ${post.sections} h2 | ${post.externalSources} src | ${post.internalLinks} internal | ${post.slug}`);
-}
+console.log('\nNo approval score is calculated. Review original value and actual reader outcomes manually.');
