@@ -10,10 +10,13 @@ for (const guide of PREDEPARTURE_GUIDES) {
     assert.equal($('.ss-post-body').length, 1);
     assert.equal($('.ss-toc').length, 1);
     assert.equal($('h1').length, 1);
+    assert.equal($('.ss-post.ss-predeparture-guide').length, 1);
+    assert.equal($('link#ss-predeparture-style[href="/assets/predeparture-guides.css"]').length, 1);
     const headings = $('.ss-post-body h2').toArray().map(node => $(node).attr('id'));
     assert.equal(headings.length, new Set(headings).size);
     assert.ok(headings.every(Boolean));
     assert.deepEqual($('.ss-toc a').toArray().map(node => $(node).attr('href')), headings.map(id => `#${id}`));
+    assert.ok($('.ss-toc a').toArray().every(node => !/^\d+\./.test($(node).text())));
     assert.equal($('.ss-post-body .ss-deepening, .ss-post-body .ss-faq').length, 0);
     const links = $('.ss-post-body a[href^="https:"]').toArray().map(node => new URL($(node).attr('href')));
     assert.ok(links.length >= 2);

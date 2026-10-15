@@ -14,8 +14,10 @@ for (const guide of PREDEPARTURE_GUIDES) {
   const file = path.join(root, guide.slug, 'index.html');
   const $ = load((await fs.readFile(file, 'utf8')).trimEnd(), { decodeEntities: false });
   if ($('.ss-post-body').length !== 1 || $('.ss-toc').length !== 1) throw new Error(`Unexpected article layout: ${guide.slug}`);
+  $('.ss-post').addClass('ss-predeparture-guide');
+  if (!$('link#ss-predeparture-style').length) $('head').append('<link id="ss-predeparture-style" rel="stylesheet" href="/assets/predeparture-guides.css">');
   $('.ss-post-body').html(guide.body);
-  const headings = $('.ss-post-body h2').toArray().map(node => ({ id: $(node).attr('id'), text: $(node).text() }));
+  const headings = $('.ss-post-body h2').toArray().map(node => ({ id: $(node).attr('id'), text: $(node).text().replace(/^\d+\.\s*/, '') }));
   if (headings.some(item => !item.id) || new Set(headings.map(item => item.id)).size !== headings.length) throw new Error(`Invalid section identifiers: ${guide.slug}`);
   $('.ss-toc').html(`<div class="ss-toc-head">목차</div><ol>${headings.map(item => `<li><a href="#${escapeHtml(item.id)}">${escapeHtml(item.text)}</a></li>`).join('')}</ol>`);
   $('.ss-post-summary p').first().text(guide.summary);
