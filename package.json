@@ -7,6 +7,8 @@
     "revise:editorial": "node scripts/rebuild-editorial-value.mjs",
     "revise:predeparture": "node scripts/revise-predeparture-guides.mjs",
     "revise:regions": "node scripts/revise-predeparture-guides.mjs --regional",
+    "revise:safi-mleiha": "node scripts/revise-predeparture-guides.mjs --safi-mleiha",
+    "test:safi-mleiha": "node --test scripts/test-safi-mleiha.mjs",
     "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",

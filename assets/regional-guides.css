@@ -2,6 +2,8 @@
 .ss-regional-guide .ss-toc ol{padding-left:22px}
 .ss-regional-guide .ss-toc a{display:block;min-height:36px;padding:6px 0;line-height:1.7}
 .ss-regional-guide caption{caption-side:top;text-align:left;padding:10px 0;font-size:14px;line-height:1.7;color:#425c51}
+.ss-review-notice,.ss-category-safety-note{border-left:3px solid #9b4f27;padding:14px 16px;margin:20px 0;background:#fff5ed;color:#452d21;line-height:1.8}
+.ss-review-notice p:last-child{margin-bottom:0}
 @media(max-width:640px){
   .ss-regional-guide table.ss-mobile-comparison caption{display:block;width:100%;max-width:none;padding:12px 14px;box-sizing:border-box}
 }

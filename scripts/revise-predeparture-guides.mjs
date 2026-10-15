@@ -4,6 +4,8 @@ import { load } from 'cheerio';
 import { ensureMobileReadingLayout, escapeHtml, writeFileUtf8 } from './lib/static-site-utils.mjs';
 import { PREDEPARTURE_GUIDES, PREDEPARTURE_HOME_UPDATE, PREDEPARTURE_MODIFIED } from './predeparture-content.mjs';
 import { REGIONAL_REVISION } from './regional-access-content.mjs';
+import { SAFI_MLEIHA_REVISION } from './safi-mleiha-content.mjs';
+import { syncEditorialReferences } from './lib/editorial-references.mjs';
 
 export async function reviseEditorialBatch({
   guides = PREDEPARTURE_GUIDES, modified = PREDEPARTURE_MODIFIED,
@@ -26,6 +28,12 @@ for (const guide of guides) {
   $('.ss-post').addClass(className);
   if (!$(`link#${styleId}`).length) $('head').append(`<link id="${escapeHtml(styleId)}" rel="stylesheet" href="${escapeHtml(stylesheet)}">`);
   $('.ss-post-body').html(guide.body);
+  if (guide.title) {
+    $('h1').first().text(guide.title);
+    $('title').text(`${guide.title} - 여행정보엑스퍼트`);
+    for (const selector of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) $(selector).attr('content', guide.title);
+    $('.ss-breadcrumb .here').text(guide.title);
+  }
   const headings = $('.ss-post-body h2').toArray().map(node => ({ id: $(node).attr('id'), text: $(node).text().replace(/^\d+\.\s*/, '') }));
   if (headings.some(item => !item.id) || new Set(headings.map(item => item.id)).size !== headings.length) throw new Error(`Invalid section identifiers: ${guide.slug}`);
   $('.ss-toc').html(`<div class="ss-toc-head">목차</div><ol>${headings.map(item => `<li><a href="#${escapeHtml(item.id)}">${escapeHtml(item.text)}</a></li>`).join('')}</ol>`);
@@ -37,7 +45,16 @@ for (const guide of guides) {
     const nodes = schema['@graph'] || [schema];
     for (const node of nodes) {
       const types = Array.isArray(node['@type']) ? node['@type'] : [node['@type']];
+      if (guide.title && types.includes('BreadcrumbList')) {
+        const last = node.itemListElement?.at(-1);
+        if (last?.item && typeof last.item === 'object') last.item.name = guide.title;
+        else if (last) last.name = guide.title;
+      }
       if (!types.some(type => ['BlogPosting', 'WebPage', 'Article'].includes(type))) continue;
+      if (guide.title) {
+        node.name = guide.title;
+        if (types.some(type => ['BlogPosting', 'Article'].includes(type))) node.headline = guide.title;
+      }
       if (types.includes('BlogPosting')) published = node.datePublished?.slice(0, 10);
       node.dateModified = modified;
       node.description = guide.summary;
@@ -65,6 +82,7 @@ home('script.rank-math-schema').each((_, script) => {
   home(script).text(JSON.stringify(schema));
 });
 await writeFileUtf8(homeFile, serialize(home));
+const referencePagesUpdated = await syncEditorialReferences(root, guides);
 
 for (const name of ['post-sitemap.xml', 'page-sitemap.xml']) {
   const file = path.join(root, name);
@@ -83,7 +101,7 @@ const indexFile = path.join(root, 'sitemap_index.xml');
 const index = load(await fs.readFile(indexFile, 'utf8'), { xml: true });
 index('sitemap').filter((_, node) => /\/(post|page)-sitemap\.xml$/.test(index(node).find('loc').text())).find('lastmod').each((_, node) => index(node).text(latest(index(node).text(), modified)));
 await writeFileUtf8(indexFile, index.xml().trimEnd() + '\n');
-console.log(JSON.stringify({ rewritten: [...changed], worksheets, homepageLogUpdated: true }, null, 2));
+console.log(JSON.stringify({ rewritten: [...changed], worksheets, homepageLogUpdated: true, referencePagesUpdated }, null, 2));
 }
 
-await reviseEditorialBatch(process.argv.includes('--regional') ? REGIONAL_REVISION : undefined);
+await reviseEditorialBatch(process.argv.includes('--safi-mleiha') ? SAFI_MLEIHA_REVISION : process.argv.includes('--regional') ? REGIONAL_REVISION : undefined);

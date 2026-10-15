@@ -4,6 +4,7 @@ import { load } from 'cheerio';
 import { ensureMobileReadingLayout, writeFileUtf8 } from './lib/static-site-utils.mjs';
 import { HOME_CONTENT, LODGING_CONTENT, PACKING_CONTENT, toolContent } from './recovery-content.mjs';
 import { REGIONAL_REVISION } from './regional-access-content.mjs';
+import { SAFI_MLEIHA_REVISION } from './safi-mleiha-content.mjs';
 
 const root = process.cwd();
 const modified = '2026-10-15T15:20:00+09:00';
@@ -198,3 +199,4 @@ console.log(JSON.stringify({ htmlPages: output.size, rewrittenPosts: posts.size,
 // Keep the later article revision and homepage log when rebuilding the first batch.
 const { reviseEditorialBatch } = await import('./revise-predeparture-guides.mjs');
 await reviseEditorialBatch(REGIONAL_REVISION);
+await reviseEditorialBatch(SAFI_MLEIHA_REVISION);
