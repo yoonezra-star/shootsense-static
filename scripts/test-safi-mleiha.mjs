@@ -93,3 +93,14 @@ test('new sitemap dates and title agree while the prior regional revision remain
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(SAFI_MLEIHA_MODIFIED));
 });
+
+test('legacy image-backed Mleiha recommendations use the current caution title', async () => {
+  for (const slug of [SAFI_SLUG, '볼거리가-없어서-오래-머물-수-있었던-무스카트-외곽', '지도에-별표가-없는-곳에서-보낸-수르의-시간']) {
+    const html = await fs.readFile(`${slug}/index.html`, 'utf8');
+    const $ = load(html);
+    assert.ok(!html.includes(SAFI_MLEIHA_GUIDES[1].previousTitle));
+    const links = $('a[href]').filter((_, node) => $(node).attr('href').includes(MLEIHA_SLUG) && $(node).find('img').length);
+    assert.ok(links.length >= 1);
+    links.each((_, node) => assert.equal($(node).find('.ti').text(), MLEIHA_TITLE));
+  }
+});
