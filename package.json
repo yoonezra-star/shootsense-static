@@ -9,6 +9,8 @@
     "revise:regions": "node scripts/revise-predeparture-guides.mjs --regional",
     "revise:safi-mleiha": "node scripts/revise-predeparture-guides.mjs --safi-mleiha",
     "test:safi-mleiha": "node --test scripts/test-safi-mleiha.mjs",
+    "revise:tuyhoa-kodai": "node scripts/revise-predeparture-guides.mjs --tuyhoa-kodai",
+    "test:tuyhoa-kodai": "node --test scripts/test-tuyhoa-kodai.mjs",
     "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",

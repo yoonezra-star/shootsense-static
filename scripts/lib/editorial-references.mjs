@@ -34,6 +34,8 @@ export async function syncEditorialReferences(root, guides) {
           $(anchor).text(guide.title);
           changed = true;
         }
+        const nestedTitle = $(anchor).find('.ti').filter((_, node) => $(node).text().trim() === guide.previousTitle);
+        if (nestedTitle.length) { nestedTitle.text(guide.title); changed = true; }
         if ($(anchor).hasClass('ss-guide-cover') && guide.coverNote) {
           const note = $(anchor).find('.overline');
           if (note.text() !== guide.coverNote) { note.text(guide.coverNote); changed = true; }
