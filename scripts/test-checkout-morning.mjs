@@ -122,7 +122,7 @@ test('sources and metadata agree with the article without changing original publ
 test('home and category references match while earlier Bangkok review date survives', async () => {
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.equal(home('#checkout-morning-update').length, 1);
-  assert.equal(home('.ss-home-updates').children().first().attr('id'), 'checkout-morning-update');
+  assert.equal(home('#checkout-morning-update a').attr('href'), `/${CHECKOUT_MORNING_SLUG}/`);
   assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(CHECKOUT_MORNING_MODIFIED));
   const categoryHtml = await fs.readFile('travel-tips/index.html', 'utf8');
   const category = load(categoryHtml);

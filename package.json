@@ -19,6 +19,8 @@
     "test:bangkok-arrival": "node --test scripts/test-bangkok-arrival.mjs",
     "revise:checkout-morning": "node scripts/revise-predeparture-guides.mjs --checkout-morning",
     "test:checkout-morning": "node --test scripts/test-checkout-morning.mjs",
+    "revise:trip-reset": "node scripts/revise-predeparture-guides.mjs --trip-reset",
+    "test:trip-reset": "node --test scripts/test-trip-reset.mjs",
     "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",
