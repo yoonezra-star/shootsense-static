@@ -114,7 +114,7 @@ test('original URL and publication date survive with matching metadata and fresh
 test('home and category references agree and earlier dining revision is not redated', async () => {
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.equal(home('#bangkok-arrival-update').length, 1);
-  assert.equal(home('.ss-home-updates').children().first().attr('id'), 'bangkok-arrival-update');
+  assert.equal(home('#bangkok-arrival-update a').attr('href'), `/${BANGKOK_ARRIVAL_SLUG}/`);
   const categoryHtml = await fs.readFile('southeast-asia-travel/index.html', 'utf8');
   const category = load(categoryHtml);
   assert.ok(categoryHtml.includes(guide.title));
