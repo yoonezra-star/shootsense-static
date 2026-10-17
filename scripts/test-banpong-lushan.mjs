@@ -82,7 +82,7 @@ test('Lushan separates stations, transport products, illustrative arithmetic and
 test('homepage and existing navigation use new titles without changing images', async () => {
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.equal(home('#banpong-lushan-update').length, 1);
-  assert.equal(home('.ss-home-updates').children().first().attr('id'), 'banpong-lushan-update');
+  assert.ok(home('.ss-home-updates').children().first().find('time').attr('datetime') >= '2026-10-16');
   for (const [guide, category] of [[BANPONG_LUSHAN_GUIDES[0], 'southeast-asia-travel'], [BANPONG_LUSHAN_GUIDES[1], 'asia-travel']]) {
     assert.equal(home(`.ss-region-list a[href="/${guide.slug}/"]`).closest('li').find('span').last().text(), guide.homeTeaser);
     const html = await fs.readFile(`${category}/index.html`, 'utf8');

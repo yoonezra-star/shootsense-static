@@ -36,6 +36,8 @@ export async function syncEditorialReferences(root, guides) {
         }
         const nestedTitle = $(anchor).find('.ti').filter((_, node) => $(node).text().trim() === guide.previousTitle);
         if (nestedTitle.length) { nestedTitle.text(guide.title); changed = true; }
+        const titledImages = $(anchor).find('img[alt]').filter((_, node) => $(node).attr('alt') === guide.previousTitle);
+        if (titledImages.length) { titledImages.attr('alt', guide.title); changed = true; }
         if ($(anchor).hasClass('ss-guide-cover') && guide.coverNote) {
           const note = $(anchor).find('.overline');
           if (note.text() !== guide.coverNote) { note.text(guide.coverNote); changed = true; }
