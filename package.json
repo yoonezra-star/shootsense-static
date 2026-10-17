@@ -11,6 +11,8 @@
     "test:safi-mleiha": "node --test scripts/test-safi-mleiha.mjs",
     "revise:tuyhoa-kodai": "node scripts/revise-predeparture-guides.mjs --tuyhoa-kodai",
     "test:tuyhoa-kodai": "node --test scripts/test-tuyhoa-kodai.mjs",
+    "revise:banpong-lushan": "node scripts/revise-predeparture-guides.mjs --banpong-lushan",
+    "test:banpong-lushan": "node --test scripts/test-banpong-lushan.mjs",
     "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",

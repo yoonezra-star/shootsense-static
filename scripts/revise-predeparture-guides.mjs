@@ -6,6 +6,7 @@ import { PREDEPARTURE_GUIDES, PREDEPARTURE_HOME_UPDATE, PREDEPARTURE_MODIFIED } 
 import { REGIONAL_REVISION } from './regional-access-content.mjs';
 import { SAFI_MLEIHA_REVISION } from './safi-mleiha-content.mjs';
 import { TUYHOA_KODAI_REVISION } from './tuyhoa-kodai-content.mjs';
+import { BANPONG_LUSHAN_REVISION } from './banpong-lushan-content.mjs';
 import { syncEditorialReferences } from './lib/editorial-references.mjs';
 
 export async function reviseEditorialBatch({
@@ -105,4 +106,4 @@ await writeFileUtf8(indexFile, index.xml().trimEnd() + '\n');
 console.log(JSON.stringify({ rewritten: [...changed], worksheets, homepageLogUpdated: true, referencePagesUpdated }, null, 2));
 }
 
-await reviseEditorialBatch(process.argv.includes('--tuyhoa-kodai') ? TUYHOA_KODAI_REVISION : process.argv.includes('--safi-mleiha') ? SAFI_MLEIHA_REVISION : process.argv.includes('--regional') ? REGIONAL_REVISION : undefined);
+await reviseEditorialBatch(process.argv.includes('--banpong-lushan') ? BANPONG_LUSHAN_REVISION : process.argv.includes('--tuyhoa-kodai') ? TUYHOA_KODAI_REVISION : process.argv.includes('--safi-mleiha') ? SAFI_MLEIHA_REVISION : process.argv.includes('--regional') ? REGIONAL_REVISION : undefined);

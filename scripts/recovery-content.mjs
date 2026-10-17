@@ -2,6 +2,7 @@ import { PREDEPARTURE_HOME_UPDATE } from './predeparture-content.mjs';
 import { REGIONAL_HOME_UPDATE } from './regional-access-content.mjs';
 import { SAFI_MLEIHA_HOME_UPDATE } from './safi-mleiha-content.mjs';
 import { TUYHOA_KODAI_HOME_UPDATE } from './tuyhoa-kodai-content.mjs';
+import { BANPONG_LUSHAN_HOME_UPDATE } from './banpong-lushan-content.mjs';
 
 export const HOME_CONTENT = `
 <div class="ss-home">
@@ -29,9 +30,9 @@ export const HOME_CONTENT = `
       <li><a href="/구경-대신-산책이-전부였던-샤르자-외곽의-오후/">아랍에미리트 · 샤르자 믈레이하</a><span>UAE 전 지역 출국권고 확인. 관광 예약보다 취소·연기와 최신 안전공지 확인을 우선합니다.</span></li>
       <li><a href="/관광-코스가-없어-자유로웠던-사피-여행/">모로코 · 사피</a><span>도자기 공방과 국립 도자기 박물관은 목적과 위치가 다릅니다. 열차 경유와 1박을 비교합니다.</span></li>
       <li><a href="/여행자보다-주민이-더-많았던-투이호아의-분위기/">베트남 · 투이호아</a><span>닥락·옛 푸옌 지명, 공항·역 도착과 해안 왕복을 다른 항목으로 대조합니다.</span></li>
-      <li><a href="/심심함이-여행의-일부가-된-반퐁에서의-며칠/">태국 · 반퐁</a><span>과거 문화시장 기록과 현재 행사 일정을 구분합니다. 시장이 없을 때의 방문 조건도 봅니다.</span></li>
+      <li><a href="/심심함이-여행의-일부가-된-반퐁에서의-며칠/">태국 · 반퐁</a><span>2023년 시장 기록의 날짜를 읽고, 현재 개최 미확인 상태에서 낮 방문과 귀환을 나눠 판단합니다.</span></li>
       <li><a href="/추천은-못-해도-기억에서-지워지지-않는-코다이카날/">인도 · 코다이카날</a><span>Kodai Road 도착을 산 위 숙소 도착으로 보지 않고, 관측소 신청·방문 회신을 따로 확인합니다.</span></li>
-      <li><a href="/honja-lushan-yeohaeng/">중국 · 루산</a><span>산악 날씨, 구링 체류, 케이블카와 마지막 복귀 수단을 분리해 계획합니다.</span></li>
+      <li><a href="/honja-lushan-yeohaeng/">중국 · 루산</a><span>루산역·주장역 이후 이동과 산 위 차량을 분리하고, 정부 게시 요금의 조합과 여권 예약 미확인 사항을 대조합니다.</span></li>
       <li><a href="/이탈리아-치비타-디-반뇨레조-근처-마을/">이탈리아 · 치비타 디 반뇨레조</a><span>보행교 구간과 숙소·정류장에서 다리까지의 접근 구간을 따로 계산합니다.</span></li>
       <li><a href="/관광객이-적어-현지의-속도를-느낀-아르타/">그리스 · 아르타</a><span>석교 보행, 실내 유산의 개방 여부, 요일별 버스 연결을 나눠 당일 방문과 1박을 판단합니다.</span></li>
     </ul>
@@ -41,7 +42,7 @@ export const HOME_CONTENT = `
     <a class="ss-action ss-action--secondary" href="/assets/trip-prep-sheet.txt" download><img src="/assets/icons/download.svg" alt="" width="18" height="18">출발 준비표 내려받기</a>
   </section>
   <section class="ss-home-band" aria-labelledby="home-update-title">
-    <h2 id="home-update-title">이번에 바뀐 자료</h2><ul class="ss-home-updates">${TUYHOA_KODAI_HOME_UPDATE}${SAFI_MLEIHA_HOME_UPDATE}${REGIONAL_HOME_UPDATE}${PREDEPARTURE_HOME_UPDATE}<li><time datetime="2026-10-15">2026.10.15</time> · <a href="/tools/stay-compare/">숙소 총비용 비교기</a>: 이용 비용·취소 손실·미확인 조건을 함께 표시합니다.</li><li><time datetime="2026-10-15">2026.10.15</time> · <a href="/honja-yeohaeng-sukso-goreuneun-beop/">숙소 비교 가이드</a>: 계산 사례와 체크인 문의 문안을 재구성했습니다.</li><li><time datetime="2026-10-15">2026.10.15</time> · <a href="/honja-yeohaeng-junbimul-checklist/">준비물 가이드</a>: 물건 목록을 출발 전 작동 점검표로 바꿨습니다.</li></ul>
+    <h2 id="home-update-title">이번에 바뀐 자료</h2><ul class="ss-home-updates">${BANPONG_LUSHAN_HOME_UPDATE}${TUYHOA_KODAI_HOME_UPDATE}${SAFI_MLEIHA_HOME_UPDATE}${REGIONAL_HOME_UPDATE}${PREDEPARTURE_HOME_UPDATE}<li><time datetime="2026-10-15">2026.10.15</time> · <a href="/tools/stay-compare/">숙소 총비용 비교기</a>: 이용 비용·취소 손실·미확인 조건을 함께 표시합니다.</li><li><time datetime="2026-10-15">2026.10.15</time> · <a href="/honja-yeohaeng-sukso-goreuneun-beop/">숙소 비교 가이드</a>: 계산 사례와 체크인 문의 문안을 재구성했습니다.</li><li><time datetime="2026-10-15">2026.10.15</time> · <a href="/honja-yeohaeng-junbimul-checklist/">준비물 가이드</a>: 물건 목록을 출발 전 작동 점검표로 바꿨습니다.</li></ul>
   </section>
   <section class="ss-home-band"><h2>자료의 범위와 오류 제보</h2><p>글마다 공식 자료에서 확인한 사실과 편집자의 계산·판단 예시를 구분합니다. 가상 사례는 실제 상품이나 이용 후기가 아닙니다. <a href="/author/">작성자 소개</a> · <a href="/editorial-policy/">편집 원칙</a> · <a href="/contact/">오류 제보</a></p></section>
 </div>`;

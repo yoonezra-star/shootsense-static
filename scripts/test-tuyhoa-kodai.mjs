@@ -73,7 +73,7 @@ test('Kodaikanal exposes old-source conflict and does not equate application wit
 test('main and both region lists use revised titles without stale link labels', async () => {
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.equal(home('#tuyhoa-kodai-update').length, 1);
-  assert.equal(home('.ss-home-updates').children().first().attr('id'), 'tuyhoa-kodai-update');
+  assert.ok(home('.ss-home-updates').children().first().find('time').attr('datetime') >= '2026-10-16');
   for (const [guide, category] of [[TUYHOA_KODAI_GUIDES[0], 'southeast-asia-travel'], [TUYHOA_KODAI_GUIDES[1], 'asia-travel']]) {
     assert.equal(home(`.ss-region-list a[href="/${guide.slug}/"]`).closest('li').find('span').last().text(), guide.homeTeaser);
     const html = await fs.readFile(`${category}/index.html`, 'utf8');
