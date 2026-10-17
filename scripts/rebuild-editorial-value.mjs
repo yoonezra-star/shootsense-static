@@ -8,6 +8,7 @@ import { SAFI_MLEIHA_REVISION } from './safi-mleiha-content.mjs';
 import { TUYHOA_KODAI_REVISION } from './tuyhoa-kodai-content.mjs';
 import { BANPONG_LUSHAN_REVISION } from './banpong-lushan-content.mjs';
 import { DINING_REVISION } from './dining-content.mjs';
+import { BANGKOK_ARRIVAL_REVISION } from './bangkok-arrival-content.mjs';
 
 const root = process.cwd();
 const modified = '2026-10-15T15:20:00+09:00';
@@ -206,3 +207,4 @@ await reviseEditorialBatch(SAFI_MLEIHA_REVISION);
 await reviseEditorialBatch(TUYHOA_KODAI_REVISION);
 await reviseEditorialBatch(BANPONG_LUSHAN_REVISION);
 await reviseEditorialBatch(DINING_REVISION);
+await reviseEditorialBatch(BANGKOK_ARRIVAL_REVISION);

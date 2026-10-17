@@ -4,6 +4,7 @@ import { SAFI_MLEIHA_HOME_UPDATE } from './safi-mleiha-content.mjs';
 import { TUYHOA_KODAI_HOME_UPDATE } from './tuyhoa-kodai-content.mjs';
 import { BANPONG_LUSHAN_HOME_UPDATE } from './banpong-lushan-content.mjs';
 import { DINING_HOME_UPDATE } from './dining-content.mjs';
+import { BANGKOK_ARRIVAL_HOME_UPDATE } from './bangkok-arrival-content.mjs';
 
 export const HOME_CONTENT = `
 <div class="ss-home">
@@ -43,7 +44,7 @@ export const HOME_CONTENT = `
     <a class="ss-action ss-action--secondary" href="/assets/trip-prep-sheet.txt" download><img src="/assets/icons/download.svg" alt="" width="18" height="18">출발 준비표 내려받기</a>
   </section>
   <section class="ss-home-band" aria-labelledby="home-update-title">
-    <h2 id="home-update-title">이번에 바뀐 자료</h2><ul class="ss-home-updates">${DINING_HOME_UPDATE}${BANPONG_LUSHAN_HOME_UPDATE}${TUYHOA_KODAI_HOME_UPDATE}${SAFI_MLEIHA_HOME_UPDATE}${REGIONAL_HOME_UPDATE}${PREDEPARTURE_HOME_UPDATE}<li><time datetime="2026-10-15">2026.10.15</time> · <a href="/tools/stay-compare/">숙소 총비용 비교기</a>: 이용 비용·취소 손실·미확인 조건을 함께 표시합니다.</li><li><time datetime="2026-10-15">2026.10.15</time> · <a href="/honja-yeohaeng-sukso-goreuneun-beop/">숙소 비교 가이드</a>: 계산 사례와 체크인 문의 문안을 재구성했습니다.</li><li><time datetime="2026-10-15">2026.10.15</time> · <a href="/honja-yeohaeng-junbimul-checklist/">준비물 가이드</a>: 물건 목록을 출발 전 작동 점검표로 바꿨습니다.</li></ul>
+    <h2 id="home-update-title">이번에 바뀐 자료</h2><ul class="ss-home-updates">${BANGKOK_ARRIVAL_HOME_UPDATE}${DINING_HOME_UPDATE}${BANPONG_LUSHAN_HOME_UPDATE}${TUYHOA_KODAI_HOME_UPDATE}${SAFI_MLEIHA_HOME_UPDATE}${REGIONAL_HOME_UPDATE}${PREDEPARTURE_HOME_UPDATE}<li><time datetime="2026-10-15">2026.10.15</time> · <a href="/tools/stay-compare/">숙소 총비용 비교기</a>: 이용 비용·취소 손실·미확인 조건을 함께 표시합니다.</li><li><time datetime="2026-10-15">2026.10.15</time> · <a href="/honja-yeohaeng-sukso-goreuneun-beop/">숙소 비교 가이드</a>: 계산 사례와 체크인 문의 문안을 재구성했습니다.</li><li><time datetime="2026-10-15">2026.10.15</time> · <a href="/honja-yeohaeng-junbimul-checklist/">준비물 가이드</a>: 물건 목록을 출발 전 작동 점검표로 바꿨습니다.</li></ul>
   </section>
   <section class="ss-home-band"><h2>자료의 범위와 오류 제보</h2><p>글마다 공식 자료에서 확인한 사실과 편집자의 계산·판단 예시를 구분합니다. 가상 사례는 실제 상품이나 이용 후기가 아닙니다. <a href="/author/">작성자 소개</a> · <a href="/editorial-policy/">편집 원칙</a> · <a href="/contact/">오류 제보</a></p></section>
 </div>`;

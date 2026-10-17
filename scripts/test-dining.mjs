@@ -94,7 +94,7 @@ test('dining sources are official operator pages and metadata matches the visibl
 test('home, category alt text, related titles and sitemap agree without redating earlier guides', async () => {
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.equal(home('#dining-update').length, 1);
-  assert.equal(home('.ss-home-updates').children().first().attr('id'), 'dining-update');
+  assert.equal(home('#dining-update a').attr('href'), `/${DINING_SLUG}/`);
   const categoryHtml = await fs.readFile('travel-tips/index.html', 'utf8');
   const category = load(categoryHtml);
   assert.ok(categoryHtml.includes(guide.title));

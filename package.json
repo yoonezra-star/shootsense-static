@@ -15,6 +15,8 @@
     "test:banpong-lushan": "node --test scripts/test-banpong-lushan.mjs",
     "revise:dining": "node scripts/revise-predeparture-guides.mjs --dining",
     "test:dining": "node --test scripts/test-dining.mjs",
+    "revise:bangkok-arrival": "node scripts/revise-predeparture-guides.mjs --bangkok-arrival",
+    "test:bangkok-arrival": "node --test scripts/test-bangkok-arrival.mjs",
     "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",
