@@ -21,6 +21,8 @@
     "test:checkout-morning": "node --test scripts/test-checkout-morning.mjs",
     "revise:trip-reset": "node scripts/revise-predeparture-guides.mjs --trip-reset",
     "test:trip-reset": "node --test scripts/test-trip-reset.mjs",
+    "revise:social-activity": "node scripts/revise-predeparture-guides.mjs --social-activity",
+    "test:social-activity": "node --test scripts/test-social-activity.mjs",
     "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",

@@ -114,7 +114,7 @@ test('contact roles, source geography, privacy and original publication remain e
 test('home, category and sitemap references match without redating the checkout guide', async () => {
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.equal(home('#trip-reset-update').length, 1);
-  assert.equal(home('.ss-home-updates').children().first().attr('id'), 'trip-reset-update');
+  assert.equal(home('#trip-reset-update a').attr('href'), `/${TRIP_RESET_SLUG}/`);
   assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(TRIP_RESET_MODIFIED));
   const categoryHtml = await fs.readFile('travel-tips/index.html', 'utf8');
   const category = load(categoryHtml);
