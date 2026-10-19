@@ -12,6 +12,7 @@ import { BANGKOK_ARRIVAL_REVISION } from './bangkok-arrival-content.mjs';
 import { CHECKOUT_MORNING_REVISION } from './checkout-morning-content.mjs';
 import { TRIP_RESET_REVISION } from './trip-reset-content.mjs';
 import { SOCIAL_ACTIVITY_REVISION } from './social-activity-content.mjs';
+import { applyHeldSafetyNotices } from './held-safety.mjs';
 
 const root = process.cwd();
 const modified = '2026-10-15T15:20:00+09:00';
@@ -214,3 +215,4 @@ await reviseEditorialBatch(BANGKOK_ARRIVAL_REVISION);
 await reviseEditorialBatch(CHECKOUT_MORNING_REVISION);
 await reviseEditorialBatch(TRIP_RESET_REVISION);
 await reviseEditorialBatch(SOCIAL_ACTIVITY_REVISION);
+await applyHeldSafetyNotices();
