@@ -25,6 +25,8 @@
     "test:social-activity": "node --test scripts/test-social-activity.mjs",
     "revise:busan": "node scripts/revise-predeparture-guides.mjs --busan",
     "test:busan": "node --test scripts/test-busan.mjs",
+    "revise:jeju": "node scripts/revise-predeparture-guides.mjs --jeju",
+    "test:jeju": "node --test scripts/test-jeju.mjs",
     "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",

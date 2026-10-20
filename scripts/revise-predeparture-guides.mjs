@@ -13,6 +13,7 @@ import { CHECKOUT_MORNING_REVISION } from './checkout-morning-content.mjs';
 import { TRIP_RESET_REVISION } from './trip-reset-content.mjs';
 import { SOCIAL_ACTIVITY_REVISION } from './social-activity-content.mjs';
 import { BUSAN_REVISION } from './busan-content.mjs';
+import { JEJU_REVISION } from './jeju-content.mjs';
 import { syncEditorialReferences } from './lib/editorial-references.mjs';
 
 export async function reviseEditorialBatch({
@@ -127,4 +128,4 @@ await writeFileUtf8(indexFile, index.xml().trimEnd() + '\n');
 console.log(JSON.stringify({ rewritten: [...changed], worksheets, homepageLogUpdated: true, referencePagesUpdated }, null, 2));
 }
 
-await reviseEditorialBatch(process.argv.includes('--busan') ? BUSAN_REVISION : process.argv.includes('--social-activity') ? SOCIAL_ACTIVITY_REVISION : process.argv.includes('--trip-reset') ? TRIP_RESET_REVISION : process.argv.includes('--checkout-morning') ? CHECKOUT_MORNING_REVISION : process.argv.includes('--bangkok-arrival') ? BANGKOK_ARRIVAL_REVISION : process.argv.includes('--dining') ? DINING_REVISION : process.argv.includes('--banpong-lushan') ? BANPONG_LUSHAN_REVISION : process.argv.includes('--tuyhoa-kodai') ? TUYHOA_KODAI_REVISION : process.argv.includes('--safi-mleiha') ? SAFI_MLEIHA_REVISION : process.argv.includes('--regional') ? REGIONAL_REVISION : undefined);
+await reviseEditorialBatch(process.argv.includes('--jeju') ? JEJU_REVISION : process.argv.includes('--busan') ? BUSAN_REVISION : process.argv.includes('--social-activity') ? SOCIAL_ACTIVITY_REVISION : process.argv.includes('--trip-reset') ? TRIP_RESET_REVISION : process.argv.includes('--checkout-morning') ? CHECKOUT_MORNING_REVISION : process.argv.includes('--bangkok-arrival') ? BANGKOK_ARRIVAL_REVISION : process.argv.includes('--dining') ? DINING_REVISION : process.argv.includes('--banpong-lushan') ? BANPONG_LUSHAN_REVISION : process.argv.includes('--tuyhoa-kodai') ? TUYHOA_KODAI_REVISION : process.argv.includes('--safi-mleiha') ? SAFI_MLEIHA_REVISION : process.argv.includes('--regional') ? REGIONAL_REVISION : undefined);
