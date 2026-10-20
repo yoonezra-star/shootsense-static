@@ -12,6 +12,7 @@ import { BANGKOK_ARRIVAL_REVISION } from './bangkok-arrival-content.mjs';
 import { CHECKOUT_MORNING_REVISION } from './checkout-morning-content.mjs';
 import { TRIP_RESET_REVISION } from './trip-reset-content.mjs';
 import { SOCIAL_ACTIVITY_REVISION } from './social-activity-content.mjs';
+import { BUSAN_REVISION } from './busan-content.mjs';
 import { syncEditorialReferences } from './lib/editorial-references.mjs';
 
 export async function reviseEditorialBatch({
@@ -19,7 +20,7 @@ export async function reviseEditorialBatch({
   homeUpdate = PREDEPARTURE_HOME_UPDATE, updateId = 'predeparture-update',
   className = 'ss-predeparture-guide', stylesheet = '/assets/predeparture-guides.css',
   styleId = 'ss-predeparture-style', trustNote = '공개 자료 확인·점검표 구성',
-  limitation = '현장 방문 기록이나 전문 안전 검사가 아닙니다.', worksheets = 3
+  limitation = '현장 방문 기록이나 전문 안전 검사가 아닙니다.', worksheets = 3, held = false
 } = {}) {
 const root = process.cwd();
 const day = modified.slice(0, 10);
@@ -27,11 +28,20 @@ const origin = 'https://shootsense.com';
 const changed = new Set(guides.map(guide => `${origin}/${guide.slug}/`));
 const serialize = $ => $.html().replace(/^[\t ]+$/gm, '').trimEnd() + '\n';
 const latest = (current, proposed) => Date.parse(current) > Date.parse(proposed) ? current : proposed;
+if (held) {
+  const sitemap = load(await fs.readFile(path.join(root, 'post-sitemap.xml'), 'utf8'), { xml: true });
+  if (sitemap('loc').toArray().some(node => changed.has(decodeURI(sitemap(node).text())))) throw new Error('Held revision unexpectedly listed in indexed sitemap');
+}
 
 for (const guide of guides) {
   const file = path.join(root, guide.slug, 'index.html');
   const $ = load((await fs.readFile(file, 'utf8')).trimEnd(), { decodeEntities: false });
   if ($('.ss-post-body').length !== 1 || $('.ss-toc').length !== 1) throw new Error(`Unexpected article layout: ${guide.slug}`);
+  if (held) {
+    if (!/noindex/.test($('meta[name="robots"]').attr('content') || '') || $('script[src*="googlesyndication"], ins.adsbygoogle').length) throw new Error(`Expected held, ad-free article: ${guide.slug}`);
+    $('.ss-post-cover').remove();
+    $('.ss-trust-box').first().html('<span class="ss-trust-kicker">자료 확인 범위</span><h2>공개 자료 대조 · 보관 원고 개편</h2><p>게시된 규정과 계산을 대조한 원고입니다. 실제 승차·운행·시설 이용을 확인한 후기가 아니며, 검색 색인과 광고 제외 상태는 유지합니다.</p><p class="ss-trust-note"></p>');
+  }
   $('.ss-post').addClass(className);
   if (!$(`link#${styleId}`).length) $('head').append(`<link id="${escapeHtml(styleId)}" rel="stylesheet" href="${escapeHtml(stylesheet)}">`);
   $('.ss-post-body').html(guide.body);
@@ -76,6 +86,12 @@ for (const guide of guides) {
   await writeFileUtf8(file, serialize($));
 }
 
+if (held) {
+  const referencePagesUpdated = await syncEditorialReferences(root, guides);
+  console.log(JSON.stringify({ rewritten: [...changed], worksheets, referencePagesUpdated, held: true, homepageLogUpdated: false, indexStatusChanged: false }, null, 2));
+  return;
+}
+
 const homeFile = path.join(root, 'index.html');
 const home = load((await fs.readFile(homeFile, 'utf8')).trimEnd(), { decodeEntities: false });
 if (home('.ss-home-updates').length !== 1) throw new Error('Home revision log is missing');
@@ -111,4 +127,4 @@ await writeFileUtf8(indexFile, index.xml().trimEnd() + '\n');
 console.log(JSON.stringify({ rewritten: [...changed], worksheets, homepageLogUpdated: true, referencePagesUpdated }, null, 2));
 }
 
-await reviseEditorialBatch(process.argv.includes('--social-activity') ? SOCIAL_ACTIVITY_REVISION : process.argv.includes('--trip-reset') ? TRIP_RESET_REVISION : process.argv.includes('--checkout-morning') ? CHECKOUT_MORNING_REVISION : process.argv.includes('--bangkok-arrival') ? BANGKOK_ARRIVAL_REVISION : process.argv.includes('--dining') ? DINING_REVISION : process.argv.includes('--banpong-lushan') ? BANPONG_LUSHAN_REVISION : process.argv.includes('--tuyhoa-kodai') ? TUYHOA_KODAI_REVISION : process.argv.includes('--safi-mleiha') ? SAFI_MLEIHA_REVISION : process.argv.includes('--regional') ? REGIONAL_REVISION : undefined);
+await reviseEditorialBatch(process.argv.includes('--busan') ? BUSAN_REVISION : process.argv.includes('--social-activity') ? SOCIAL_ACTIVITY_REVISION : process.argv.includes('--trip-reset') ? TRIP_RESET_REVISION : process.argv.includes('--checkout-morning') ? CHECKOUT_MORNING_REVISION : process.argv.includes('--bangkok-arrival') ? BANGKOK_ARRIVAL_REVISION : process.argv.includes('--dining') ? DINING_REVISION : process.argv.includes('--banpong-lushan') ? BANPONG_LUSHAN_REVISION : process.argv.includes('--tuyhoa-kodai') ? TUYHOA_KODAI_REVISION : process.argv.includes('--safi-mleiha') ? SAFI_MLEIHA_REVISION : process.argv.includes('--regional') ? REGIONAL_REVISION : undefined);
