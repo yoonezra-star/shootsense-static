@@ -27,6 +27,8 @@
     "test:busan": "node --test scripts/test-busan.mjs",
     "revise:jeju": "node scripts/revise-predeparture-guides.mjs --jeju",
     "test:jeju": "node --test scripts/test-jeju.mjs",
+    "revise:matsudai": "node scripts/revise-predeparture-guides.mjs --matsudai",
+    "test:matsudai": "node --test scripts/test-matsudai.mjs",
     "test:regions": "node --test scripts/test-regional-access.mjs",
     "test:predeparture": "node --test scripts/test-predeparture-guides.mjs",
     "test:stay-math": "node --test scripts/test-stay-math.mjs",
