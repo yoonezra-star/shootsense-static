@@ -17,12 +17,14 @@ for (const guide of HELD_SAFETY_GUIDES) {
     assert.equal($('#ss-held-safety-note').length, 1);
     assert.equal($('#ss-held-safety-note').next('.ss-toc').length, 1);
     assert.equal($('.ss-post-body').children().first().attr('id'), 'ss-held-archive-scope');
-    assert.match($('#ss-held-safety-note').text(), /2026-10-19/);
+    assert.match($('#ss-held-safety-note').text(), /2026-11-22/);
     assert.ok($('#ss-held-safety-note').text().includes(guide.warning));
     assert.equal($('#ss-held-safety-note a').attr('href'), guide.source);
     assert.match($('#ss-held-safety-note').text(), /환불이 자동 확정되는 것은 아닙니다/);
-    assert.match($('.ss-trust-note').text(), /기존 원고 전체 검토는 미완료/);
-    assert.match($('.ss-trust-box h2').text(), /원고 재검토 대기/);
+    assert.match($('.ss-trust-note').text(), /공개 범위 정리/);
+    assert.match($('.ss-trust-box h2').text(), /기존 관광 원고 공개 중단/);
+    assert.equal($('.ss-post-body h2').length, 3);
+    assert.deepEqual($('.ss-toc a').toArray().map(node => $(node).attr('href')), $('.ss-post-body h2').toArray().map(node => `#${$(node).attr('id')}`));
     assert.ok(!$('.ss-trust-box').text().includes('숙소 위치, 이동 동선, 식사 난이도, 야간 도착 가능성을 우선 확인했습니다'));
     assert.equal($('meta[property="article:modified_time"]').attr('content'), HELD_SAFETY_MODIFIED);
     const xml = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
@@ -42,5 +44,5 @@ test('Cambodia caution distinguishes the city from the province and never exempt
   const text = $('#ss-held-safety-note').text();
   assert.match(text, /시하누크빌 시 출국권고 · 시하누크빌 주 여행자제/);
   assert.match(text, /외곽이라는 표현만으로 시 경계 밖이거나 경보 적용 밖이라고 판단할 수 없습니다/);
-  assert.match(text, /원고 전체의 운영·교통·관광 정보를 다시 검증했다는 뜻이 아닙니다/);
+  assert.match(text, /현지 시설·교통·관광 운영을 검증했다는 뜻이 아닙니다/);
 });

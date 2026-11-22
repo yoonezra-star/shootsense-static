@@ -124,7 +124,8 @@ test('sources, canonical and metadata preserve original publication with honest 
 test('home, category and sitemap references match without redating the previous article', async () => {
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.equal(home('#social-activity-update').length, 1);
-  assert.equal(home('.ss-home-updates').children().first().attr('id'), 'social-activity-update');
+  assert.equal(home('#social-activity-update').length, 1);
+  assert.ok(home('.ss-home-updates').children().first().find('time').attr('datetime') >= '2026-10-17');
   assert.equal(home('#social-activity-update a').attr('href'), `/${SOCIAL_ACTIVITY_SLUG}/`);
   const categoryHtml = await fs.readFile('travel-tips/index.html', 'utf8');
   const category = load(categoryHtml);

@@ -16,6 +16,7 @@ import { applyHeldSafetyNotices } from './held-safety.mjs';
 import { BUSAN_REVISION } from './busan-content.mjs';
 import { JEJU_REVISION } from './jeju-content.mjs';
 import { MATSUDAI_REVISION } from './matsudai-content.mjs';
+import { applyNovemberRecovery } from './november-recovery.mjs';
 
 const root = process.cwd();
 const modified = '2026-10-15T15:20:00+09:00';
@@ -222,3 +223,4 @@ await applyHeldSafetyNotices();
 await reviseEditorialBatch(BUSAN_REVISION);
 await reviseEditorialBatch(JEJU_REVISION);
 await reviseEditorialBatch(MATSUDAI_REVISION);
+await applyNovemberRecovery();

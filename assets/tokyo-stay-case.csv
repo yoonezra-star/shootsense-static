@@ -1,0 +1,6 @@
+scenario,currency,nights,people,lodging_payment_excluding_accommodation_tax,accommodation_tax,transport,other,total
+fictional_A_2026,JPY,2,1,21560,0,1800,0,23360
+fictional_B_2026,JPY,2,1,22660,200,400,0,23260
+fictional_A_transport_1700,JPY,2,1,21560,0,1700,0,23260
+fictional_B_extra_1000,JPY,2,1,22660,200,400,1000,24260
+fictional_B_2027_same_prices,JPY,2,1,22660,0,400,0,23060

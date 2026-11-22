@@ -1,5 +1,5 @@
 export const MATSUDAI_SLUG = '여행의-목적이-보기가-아니었을-때-선택한-마쓰다이';
-export const MATSUDAI_MODIFIED = '2026-10-25T01:49:00+09:00';
+export const MATSUDAI_MODIFIED = '2026-11-22T22:15:00+09:00';
 export const MATSUDAI_SOURCES = {
   guide: 'https://matsudai-nohbutai-fieldmuseum.jp/guide/',
   notice: 'https://matsudai-nohbutai-fieldmuseum.jp/news/%E3%80%90%E6%9C%80%E6%96%B0%E3%80%917-18%EF%BD%9E%E5%96%B6%E6%A5%AD%E6%83%85%E5%A0%B1%EF%BC%882026-07-20%E6%9B%B4%E6%96%B0%EF%BC%89-latest-news/',
@@ -15,6 +15,7 @@ export const MATSUDAI_GUIDES = [{
   previousTitle: '일본 마쓰다이 혼자 여행: 에치고쓰마리 예술 권역을 숙박으로 볼지 판단하는 기준',
   summary: '마쓰다이역에서 노부타이·마쓰다이성으로 가는 방문 판단입니다. 전망 데크 중단 공지, 가을 운영과 겨울 준비, 관람권별 범위와 셔틀 뒤 남는 도보를 대조해 당일 방문·숙박·날짜 변경을 구분합니다.',
   body: `
+<aside id="matsudai-season-ended" class="ss-review-notice"><p><strong>2026-11-22 계절 안내 추가</strong> · 아래 가을 행사의 게시 기간은 11월 8일에 끝났습니다. 운영자 FAQ의 겨울 야외 관람 제한과 순차적 눈가림 안내를 다시 읽었습니다. 10월의 관람권·셔틀·행사 조합을 현재 방문 계획으로 그대로 사용하지 않습니다. 이번 추가 확인은 겨울 개별 작품·셔틀의 실제 운행을 확인했다는 뜻이 아닙니다.</p></aside>
 <p>마쓰다이에서 하루를 더 잔다고 볼 수 있는 작품이 자동으로 늘지는 않습니다. 노부타이 건물 개관, 개별 작품 공개, 산 위 시설 접근, 철도 연결은 서로 다른 조건입니다. 여기서는 <strong>마쓰다이역 → 노부타이(農舞台) → 선택적으로 마쓰다이성(松代城)</strong>으로 범위를 좁힙니다. 에치고쓰마리 전역을 하루에 도는 코스나 실제 숙박 후기가 아닙니다.</p>
 <p><strong>자료 확인일: 2026-10-25.</strong> 운영자의 이용 안내·최신 공지·가을 행사·질문답변과 호쿠에쓰 급행의 시간표 안내를 대조했습니다. 실제 방문·승차·시설 개방 확인이나 운영자 회신을 받은 기록은 아닙니다. 기존 보관 원고의 검색 색인·광고 제외는 유지합니다.</p>
 <h2 id="matsudai-art-status">1. 추천 코스보다 작품별 중단 공지를 먼저 읽기</h2>

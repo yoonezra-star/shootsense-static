@@ -1,4 +1,5 @@
 import { compareStays } from './stay-math.js';
+import { TOKYO_COMPARE_INPUTS } from './tokyo-stay-case.js';
 
 const form = document.getElementById('stay-compare-form');
 const results = document.getElementById('comparison-results');
@@ -7,6 +8,14 @@ const format = new Intl.NumberFormat('ko-KR');
 const won = value => `${format.format(value)}원`;
 let comparison = null;
 let example = false;
+const tokyoExample = new URLSearchParams(location.search).get('example') === 'tokyo-2026';
+if (tokyoExample) {
+  document.getElementById('load-example').textContent = '도쿄 2박 가상 사례';
+  const note = document.createElement('p');
+  note.className = 'ss-tool-note';
+  note.textContent = '도쿄 분석의 설명용 환산 가정: 1엔=10원. 실제 환율·객실 견적이 아니며 취소·체크인·추가비용 확인 상태는 미확인입니다.';
+  form.before(note);
+}
 
 function read() {
   return ['a', 'b'].map(id => {
@@ -65,14 +74,14 @@ form.addEventListener('reset', () => {
 });
 
 document.getElementById('load-example').addEventListener('click', () => {
-  const data = [
+  const data = tokyoExample ? TOKYO_COMPARE_INPUTS : [
     { name: '가상 숙소 A', room: 75000, fees: 15000, transport: 18000, other: 0, cancellation: 90000, checkin: 'unknown' },
     { name: '가상 숙소 B', room: 91000, fees: 0, transport: 4000, other: 0, cancellation: 0, checkin: 'yes' }
   ];
   data.forEach((stay, index) => {
     const group = form.querySelector(`[data-stay="${index === 0 ? 'a' : 'b'}"]`);
     for (const [key, value] of Object.entries(stay)) group.querySelector(`[data-field="${key}"]`).value = value;
-    group.querySelector('[data-field="feesConfirmed"]').checked = true;
+    group.querySelector('[data-field="feesConfirmed"]').checked = stay.feesConfirmed ?? true;
   });
   example = true;
   calculate();

@@ -1,0 +1,25 @@
+.ss-research{max-width:900px;margin:0 auto;padding:24px 22px 44px;color:#20352d;letter-spacing:0;overflow-wrap:anywhere;word-break:keep-all}
+.ss-research *{box-sizing:border-box;letter-spacing:0}
+.ss-research-header{border-bottom:2px solid #1c493a;padding-bottom:20px}
+.ss-research h1{font-size:30px;line-height:1.45;margin:8px 0 16px;color:#183e31}
+.ss-research h2{font-size:23px;line-height:1.5;margin:32px 0 16px;color:#183e31;scroll-margin-top:32px}
+.ss-research p,.ss-research li{font-size:16px;line-height:1.9}
+.ss-research a{color:#086a57;text-underline-offset:3px}
+.ss-research .ss-eyebrow{font-size:14px;font-weight:700;color:#8a401f;margin:0}
+.ss-research-scope{border-left:3px solid #9b542e;background:#fff8f1;padding:16px;margin:22px 0}
+.ss-research-scope p{margin:6px 0 0}
+.ss-research .ss-toc{border:0;border-bottom:1px solid #cddbd2;border-radius:0;box-shadow:none;background:transparent;padding:16px 0}
+.ss-research .ss-toc a{display:block;padding:7px 0;min-height:38px}
+.ss-research table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.8}
+.ss-research th,.ss-research td{border:1px solid #cddbd2;text-align:left;padding:12px;vertical-align:top}
+.ss-research th{background:#edf4f0;color:#234f40}
+.ss-research figure{margin:22px 0;max-width:100%}
+.ss-cost-reading{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0;padding:20px 0;border-top:1px solid #cddbd2;border-bottom:1px solid #cddbd2}
+.ss-cost-reading strong,.ss-cost-reading span{display:block;line-height:1.8}
+.ss-cost-reading meter{width:100%;height:24px;accent-color:#136d55}
+.ss-cost-reading>div:last-child meter{accent-color:#b85e26}
+.ss-cost-reading span{font-size:14px}
+.ss-home-research{border-top:3px solid #b46a32}
+.ss-home-research .ss-research-result{font-size:22px;font-weight:700;color:#185842}
+.ss-review-notice{font-size:16px}
+@media(max-width:640px){.ss-research{padding:18px 18px 32px}.ss-research h1{font-size:26px}.ss-research h2{font-size:21px}.ss-cost-reading{grid-template-columns:1fr;gap:18px}}
