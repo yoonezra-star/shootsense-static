@@ -120,7 +120,9 @@ export async function buildGuideHub(root = process.cwd()) {
       });
     }
     if (relative === 'privacy-policy/index.html') {
-      if (!page('#guide-search-privacy').length) page('.ss-page').first().append('<section id="guide-search-privacy"><h2>가이드 검색과 주소 정보</h2><p>가이드 목록의 검색·분류는 브라우저에서 처리하며 별도 검색 API나 브라우저 저장소로 보내거나 보관하지 않습니다. 검색어와 선택 조건은 페이지 주소에 포함됩니다. 그 주소를 다시 열거나 공유하면 주소에 포함된 내용이 호스팅 서비스의 접속 요청에 전달될 수 있습니다. 검색어에 이름·연락처·예약번호 등 개인정보를 넣지 마세요. 호스팅 서비스의 접속 정보 처리는 이 정책의 외부 서비스 항목에 따릅니다.</p></section>');
+      const privacyText = '<section id="guide-search-privacy"><h2>가이드 검색과 주소 정보</h2><p>가이드 목록의 검색·분류는 브라우저에서 처리하며 별도 검색 API나 브라우저 저장소로 보내거나 보관하지 않습니다. 검색어와 선택 조건은 페이지 주소에 포함됩니다. 사이트에 적용된 호스팅 서비스의 접속·성능 분석 기능이 해당 주소를 받을 수 있으며, 주소를 다시 열거나 공유할 때도 호스팅 서비스의 접속 요청에 전달될 수 있습니다. 검색어에 이름·연락처·예약번호 등 개인정보를 넣지 마세요. 호스팅 서비스의 접속 정보 처리는 이 정책의 외부 서비스 항목에 따릅니다.</p></section>';
+      if (page('#guide-search-privacy').length) page('#guide-search-privacy').replaceWith(privacyText);
+      else page('.ss-page').first().append(privacyText);
       for (const selector of ['meta[property="og:updated_time"]', 'meta[property="article:modified_time"]']) page(selector).attr('content', HUB_MODIFIED);
       page('script.rank-math-schema').each((_, script) => {
         const schema = JSON.parse(page(script).text());

@@ -73,6 +73,7 @@ test('controls retain native labels, status and complete fallback content withou
   assert.equal(policy('#guide-search-privacy').length, 1);
   assert.match(policy('#guide-search-privacy').text(), /페이지 주소에 포함/);
   assert.match(policy('#guide-search-privacy').text(), /호스팅 서비스의 접속 요청에 전달/);
+  assert.match(policy('#guide-search-privacy').text(), /접속·성능 분석 기능/);
 });
 
 test('home, categories and footer expose the directory without duplicating the contact email', async () => {
