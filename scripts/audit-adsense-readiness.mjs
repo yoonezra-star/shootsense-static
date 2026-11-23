@@ -36,7 +36,7 @@ const publishedTools = [];
 for (const filePath of files) {
   const html = await fs.readFile(filePath, "utf8");
   const $ = load(html, { decodeEntities: false });
-  if ($('.ss-tool').length) publishedTools.push({ route: path.relative(rootDir, path.dirname(filePath)).replaceAll('\\', '/'), title: normalize($('h1').first().text()) });
+  if ($('.ss-tool, .ss-trip-tool').length) publishedTools.push({ route: path.relative(rootDir, path.dirname(filePath)).replaceAll('\\', '/'), title: normalize($('h1').first().text()) });
   if (!$('.ss-post').length) continue;
 
   const body = $('.ss-post-body').first();

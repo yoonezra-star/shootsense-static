@@ -5,7 +5,8 @@ import { load } from 'cheerio';
 import { escapeHtml, writeFileUtf8 } from './lib/static-site-utils.mjs';
 
 export const HUB_ROUTE = '/guides/';
-export const HUB_MODIFIED = '2026-11-23T23:26:00+09:00';
+export const HUB_PUBLISHED = '2026-11-23T23:26:00+09:00';
+export const HUB_MODIFIED = '2026-11-24T00:46:00+09:00';
 export const TOPIC_LABELS = { stay: '숙소·예약', prepare: '준비·이동', life: '식사·교류', support: '문제 대응', regional: '지역별 이동' };
 export const REGION_LABELS = { general: '공통', japan: '일본', thailand: '태국', vietnam: '베트남', china: '중국', india: '인도', europe: '유럽', mena: '중동·북아프리카' };
 const META = [
@@ -35,7 +36,10 @@ export async function readHubEntries(root = process.cwd()) {
   const sitemap = load(await fs.readFile(path.join(root, 'post-sitemap.xml'), 'utf8'), { xml: true });
   const indexed = new Set(sitemap('loc').toArray().map(node => decodeURI(new URL(sitemap(node).text()).pathname)));
   const definitions = [
+    ['tools/departure-check', 'prepare', 'japan', '도쿄 Tokyo 출발일 일정 짐 보관 회수 시간 계산 지연', '일정 도구'],
     ['tools/stay-compare', 'stay', 'general', '숙소 총비용 계산기 비교 도구', '비교 도구'],
+    ['analysis/tokyo-late-checkin', 'stay', 'japan', '도쿄 Tokyo 자정 늦은 체크인 24시 25시 날짜', '계산 분석'],
+    ['analysis/room-extension-or-baggage', 'stay', 'japan', '도쿄 Tokyo 객실 연장 짐 보관 체크아웃 비용', '계산 분석'],
     ['analysis/tokyo-stay-cost', 'stay', 'japan', '도쿄 東京 Tokyo 숙박세 2박 가격 역전 분석', '계산 분석'],
     ...META.map(item => [...item, '가이드'])
   ];
@@ -99,7 +103,7 @@ export async function buildGuideHub(root = process.cwd()) {
   $('meta[property="og:updated_time"]').attr('content', HUB_MODIFIED);
   $('meta[property^="article:"], meta[name^="twitter:label"], meta[name^="twitter:data"], script[src*="googlesyndication"], ins.adsbygoogle').remove();
   $('script.rank-math-schema').text(JSON.stringify({ '@context': 'https://schema.org', '@graph': [
-    { '@type': 'CollectionPage', '@id': `${origin}${HUB_ROUTE}#webpage`, url: `${origin}${HUB_ROUTE}`, name: title, description, datePublished: HUB_MODIFIED, dateModified: HUB_MODIFIED, inLanguage: 'ko-KR', mainEntity: { '@id': `${origin}${HUB_ROUTE}#list` } },
+    { '@type': 'CollectionPage', '@id': `${origin}${HUB_ROUTE}#webpage`, url: `${origin}${HUB_ROUTE}`, name: title, description, datePublished: HUB_PUBLISHED, dateModified: HUB_MODIFIED, inLanguage: 'ko-KR', mainEntity: { '@id': `${origin}${HUB_ROUTE}#list` } },
     { '@type': 'ItemList', '@id': `${origin}${HUB_ROUTE}#list`, numberOfItems: entries.length, itemListElement: entries.map((entry, index) => ({ '@type': 'ListItem', position: index + 1, name: entry.title, url: `${origin}${entry.href}` })) }
   ] }));
   $('head').append('<link id="ss-guide-hub-style" rel="stylesheet" href="/assets/guide-hub.css"><script id="ss-guide-search" type="module" src="/assets/guide-search.js"></script>');
@@ -111,7 +115,7 @@ export async function buildGuideHub(root = process.cwd()) {
     const relative = path.relative(root, file).replaceAll('\\', '/');
     if (relative === 'index.html') {
       page('#ss-home-directory').remove();
-      page('.ss-home-intro').after(`<section id="ss-home-directory" class="ss-home-band"><h2><a href="/guides/">가이드 모아보기</a></h2><p>예약·준비·식사·문제 대응·지역 이동 자료 ${entries.length}개</p><a class="ss-action ss-action--secondary" href="/guides/">전체 가이드 찾기</a></section>`);
+      (page('#ss-home-lab').length ? page('#ss-home-lab') : page('.ss-home-intro')).after(`<section id="ss-home-directory" class="ss-home-band"><h2><a href="/guides/">가이드 모아보기</a></h2><p>예약·준비·식사·문제 대응·지역 이동 자료 ${entries.length}개</p><a class="ss-action ss-action--secondary" href="/guides/">전체 가이드 찾기</a></section>`);
       page('meta[property="og:updated_time"]').attr('content', HUB_MODIFIED);
       page('script.rank-math-schema').each((_, script) => {
         const schema = JSON.parse(page(script).text());

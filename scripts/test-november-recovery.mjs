@@ -5,6 +5,7 @@ import { load } from 'cheerio';
 import { TOKYO_CASE, TOKYO_COMPARE_INPUTS, TOKYO_SENSITIVITY, tokyoCaseTotal } from '../assets/tokyo-stay-case.js';
 import { compareStays } from '../assets/stay-math.js';
 import { ANALYSIS_ROUTE, ANALYSIS_MODIFIED, ANALYSIS_TITLE, ANALYSIS_SOURCES } from './tokyo-analysis-content.mjs';
+import { LAB_MODIFIED } from './trip-lab-content.mjs';
 import { RECHECKS } from './november-recovery.mjs';
 import { HELD_SAFETY_GUIDES } from './held-safety.mjs';
 
@@ -89,7 +90,7 @@ test('canonical, article identity and publication match a genuinely new analysis
   assert.equal(graph.filter(node => node['@type'] === 'Article').length, 1);
   for (const node of graph.filter(node => ['Article', 'WebPage'].includes(node['@type']))) {
     assert.equal(node.datePublished, ANALYSIS_MODIFIED);
-    assert.equal(node.dateModified, ANALYSIS_MODIFIED);
+    assert.equal(node.dateModified, LAB_MODIFIED);
   }
   assert.ok(!graph.some(node => node.url?.includes('/contact/')));
   assert.equal($('a[aria-current="page"]').length, 0);
@@ -145,7 +146,7 @@ test('new analysis is listed once as a page while held navigation remains exclud
   const pageMap = load(await fs.readFile('page-sitemap.xml', 'utf8'), { xml: true });
   const item = pageMap('url').filter((_, node) => pageMap(node).find('loc').text() === `https://shootsense.com${ANALYSIS_ROUTE}`);
   assert.equal(item.length, 1);
-  assert.equal(item.find('lastmod').text(), ANALYSIS_MODIFIED);
+  assert.equal(item.find('lastmod').text(), LAB_MODIFIED);
   const postMap = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
   assert.equal(postMap('url').length, 18);
   assert.equal(postMap('loc').filter((_, node) => postMap(node).text().includes(ANALYSIS_ROUTE)).length, 0);

@@ -3,16 +3,17 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { matchesGuide, normalizeQuery, readGuideFilters, TOPICS, REGIONS } from '../assets/guide-search.js';
-import { readHubEntries, HUB_ROUTE, HUB_MODIFIED } from './build-guide-hub.mjs';
+import { readHubEntries, HUB_ROUTE, HUB_MODIFIED, HUB_PUBLISHED } from './build-guide-hub.mjs';
 
 const read = async file => load(await fs.readFile(file, 'utf8'));
 
-test('all indexed posts, one analysis and one tool appear exactly once and held articles never enter the directory', async () => {
+test('all indexed posts, three analyses and two tools appear exactly once and held articles never enter the directory', async () => {
   const entries = await readHubEntries();
-  assert.equal(entries.length, 20);
-  assert.equal(new Set(entries.map(entry => entry.href)).size, 20);
+  assert.equal(entries.length, 23);
+  assert.equal(new Set(entries.map(entry => entry.href)).size, 23);
   assert.equal(entries.filter(entry => entry.kind === '가이드').length, 18);
-  assert.equal(entries.filter(entry => entry.kind === '계산 분석').length, 1);
+  assert.equal(entries.filter(entry => entry.kind === '계산 분석').length, 3);
+  assert.equal(entries.filter(entry => entry.kind === '일정 도구').length, 1);
   assert.equal(entries.filter(entry => entry.kind === '비교 도구').length, 1);
   assert.ok(entries.every(entry => entry.title && entry.summary && TOPICS.includes(entry.topic) && REGIONS.includes(entry.region)));
   const $ = await read('guides/index.html');
@@ -51,9 +52,10 @@ test('directory identity, canonical and structured list agree with its actual co
   const graph = JSON.parse($('script.rank-math-schema').text())['@graph'];
   const collection = graph.find(node => node['@type'] === 'CollectionPage');
   const list = graph.find(node => node['@type'] === 'ItemList');
-  assert.equal(collection.datePublished, HUB_MODIFIED);
-  assert.equal(list.numberOfItems, 20);
-  assert.deepEqual(list.itemListElement.map(node => node.position), Array.from({ length: 20 }, (_, i) => i + 1));
+  assert.equal(collection.datePublished, HUB_PUBLISHED);
+  assert.equal(collection.dateModified, HUB_MODIFIED);
+  assert.equal(list.numberOfItems, 23);
+  assert.deepEqual(list.itemListElement.map(node => node.position), Array.from({ length: 23 }, (_, i) => i + 1));
 });
 
 test('controls retain native labels, status and complete fallback content without a search API', async () => {
@@ -79,7 +81,7 @@ test('controls retain native labels, status and complete fallback content withou
 test('home, categories and footer expose the directory without duplicating the contact email', async () => {
   const home = await read('index.html');
   assert.equal(home('#ss-home-directory').length, 1);
-  assert.equal(home('.ss-home-intro + #ss-home-directory').length, 1);
+  assert.equal(home('#ss-home-lab + #ss-home-directory').length, 1);
   assert.equal(home('.ss-site-footer a[href="/guides/"]').length, 1);
   assert.equal(home('a[href="mailto:replyleaders01@gmail.com"]').length, 1);
   for (const slug of ['travel-tips', 'asia-travel', 'europe-travel', 'southeast-asia-travel', 'middle-east-travel']) {

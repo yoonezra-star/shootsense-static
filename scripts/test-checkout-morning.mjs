@@ -106,13 +106,13 @@ test('sources and metadata agree with the article without changing original publ
   assert.deepEqual(new Set(external), new Set(Object.values(CHECKOUT_MORNING_SOURCES)));
   assert.equal($('link[rel="canonical"]').attr('href'), `https://shootsense.com/${guide.slug}/`);
   for (const selector of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) assert.equal($(selector).attr('content'), guide.title);
-  assert.equal($('meta[property="article:modified_time"]').attr('content'), CHECKOUT_MORNING_MODIFIED);
+  assert.equal($('meta[property="article:modified_time"]').attr('content'), '2026-11-24T00:46:00+09:00');
   const graph = JSON.parse($('script.rank-math-schema').text())['@graph'];
   assert.ok(!graph.some(node => node['@type'] === 'FAQPage'));
   for (const node of graph.filter(node => ['WebPage', 'BlogPosting'].includes(node['@type']))) {
     assert.equal(node.name, guide.title);
     assert.equal(node.description, guide.summary);
-    assert.equal(node.dateModified, CHECKOUT_MORNING_MODIFIED);
+    assert.equal(node.dateModified, '2026-11-24T00:46:00+09:00');
     assert.equal(node.datePublished, '2025-06-16T23:14:36+09:00');
   }
   const last = graph.find(node => node['@type'] === 'BreadcrumbList').itemListElement.at(-1);
@@ -134,7 +134,7 @@ test('home and category references match while earlier Bangkok review date survi
   assert.equal(xml('url').length, 18);
   const item = xml('url').filter((_, node) => xml(node).find('loc').text() === `https://shootsense.com/${guide.slug}/`);
   assert.equal(item.length, 1);
-  assert.equal(item.find('lastmod').text(), CHECKOUT_MORNING_MODIFIED);
+  assert.equal(item.find('lastmod').text(), '2026-11-24T00:46:00+09:00');
   for (const previous of BANGKOK_ARRIVAL_GUIDES) {
     const prior = load(await fs.readFile(`${previous.slug}/index.html`, 'utf8'));
     assert.equal(prior('meta[property="article:modified_time"]').attr('content'), BANGKOK_ARRIVAL_MODIFIED);

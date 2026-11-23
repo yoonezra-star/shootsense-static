@@ -225,4 +225,6 @@ await reviseEditorialBatch(BUSAN_REVISION);
 await reviseEditorialBatch(JEJU_REVISION);
 await reviseEditorialBatch(MATSUDAI_REVISION);
 await applyNovemberRecovery();
+const { buildTripLab } = await import('./build-trip-lab.mjs');
+await buildTripLab();
 await buildGuideHub();

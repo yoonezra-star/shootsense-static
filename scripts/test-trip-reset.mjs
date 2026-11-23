@@ -111,7 +111,7 @@ test('contact roles, source geography, privacy and original publication remain e
   assert.equal(last.item?.name || last.name, guide.title);
 });
 
-test('home, category and sitemap references match without redating the checkout guide', async () => {
+test('home, category and sitemap references match while checkout source date remains separate', async () => {
   const home = load(await fs.readFile('index.html', 'utf8'));
   assert.equal(home('#trip-reset-update').length, 1);
   assert.equal(home('#trip-reset-update a').attr('href'), `/${TRIP_RESET_SLUG}/`);
@@ -129,6 +129,7 @@ test('home, category and sitemap references match without redating the checkout 
   assert.equal(item.find('lastmod').text(), TRIP_RESET_MODIFIED);
   for (const previous of CHECKOUT_MORNING_GUIDES) {
     const prior = load(await fs.readFile(`${previous.slug}/index.html`, 'utf8'));
-    assert.equal(prior('meta[property="article:modified_time"]').attr('content'), CHECKOUT_MORNING_MODIFIED);
+    assert.equal(prior('meta[property="article:modified_time"]').attr('content'), '2026-11-24T00:46:00+09:00');
+    assert.match(prior('#ss-storage-recheck').text(), /기존 2026-10-17 표/);
   }
 });
