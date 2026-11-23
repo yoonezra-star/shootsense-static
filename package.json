@@ -6,6 +6,8 @@
     "audit:adsense": "node scripts/audit-adsense-readiness.mjs",
     "revise:november": "node scripts/november-recovery.mjs",
     "test:november": "node --test scripts/test-november-recovery.mjs",
+    "build:guide-hub": "node scripts/build-guide-hub.mjs",
+    "test:guide-hub": "node --test scripts/test-guide-hub.mjs",
     "revise:editorial": "node scripts/rebuild-editorial-value.mjs",
     "revise:predeparture": "node scripts/revise-predeparture-guides.mjs",
     "revise:regions": "node scripts/revise-predeparture-guides.mjs --regional",
