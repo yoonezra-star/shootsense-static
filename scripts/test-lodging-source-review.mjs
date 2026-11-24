@@ -49,7 +49,7 @@ test('private worksheet records units, source scope, cancellation moment and act
 });
 
 test('only the lodging article, affected tools and home advance review dates while earlier reviews remain independent', async () => {
-  for (const file of [`${LODGING_SLUG}/index.html`, 'tools/stay-compare/index.html', 'tools/trip-board/index.html', 'index.html']) {
+  for (const file of [`${LODGING_SLUG}/index.html`, 'tools/stay-compare/index.html', 'tools/trip-board/index.html']) {
     const page = await read(file);
     assert.equal(page('meta[property="og:updated_time"]').attr('content'), LODGING_REVIEW_MODIFIED);
     const graph = JSON.parse(page('script.rank-math-schema').text())['@graph'];
@@ -58,6 +58,7 @@ test('only the lodging article, affected tools and home advance review dates whi
   for (const [slug, date] of Object.entries(PREDEPARTURE_REVIEW_DATES)) assert.equal((await read(`${slug}/index.html`))('meta[property="article:modified_time"]').attr('content'), date);
   assert.equal((await read('privacy-policy/index.html'))('meta[property="og:updated_time"]').attr('content'), '2026-11-24T13:06:00+09:00');
   const home = await read('index.html');
+  assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(LODGING_REVIEW_MODIFIED));
   assert.equal(home('#ss-home-lodging-review').length, 1);
   assert.equal(home('.ss-home-updates > li').first().attr('id'), 'november-recovery-update');
   const map = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });

@@ -69,11 +69,12 @@
 .ss-tool-method ul{padding-left:22px;line-height:1.8}
 .ss-worked-example{padding:16px 20px;background:#f1f7f3;border-left:3px solid #0b6a5c;margin:18px 0}
 .ss-post-body .ss-worked-example p:last-child{margin-bottom:0}
-.ss-lodging-sources{border-left:3px solid #34756c;padding:14px 16px;margin:20px 0;background:#f1f7f5;color:#233b37;line-height:1.8;overflow-wrap:anywhere}
-.ss-lodging-sources summary{font-weight:700;min-height:44px;padding:8px 0;cursor:pointer}
-.ss-lodging-sources ul{list-style:none;padding:0;margin:12px 0 0}
-.ss-lodging-sources li{border-top:1px solid #cbded8;padding:14px 0;margin:0}
+.ss-lodging-sources,.ss-packing-sources{border-left:3px solid #34756c;padding:14px 16px;margin:20px 0;background:#f1f7f5;color:#233b37;line-height:1.8;overflow-wrap:anywhere}
+.ss-lodging-sources summary,.ss-packing-sources summary{font-weight:700;min-height:44px;padding:8px 0;cursor:pointer}
+.ss-lodging-sources ul,.ss-packing-sources ul{list-style:none;padding:0;margin:12px 0 0}
+.ss-lodging-sources li,.ss-packing-sources li{border-top:1px solid #cbded8;padding:14px 0;margin:0}
 @media(max-width:720px){
+  body:has(#ss-packing-source-review) #ast-scroll-top{right:8px}
   .home .entry-content .ss-home{padding:0 20px 28px}
   .ss-home h1,.ss-tool h1{font-size:30px}
   .ss-home h2,.ss-tool h2{font-size:22px}

@@ -262,3 +262,5 @@ const { finalizePreparationSafetySourceReview } = await import('./finalize-prepa
 await finalizePreparationSafetySourceReview();
 const { finalizeLodgingSourceReview } = await import('./finalize-lodging-source-review.mjs');
 await finalizeLodgingSourceReview();
+const { finalizePackingSourceReview } = await import('./finalize-packing-source-review.mjs');
+await finalizePackingSourceReview();
