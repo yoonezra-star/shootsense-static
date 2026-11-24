@@ -1,0 +1,7 @@
+ical.js 2.2.1, unmodified npm distribution dist/ical.js.
+Copyright Philipp Kewisch and contributors. License: MPL-2.0.
+License text: /assets/vendor/ical-LICENSE.txt
+Human-readable distributed source: /assets/vendor/ical.js
+Upstream source for this version:
+https://github.com/kewisch/ical.js/tree/v2.2.1
+https://www.npmjs.com/package/ical.js/v/2.2.1

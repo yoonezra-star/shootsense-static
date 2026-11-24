@@ -3,11 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
 import { escapeHtml, writeFileUtf8 } from './lib/static-site-utils.mjs';
-import { BOARD_MODIFIED } from './trip-board-content.mjs';
+import { DEADLINE_MODIFIED } from './deadline-content.mjs';
 
 export const HUB_ROUTE = '/guides/';
 export const HUB_PUBLISHED = '2026-11-23T23:26:00+09:00';
-export const HUB_MODIFIED = BOARD_MODIFIED;
+export const HUB_MODIFIED = DEADLINE_MODIFIED;
 export const TOPIC_LABELS = { stay: '숙소·예약', prepare: '준비·이동', life: '식사·교류', support: '문제 대응', regional: '지역별 이동' };
 export const REGION_LABELS = { general: '공통', japan: '일본', thailand: '태국', vietnam: '베트남', china: '중국', india: '인도', europe: '유럽', mena: '중동·북아프리카' };
 const META = [
@@ -37,6 +37,7 @@ export async function readHubEntries(root = process.cwd()) {
   const sitemap = load(await fs.readFile(path.join(root, 'post-sitemap.xml'), 'utf8'), { xml: true });
   const indexed = new Set(sitemap('loc').toArray().map(node => decodeURI(new URL(sitemap(node).text()).pathname)));
   const definitions = [
+    ['tools/reservation-deadlines', 'stay', 'general', '예약 변경 취소 마감 캘린더 시간대 서머타임 일정 ICS 확인 알림', '마감 도구'],
     ['tools/trip-board', 'prepare', 'japan', '일본 도쿄 Tokyo 여행 준비판 숙소 도착 출발 통합 준비표 파일', '준비 도구'],
     ['tools/arrival-check', 'prepare', 'japan', '일본 도쿄 Tokyo 공항 도착 체크인 입국 짐 수령 심야 교통 지연 시간 계산', '일정 도구'],
     ['tools/departure-check', 'prepare', 'japan', '도쿄 Tokyo 출발일 일정 짐 보관 회수 시간 계산 지연', '일정 도구'],

@@ -630,7 +630,16 @@ export async function updateSitemaps(rootDir, posts) {
     "asia-travel/",
     "europe-travel/",
     "middle-east-travel/",
-    "southeast-asia-travel/"
+    "southeast-asia-travel/",
+    "guides/",
+    "analysis/tokyo-stay-cost/",
+    "analysis/tokyo-late-checkin/",
+    "analysis/room-extension-or-baggage/",
+    "tools/stay-compare/",
+    "tools/departure-check/",
+    "tools/arrival-check/",
+    "tools/trip-board/",
+    "tools/reservation-deadlines/"
   ]
     .map((segment) => {
       const loc = segment ? `${SITE_URL}/${segment}` : `${SITE_URL}/`;

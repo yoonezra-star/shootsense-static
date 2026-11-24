@@ -7,14 +7,15 @@ import { readHubEntries, HUB_ROUTE, HUB_MODIFIED, HUB_PUBLISHED } from './build-
 
 const read = async file => load(await fs.readFile(file, 'utf8'));
 
-test('all indexed posts, three analyses and four tools appear exactly once and held articles never enter the directory', async () => {
+test('all indexed posts, three analyses and five tools appear exactly once and held articles never enter the directory', async () => {
   const entries = await readHubEntries();
-  assert.equal(entries.length, 25);
-  assert.equal(new Set(entries.map(entry => entry.href)).size, 25);
+  assert.equal(entries.length, 26);
+  assert.equal(new Set(entries.map(entry => entry.href)).size, 26);
   assert.equal(entries.filter(entry => entry.kind === '가이드').length, 18);
   assert.equal(entries.filter(entry => entry.kind === '계산 분석').length, 3);
   assert.equal(entries.filter(entry => entry.kind === '일정 도구').length, 2);
   assert.equal(entries.filter(entry => entry.kind === '준비 도구').length, 1);
+  assert.equal(entries.filter(entry => entry.kind === '마감 도구').length, 1);
   assert.equal(entries.filter(entry => entry.kind === '비교 도구').length, 1);
   assert.ok(entries.every(entry => entry.title && entry.summary && TOPICS.includes(entry.topic) && REGIONS.includes(entry.region)));
   const $ = await read('guides/index.html');
@@ -55,8 +56,8 @@ test('directory identity, canonical and structured list agree with its actual co
   const list = graph.find(node => node['@type'] === 'ItemList');
   assert.equal(collection.datePublished, HUB_PUBLISHED);
   assert.equal(collection.dateModified, HUB_MODIFIED);
-  assert.equal(list.numberOfItems, 25);
-  assert.deepEqual(list.itemListElement.map(node => node.position), Array.from({ length: 25 }, (_, i) => i + 1));
+  assert.equal(list.numberOfItems, 26);
+  assert.deepEqual(list.itemListElement.map(node => node.position), Array.from({ length: 26 }, (_, i) => i + 1));
 });
 
 test('controls retain native labels, status and complete fallback content without a search API', async () => {

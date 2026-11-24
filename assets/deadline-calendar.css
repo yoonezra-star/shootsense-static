@@ -1,0 +1,18 @@
+.ss-deadline-tool{max-width:1180px}
+.ss-deadline-tool textarea{display:block;width:100%;min-height:100px;padding:10px 12px;margin-top:8px;border:1px solid #91aa99;border-radius:4px;font:inherit;font-size:16px;resize:vertical;background:#fff;color:#20352d}
+.ss-deadline-tool .ss-deadline-confirm{display:flex;gap:10px;align-items:start;margin-top:18px}
+.ss-deadline-tool .ss-deadline-confirm input{width:20px;min-height:20px;height:20px;flex:0 0 20px;margin:4px 0;accent-color:#176249}
+.ss-deadline-table{width:100%;border-collapse:collapse;table-layout:fixed;margin:20px 0}
+.ss-deadline-table th,.ss-deadline-table td{padding:12px 10px;border-bottom:1px solid #cddbd2;text-align:left;vertical-align:top;overflow-wrap:anywhere;font-size:14px;line-height:1.8}
+.ss-deadline-table th{background:#edf4f0}.ss-deadline-table th:last-child{width:108px}
+.ss-deadline-table p{font-size:14px;margin:4px 0}.ss-deadline-table small{display:block;font-size:13px}
+.ss-deadline-table td>div{min-width:0}
+.ss-deadline-tool .ss-deadline-row-actions{display:flex;gap:8px}
+.ss-deadline-tool .ss-deadline-icon{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;min-height:42px;padding:8px;flex:0 0 42px}
+.ss-deadline-icon img{width:20px;height:20px}.ss-deadline-actions button{display:inline-flex;align-items:center;gap:8px}
+.ss-deadline-tool button:disabled{opacity:.55;cursor:default}
+#deadline-error{color:#9b3329;min-height:24px;font-weight:700;scroll-margin-top:20px}
+#deadline-message,#deadline-time-note{min-height:24px}
+.ss-deadline-exclusion{color:#985026}
+@media(max-width:800px){.ss-deadline-table,.ss-deadline-table tbody,.ss-deadline-table tr,.ss-deadline-table td{display:block;width:100%}.ss-deadline-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.ss-deadline-table tr{border-bottom:2px solid #91aa99;margin-bottom:20px;padding-bottom:12px}.ss-deadline-table td{display:grid;grid-template-columns:90px minmax(0,1fr);gap:12px;border:0;padding:8px 0}.ss-deadline-table td:before{content:attr(data-label);font-weight:700;color:#234f40}.ss-deadline-table caption{display:block;width:100%;text-align:left;margin:12px 0}}
+@media print{body:has(.ss-deadline-tool) .ss-deadline-tool>:not(#deadline-records){display:none!important}.ss-deadline-toolbar,.ss-deadline-row-actions{display:none!important}.ss-deadline-table{table-layout:auto}.ss-deadline-table tr{break-inside:avoid}.ss-deadline-table th:last-child,.ss-deadline-table td:last-child{display:none!important}.ss-deadline-tool p,.ss-deadline-table td{font-size:11px;line-height:1.5}}

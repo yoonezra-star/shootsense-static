@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { emptyBoard, exampleBoard, boardOverview, boardText, normalizeToolRecord, normalizeBoard, parseBoardFile, MAX_BOARD_BYTES } from '../assets/trip-board-model.js';
 import { BOARD_ROUTE, BOARD_MODIFIED } from './trip-board-content.mjs';
+import { DEADLINE_MODIFIED } from './deadline-content.mjs';
 const read = async route => load(await fs.readFile(`.${route}index.html`, 'utf8'));
 
 test('new board has no invented inputs, selected hotel, completion or linkage', () => {
@@ -137,7 +138,7 @@ test('main, three tools, privacy and sitemap expose board once without changing 
   const map = load(await fs.readFile('page-sitemap.xml', 'utf8'), { xml: true });
   const item = map('url').filter((_, node) => map(node).find('loc').text() === 'https://shootsense.com' + BOARD_ROUTE);
   assert.equal(item.length, 1);
-  assert.equal(item.find('lastmod').text(), BOARD_MODIFIED);
+  assert.equal(item.find('lastmod').text(), DEADLINE_MODIFIED);
 });
 test('board uses no upload API, URL inputs or browser storage and message bridge checks both sender and origin', async () => {
   const source = await fs.readFile('assets/trip-board.js', 'utf8');

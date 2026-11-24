@@ -231,4 +231,6 @@ const { buildArrivalCheck } = await import('./build-arrival-check.mjs');
 await buildArrivalCheck();
 const { buildTripBoard } = await import('./build-trip-board.mjs');
 await buildTripBoard();
+const { buildDeadlineCalendar } = await import('./build-deadline-calendar.mjs');
+await buildDeadlineCalendar();
 await buildGuideHub();
