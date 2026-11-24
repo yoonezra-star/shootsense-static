@@ -25,7 +25,7 @@ test('checkout morning has six unique sections, one TOC and a private UTF-8 work
   const download = $('.ss-post-body a[download]');
   assert.equal(download.length, 1);
   const sheet = await fs.readFile(`.${download.attr('href')}`, 'utf8');
-  assert.match(sheet, /자료 검토: 2026-10-17/);
+  assert.match(sheet, /자료 검토: 2026-11-24/);
   assert.ok(sheet.includes(`https://shootsense.com/${CHECKOUT_MORNING_SLUG}/`));
   assert.match(sheet, /비공개 개인용/);
   assert.match(sheet, /보관 QR·보관 암호/);
@@ -55,7 +55,8 @@ test('station geography, differing service hours and paid entry retain their sco
   assert.match(body, /이유나 갱신 순서를.*확정하지 않았습니다/);
   assert.match(body, /23:00을 골라 반환 마감으로 쓰거나/);
   assert.match(body, /영업시간 밖 반환이 불가능/);
-  assert.match(body, /Suica로 같은 역에 들어갔다 2시간 안에 나올 때.*유료 입장/);
+  assert.match(body, /일반 기준은 2시간 이내/);
+  assert.match(body, /도쿄역은 3시간 이내/);
   assert.match(body, /신칸센 개찰구에는 이 서비스로 들어갈 수 없습니다/);
   assert.match(body, /무료 입장·모든 개찰구 통과 보장으로 읽지 않고/);
 });
@@ -70,7 +71,9 @@ test('per-piece prices and overall baggage restrictions do not become unlimited 
   assert.match(body, /이동비·개찰구 입장료·추가 이용일·별도 필수 비용을 아직 더하지 않았습니다/);
   assert.match(body, /캐리어 위의 가방·종이봉투도 별도 과금/);
   assert.match(body, /세 변 합 200cm 이하·무게 30kg 이하/);
-  assert.match(body, /‘161cm 이상’ 구간은 무제한 크기를 받는다는 뜻이 아닙니다/);
+  assert.match(body, /일본어 FAQ.*크기 상한이 지점마다 다르므로/);
+  assert.match(body, /모든 지점의 확정 허용치로 바꾸지 않습니다/);
+  assert.match(body, /‘161cm 이상’ 구간도 무제한 크기를 받는다는 뜻이 아닙니다/);
   assert.match(body, /야에스 남쪽 창구와 같은 시설이 아닙니다/);
 });
 
@@ -106,13 +109,13 @@ test('sources and metadata agree with the article without changing original publ
   assert.deepEqual(new Set(external), new Set(Object.values(CHECKOUT_MORNING_SOURCES)));
   assert.equal($('link[rel="canonical"]').attr('href'), `https://shootsense.com/${guide.slug}/`);
   for (const selector of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) assert.equal($(selector).attr('content'), guide.title);
-  assert.equal($('meta[property="article:modified_time"]').attr('content'), '2026-11-24T00:46:00+09:00');
+  assert.equal($('meta[property="article:modified_time"]').attr('content'), CHECKOUT_MORNING_MODIFIED);
   const graph = JSON.parse($('script.rank-math-schema').text())['@graph'];
   assert.ok(!graph.some(node => node['@type'] === 'FAQPage'));
   for (const node of graph.filter(node => ['WebPage', 'BlogPosting'].includes(node['@type']))) {
     assert.equal(node.name, guide.title);
     assert.equal(node.description, guide.summary);
-    assert.equal(node.dateModified, '2026-11-24T00:46:00+09:00');
+    assert.equal(node.dateModified, CHECKOUT_MORNING_MODIFIED);
     assert.equal(node.datePublished, '2025-06-16T23:14:36+09:00');
   }
   const last = graph.find(node => node['@type'] === 'BreadcrumbList').itemListElement.at(-1);
@@ -134,7 +137,7 @@ test('home and category references match while earlier Bangkok review date survi
   assert.equal(xml('url').length, 18);
   const item = xml('url').filter((_, node) => xml(node).find('loc').text() === `https://shootsense.com/${guide.slug}/`);
   assert.equal(item.length, 1);
-  assert.equal(item.find('lastmod').text(), '2026-11-24T00:46:00+09:00');
+  assert.equal(item.find('lastmod').text(), CHECKOUT_MORNING_MODIFIED);
   for (const previous of BANGKOK_ARRIVAL_GUIDES) {
     const prior = load(await fs.readFile(`${previous.slug}/index.html`, 'utf8'));
     assert.equal(prior('meta[property="article:modified_time"]').attr('content'), BANGKOK_ARRIVAL_MODIFIED);

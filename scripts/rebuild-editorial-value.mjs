@@ -240,3 +240,5 @@ const { buildArticleWorkflows } = await import('./build-article-workflows.mjs');
 await buildArticleWorkflows();
 const { preserveToolNavigation } = await import('./preserve-tool-navigation.mjs');
 await preserveToolNavigation();
+const { finalizeCheckoutSourceReview } = await import('./finalize-checkout-source-review.mjs');
+await finalizeCheckoutSourceReview();

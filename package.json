@@ -12,6 +12,7 @@
     "test:article-cases": "node --test scripts/test-article-cases.mjs",
     "test:article-workflows": "node --test scripts/test-article-workflows.mjs",
     "test:tool-navigation": "node --test scripts/test-tool-navigation.mjs",
+    "test:checkout-source-review": "node --test scripts/test-checkout-source-review.mjs",
     "test:arrival-check": "node --test scripts/test-arrival-check.mjs",
     "test:trip-board": "node --test scripts/test-trip-board.mjs",
     "test:deadlines": "node --test scripts/test-deadlines.mjs",

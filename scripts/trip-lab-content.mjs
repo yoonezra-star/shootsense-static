@@ -9,7 +9,7 @@ export const LAB_SOURCES = {
   super: { title: 'Super Hotel 공식 FAQ', url: 'https://www.superhoteljapan.com/en/faq01.html', scope: '일반 24:00 체크인·야에스 중앙구점 25:00 예외·체크아웃 당일 짐 회수. 빈방·보관료·개별 접수 승인은 미확인', status: '2026-11-24 게시 원문 대조' },
   superTerms: { title: 'Super Hotel 숙박 약관', url: 'https://www.superhoteljapan.com/en/yakkan.html', scope: '일반 개인 예약의 당일 15:00 취소 경계. 개별 예약 상품의 적용 여부는 별도 확인', status: '2026-11-24 게시 원문 대조' },
   station: { title: 'Tokyo Station City 역·짐 보관 안내', url: 'https://www.tokyostationcity.com/en/information/', scope: '야에스 남쪽 개찰구 밖·GRANSTA 내부 시설 구분. 개별 보관 반환 마감·현재 요금은 이 소개만으로 확정하지 않음', status: '2026-11-24 게시 원문 대조' },
-  operator: { title: 'JR동일본물류 짐 서비스 안내', url: 'https://www.jrbutsuryu.jregroup.ne.jp/business/baggage.html', scope: '기존 2026-10-17에 읽은 요금·접수 기록. 추가 조사에서 원문 접근 실패로 현재 조건은 재검증하지 못함', status: '2026-11-24 접근 실패 · 현행 조건 미확인' }
+  operator: { title: 'JR동일본물류 짐 서비스 안내', url: 'https://www.jrbutsuryu.jregroup.ne.jp/business/baggage.html', scope: '도쿄역 야에스 남쪽 개찰구 밖·GRANSTA 지하 북쪽 개찰구 안의 09:30~20:00 접수 게시, S 500엔·M 1,000엔 구간과 영업시간 밖 반환 불가를 재대조. 이용일 공간·접수 승인은 별도 미확인', status: '2026-11-24 14:10 게시 원문 재대조 · 앞선 접근 실패 기록 갱신' }
 };
 
 export function sourceNotes(keys) {

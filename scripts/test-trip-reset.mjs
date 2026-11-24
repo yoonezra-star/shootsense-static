@@ -129,7 +129,7 @@ test('home, category and sitemap references match while checkout source date rem
   assert.equal(item.find('lastmod').text(), TRIP_RESET_MODIFIED);
   for (const previous of CHECKOUT_MORNING_GUIDES) {
     const prior = load(await fs.readFile(`${previous.slug}/index.html`, 'utf8'));
-    assert.equal(prior('meta[property="article:modified_time"]').attr('content'), '2026-11-24T00:46:00+09:00');
-    assert.match(prior('#ss-storage-recheck').text(), /기존 2026-10-17 표/);
+    assert.equal(prior('meta[property="article:modified_time"]').attr('content'), CHECKOUT_MORNING_MODIFIED);
+    assert.match(prior('#ss-storage-recheck').text(), /공식 자료 재대조/);
   }
 });
