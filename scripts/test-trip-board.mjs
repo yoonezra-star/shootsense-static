@@ -127,7 +127,12 @@ test('board is indexed once with native fallback links, disabled controls and no
 });
 test('main, three tools, privacy and sitemap expose board once without changing publication dates', async () => {
   assert.equal((await read('/'))('#ss-home-board a').attr('href'), BOARD_ROUTE);
-  for (const route of ['/tools/stay-compare/', '/tools/arrival-check/', '/tools/departure-check/']) assert.equal((await read(route))('#ss-board-link a').attr('href'), BOARD_ROUTE);
+  for (const route of ['/tools/stay-compare/', '/tools/arrival-check/', '/tools/departure-check/']) {
+    const $ = await read(route);
+    assert.equal($('#ss-board-link a').attr('href'), BOARD_ROUTE);
+    assert.equal($('#ss-board-link a').attr('target'), '_blank');
+    assert.equal($('#ss-board-link a').attr('rel'), 'noopener');
+  }
   assert.equal((await read('/privacy-policy/'))('#trip-board-privacy').length, 1);
   const map = load(await fs.readFile('page-sitemap.xml', 'utf8'), { xml: true });
   const item = map('url').filter((_, node) => map(node).find('loc').text() === 'https://shootsense.com' + BOARD_ROUTE);

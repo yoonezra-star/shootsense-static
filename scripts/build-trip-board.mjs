@@ -44,7 +44,7 @@ export async function buildTripBoard(root = process.cwd()) {
     const file = path.join(root, 'tools', route, 'index.html');
     const page = load((await fs.readFile(file, 'utf8')).trimEnd());
     page('#ss-board-link').remove();
-    (page('.ss-tool header').length ? page('.ss-tool header') : page('.ss-trip-tool header')).append(`<p id="ss-board-link"><a href="${BOARD_ROUTE}">내 여행 준비판에서 세 도구 함께 검토하기</a></p>`);
+    (page('.ss-tool header').length ? page('.ss-tool header') : page('.ss-trip-tool header')).append(`<p id="ss-board-link"><a href="${BOARD_ROUTE}" target="_blank" rel="noopener">내 여행 준비판에서 세 도구 함께 검토하기</a></p>`);
     dated(page);
     await writeFileUtf8(file, serialize(page));
   }
