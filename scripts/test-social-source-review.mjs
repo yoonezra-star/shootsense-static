@@ -42,14 +42,15 @@ test('hypothetical date arithmetic does not invent cutoff hours or cancellation 
 test('worksheet, homepage and sitemaps match the review without redating the dining article', async () => {
   const home = await read('index.html');
   assert.equal(home('#ss-home-source-review #ss-home-social-review').length, 1);
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), SOCIAL_ACTIVITY_MODIFIED);
+  const homeModified = home('meta[property="og:updated_time"]').attr('content');
+  assert.ok(Date.parse(homeModified) >= Date.parse(SOCIAL_ACTIVITY_MODIFIED));
   const graph = JSON.parse(home('script.rank-math-schema').text())['@graph'];
-  assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === SOCIAL_ACTIVITY_MODIFIED));
+  assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === homeModified));
   const map = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
   assert.equal(map('url').length, 18);
   assert.equal(map('url').filter((_, node) => map(node).find('loc').text().endsWith(`/${SOCIAL_ACTIVITY_SLUG}/`)).find('lastmod').text(), SOCIAL_ACTIVITY_MODIFIED);
   const pageMap = load(await fs.readFile('page-sitemap.xml', 'utf8'), { xml: true });
-  assert.equal(pageMap('url').filter((_, node) => pageMap(node).find('loc').text() === 'https://shootsense.com/').find('lastmod').text(), SOCIAL_ACTIVITY_MODIFIED);
+  assert.equal(pageMap('url').filter((_, node) => pageMap(node).find('loc').text() === 'https://shootsense.com/').find('lastmod').text(), homeModified);
   assert.equal((await read(`${DINING_SLUG}/index.html`))('meta[property="article:modified_time"]').attr('content'), DINING_MODIFIED);
   const sheet = await fs.readFile('assets/social-activity-check.txt', 'utf8');
   assert.match(sheet, /자료 검토: 2026-11-24/);

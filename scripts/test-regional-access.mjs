@@ -23,7 +23,7 @@ for (const guide of REGIONAL_GUIDES) {
     assert.equal(downloads.length, 1);
     const worksheet = await fs.readFile(`.${downloads[0]}`, 'utf8');
     assert.ok(worksheet.includes(`https://shootsense.com/${guide.slug}/`));
-    assert.match(worksheet, /자료 검토: 2026-10-15/);
+    assert.match(worksheet, /자료 검토: 2026-11-24/);
     assert.match(worksheet, /비공개/);
     assert.ok(!worksheet.includes('\ufffd'));
     const sources = $('.ss-post-body a[href^="https:"]').toArray().map(node => new URL($(node).attr('href')));

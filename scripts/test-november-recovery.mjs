@@ -8,6 +8,7 @@ import { ANALYSIS_ROUTE, ANALYSIS_MODIFIED, ANALYSIS_TITLE, ANALYSIS_SOURCES } f
 import { LAB_MODIFIED } from './trip-lab-content.mjs';
 import { RECHECKS } from './november-recovery.mjs';
 import { HELD_SAFETY_GUIDES } from './held-safety.mjs';
+import { REGIONAL_GUIDES, REGIONAL_MODIFIED } from './regional-access-content.mjs';
 
 const read = async relative => load(await fs.readFile(relative, 'utf8'));
 
@@ -115,6 +116,13 @@ test('home, existing tool and lodging guide expose the analysis without replacin
 test('partial rechecks remain scoped and do not claim whole-article new verification dates', async () => {
   for (const check of RECHECKS) {
     const $ = await read(`${check.slug}/index.html`);
+    if (REGIONAL_GUIDES.some(guide => guide.slug === check.slug)) {
+      assert.equal($('#ss-november-recheck').length, 0);
+      assert.equal($('.ss-source-review').length, 1);
+      assert.equal($('meta[property="article:modified_time"]').attr('content'), REGIONAL_MODIFIED);
+      assert.ok($('.ss-source-review a').toArray().some(node => $(node).attr('href') === check.href));
+      continue;
+    }
     assert.equal($('#ss-november-recheck').length, 1);
     assert.equal($('#ss-november-recheck a').attr('href'), check.href);
     assert.ok($('#ss-november-recheck').text().includes(check.text));

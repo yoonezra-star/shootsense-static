@@ -248,3 +248,5 @@ const { finalizeDiningSourceReview } = await import('./finalize-dining-source-re
 await finalizeDiningSourceReview();
 const { finalizeSocialSourceReview } = await import('./finalize-social-source-review.mjs');
 await finalizeSocialSourceReview();
+const { finalizeRegionalSourceReview } = await import('./finalize-regional-source-review.mjs');
+await finalizeRegionalSourceReview();
