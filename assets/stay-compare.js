@@ -1,6 +1,7 @@
 import { compareStays } from './stay-math.js';
 import { TOKYO_COMPARE_INPUTS } from './tokyo-stay-case.js';
 import { installToolBoardBridge } from './tool-board-bridge.js';
+import { STAY_PRICE_EXAMPLE, mountArticleCase } from './article-cases.js';
 
 const form = document.getElementById('stay-compare-form');
 const results = document.getElementById('comparison-results');
@@ -10,6 +11,8 @@ const won = value => `${format.format(value)}원`;
 let comparison = null;
 let example = false;
 const tokyoExample = new URLSearchParams(location.search).get('example') === 'tokyo-2026';
+const articleCase = tokyoExample ? null : mountArticleCase('stay', form);
+if (articleCase) document.getElementById('load-example').textContent = articleCase.button;
 if (tokyoExample) {
   document.getElementById('load-example').textContent = '도쿄 2박 가상 사례';
   const note = document.createElement('p');
@@ -91,10 +94,7 @@ form.addEventListener('reset', () => {
 });
 
 document.getElementById('load-example').addEventListener('click', () => {
-  const data = tokyoExample ? TOKYO_COMPARE_INPUTS : [
-    { name: '가상 숙소 A', room: 75000, fees: 15000, transport: 18000, other: 0, cancellation: 90000, checkin: 'unknown' },
-    { name: '가상 숙소 B', room: 91000, fees: 0, transport: 4000, other: 0, cancellation: 0, checkin: 'yes' }
-  ];
+  const data = tokyoExample ? TOKYO_COMPARE_INPUTS : articleCase?.inputs || STAY_PRICE_EXAMPLE;
   data.forEach((stay, index) => {
     const group = form.querySelector(`[data-stay="${index === 0 ? 'a' : 'b'}"]`);
     for (const [key, value] of Object.entries(stay)) group.querySelector(`[data-field="${key}"]`).value = value;

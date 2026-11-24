@@ -1,0 +1,12 @@
+.ss-case-walkthrough{margin:32px 0;padding:24px 0;border-top:2px solid #1c493a;letter-spacing:0;overflow-wrap:anywhere;font-size:1rem;line-height:1.85}
+.ss-case-walkthrough h2{font-size:1.35rem;line-height:1.5;margin:12px 0 18px}
+.ss-case-walkthrough .ss-case-date{font-size:.875rem;color:#53675e;margin:0}
+.ss-case-walkthrough dl{margin:20px 0;border-top:1px solid #cddbd2}
+.ss-case-walkthrough dl>div{display:grid;grid-template-columns:minmax(100px,1fr) minmax(0,3fr);gap:16px;border-bottom:1px solid #cddbd2;padding:14px 0}
+.ss-case-walkthrough dt{font-weight:700;color:#183e31}
+.ss-case-walkthrough dd{margin:0;min-width:0}
+.ss-case-walkthrough dd strong{display:block;margin-top:6px}
+.ss-case-open{display:inline-block;padding:8px 0;min-height:44px;color:#086a57;text-underline-offset:3px}
+.ss-case-open:focus-visible{outline:3px solid #a75e2d;outline-offset:3px}
+@media(max-width:540px){.ss-case-walkthrough dl>div{grid-template-columns:1fr;gap:4px}}
+@media print{.ss-case-open{display:none}}

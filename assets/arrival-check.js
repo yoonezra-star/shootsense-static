@@ -1,11 +1,18 @@
 import { calculateArrival, arrivalConditions, arrivalText, arrivalFields, ARRIVAL_LABELS, ARRIVAL_EXAMPLES } from './arrival-math.js';
 import { formatPlannerTime } from './departure-math.js';
 import { installToolBoardBridge } from './tool-board-bridge.js';
+import { mountArticleCase } from './article-cases.js';
 
 const form = document.getElementById('arrival-form');
 const resultBlock = document.getElementById('arrival-results');
 const error = document.getElementById('arrival-error');
 const record = document.getElementById('arrival-input-record');
+const articleCase = mountArticleCase('arrival', form);
+if (articleCase) {
+  const option = new Option(articleCase.button, 'article');
+  document.getElementById('arrival-preset').append(option);
+  document.getElementById('arrival-preset').value = 'article';
+}
 let result = null;
 let example = false;
 let recordWasOpen = false;
@@ -66,7 +73,8 @@ for (const event of ['input', 'change']) form.addEventListener(event, () => { st
 // Reset fires before the native radio defaults are restored.
 form.addEventListener('reset', () => { stale(); example = false; record.open = false; syncMode('direct'); boardBridge.reset(); });
 document.getElementById('arrival-example').addEventListener('click', () => {
-  const data = ARRIVAL_EXAMPLES[document.getElementById('arrival-preset').value];
+  const preset = document.getElementById('arrival-preset').value;
+  const data = preset === 'article' ? articleCase.inputs : ARRIVAL_EXAMPLES[preset];
   form.reset();
   for (const [key, value] of Object.entries(data)) form.elements.namedItem(key).value = value;
   example = true; syncMode(); render();

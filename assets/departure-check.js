@@ -1,9 +1,16 @@
 import { calculateDeparture, formatPlannerTime, departureText, DEPARTURE_EXAMPLE, PLANNER_FIELDS } from './departure-math.js';
 import { installToolBoardBridge } from './tool-board-bridge.js';
+import { mountArticleCase } from './article-cases.js';
 
 const form = document.getElementById('departure-form');
 const resultBlock = document.getElementById('departure-results');
 const error = document.getElementById('departure-error');
+const articleCase = mountArticleCase('departure', form);
+if (articleCase) {
+  const option = new Option(articleCase.button, 'article');
+  document.getElementById('departure-preset').append(option);
+  document.getElementById('departure-preset').value = 'article';
+}
 const inputRecord = document.createElement('details');
 inputRecord.className = 'ss-trip-input-record';
 const inputSummary = document.createElement('summary');
@@ -71,7 +78,8 @@ form.addEventListener('submit', event => { event.preventDefault(); render(); });
 for (const event of ['input', 'change']) form.addEventListener(event, () => { result = null; resultBlock.hidden = true; error.textContent = ''; boardBridge.publish('dirty', example); });
 form.addEventListener('reset', () => { result = null; example = false; resultBlock.hidden = true; error.textContent = ''; boardBridge.reset(); });
 document.getElementById('departure-example').addEventListener('click', () => {
-  const data = { ...DEPARTURE_EXAMPLE, ...(document.getElementById('departure-preset').value === 'early' ? { pickupDeadline: '2026-12-12T14:30' } : {}) };
+  const preset = document.getElementById('departure-preset').value;
+  const data = preset === 'article' ? articleCase.inputs : { ...DEPARTURE_EXAMPLE, ...(preset === 'early' ? { pickupDeadline: '2026-12-12T14:30' } : {}) };
   for (const [name, value] of Object.entries(data)) form.elements.namedItem(name).value = value;
   example = true;
   render();

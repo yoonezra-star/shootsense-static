@@ -234,3 +234,5 @@ await buildTripBoard();
 const { buildDeadlineCalendar } = await import('./build-deadline-calendar.mjs');
 await buildDeadlineCalendar();
 await buildGuideHub();
+const { buildArticleCases } = await import('./build-article-cases.mjs');
+await buildArticleCases();
