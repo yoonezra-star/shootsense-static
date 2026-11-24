@@ -68,13 +68,14 @@ test('updated worksheets and sitemaps agree while earlier regional revisions rem
   }
   const home = await read('index.html');
   assert.equal(home('#ss-home-source-review #ss-home-tuyhoa-kodai-review a').length, 2);
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), TUYHOA_KODAI_MODIFIED);
+  const homeModified = home('meta[property="og:updated_time"]').attr('content');
+  assert.ok(Date.parse(homeModified) >= Date.parse(TUYHOA_KODAI_MODIFIED));
   const graph = JSON.parse(home('script.rank-math-schema').text())['@graph'];
-  assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === TUYHOA_KODAI_MODIFIED));
+  assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === homeModified));
   const posts = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
   assert.equal(posts('url').length, 18);
   for (const guide of TUYHOA_KODAI_GUIDES) assert.equal(posts('url').filter((_, node) => posts(node).find('loc').text() === `https://shootsense.com/${guide.slug}/`).find('lastmod').text(), TUYHOA_KODAI_MODIFIED);
   const pages = load(await fs.readFile('page-sitemap.xml', 'utf8'), { xml: true });
-  assert.equal(pages('url').filter((_, node) => pages(node).find('loc').text() === 'https://shootsense.com/').find('lastmod').text(), TUYHOA_KODAI_MODIFIED);
+  assert.equal(pages('url').filter((_, node) => pages(node).find('loc').text() === 'https://shootsense.com/').find('lastmod').text(), homeModified);
   for (const guide of REGIONAL_GUIDES) assert.equal((await read(`${guide.slug}/index.html`))('meta[property="article:modified_time"]').attr('content'), REGIONAL_MODIFIED);
 });

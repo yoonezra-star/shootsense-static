@@ -25,7 +25,7 @@ for (const guide of BANPONG_LUSHAN_GUIDES) {
     assert.equal(downloads.length, 1);
     const sheet = await fs.readFile(`.${downloads.attr('href')}`, 'utf8');
     assert.ok(sheet.includes(`https://shootsense.com/${guide.slug}/`));
-    assert.match(sheet, /자료 검토: 2026-10-16/);
+    assert.match(sheet, /자료 검토: 2026-11-24/);
     assert.match(sheet, /비공개/);
     assert.ok(!sheet.includes('\ufffd'));
     const allowed = new Set(['www.banpong.go.th', 'petfriendly.tourismthailand.org', 'www.tourismthailand.org', 'dticket.railway.co.th', 'ttsview.railway.co.th', 'whc.unesco.org', 'www.lushan.gov.cn']);
