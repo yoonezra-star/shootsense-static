@@ -11,6 +11,7 @@
     "test:tool-discovery": "node --test scripts/test-tool-discovery.mjs",
     "test:article-cases": "node --test scripts/test-article-cases.mjs",
     "test:article-workflows": "node --test scripts/test-article-workflows.mjs",
+    "test:tool-navigation": "node --test scripts/test-tool-navigation.mjs",
     "test:arrival-check": "node --test scripts/test-arrival-check.mjs",
     "test:trip-board": "node --test scripts/test-trip-board.mjs",
     "test:deadlines": "node --test scripts/test-deadlines.mjs",

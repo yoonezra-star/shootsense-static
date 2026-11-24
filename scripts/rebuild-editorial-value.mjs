@@ -238,3 +238,5 @@ const { buildArticleCases } = await import('./build-article-cases.mjs');
 await buildArticleCases();
 const { buildArticleWorkflows } = await import('./build-article-workflows.mjs');
 await buildArticleWorkflows();
+const { preserveToolNavigation } = await import('./preserve-tool-navigation.mjs');
+await preserveToolNavigation();
