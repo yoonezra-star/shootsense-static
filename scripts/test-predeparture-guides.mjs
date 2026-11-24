@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { load } from 'cheerio';
-import { PREDEPARTURE_GUIDES, PREDEPARTURE_MODIFIED, PREPARATION_SAFETY_MODIFIED, PREPARATION_SAFETY_SLUGS } from './predeparture-content.mjs';
+import { PREDEPARTURE_GUIDES, PREDEPARTURE_REVIEW_DATES } from './predeparture-content.mjs';
 
-const modifiedFor = guide => PREPARATION_SAFETY_SLUGS.includes(guide.slug) ? PREPARATION_SAFETY_MODIFIED : PREDEPARTURE_MODIFIED;
+const modifiedFor = guide => PREDEPARTURE_REVIEW_DATES[guide.slug];
 
 for (const guide of PREDEPARTURE_GUIDES) {
   test(`${guide.slug}: source, headings, worksheet and dates match the revision`, async () => {
@@ -44,7 +44,7 @@ for (const guide of PREDEPARTURE_GUIDES) {
 test('urgent help precedes record-keeping and country-specific numbers stay distinct', async () => {
   const $ = load(await fs.readFile('honja-yeohaeng-emergency-response/index.html', 'utf8'));
   assert.match($('.ss-post-summary p').text(), /즉각적인 생명·신체 위험에는 현지 긴급서비스 요청이 먼저/);
-  assert.match($('.ss-post-body > p').first().text(), /현지 긴급서비스/);
+  assert.match($('#ss-emergency-priority').text(), /현지 긴급서비스/);
   assert.equal($('.ss-post-body a[href="tel:+82232100404"]').text(), '+82-2-3210-0404');
   assert.ok($('.ss-post-body a[href="https://passport.go.kr/home/kor/contents.do?menuPos=26"]').length);
   assert.match($('.ss-post-body').text(), /나중에 찾아도 사용할 수 없습니다/);

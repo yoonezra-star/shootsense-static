@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { ARTA_SLUG, CIVITA_SLUG, ARTA_BUS_ROWS, REGIONAL_GUIDES, REGIONAL_MODIFIED } from './regional-access-content.mjs';
-import { PREDEPARTURE_GUIDES, PREDEPARTURE_MODIFIED, PREPARATION_SAFETY_MODIFIED, PREPARATION_SAFETY_SLUGS } from './predeparture-content.mjs';
+import { PREDEPARTURE_GUIDES, PREDEPARTURE_REVIEW_DATES } from './predeparture-content.mjs';
 
 for (const guide of REGIONAL_GUIDES) {
   test(`${guide.slug}: one readable article, one TOC, source links and local worksheet`, async () => {
@@ -83,6 +83,6 @@ test('homepage and sitemap keep both batches and only update the revised regiona
   }
   for (const guide of PREDEPARTURE_GUIDES) {
     const article = load(await fs.readFile(`${guide.slug}/index.html`, 'utf8'));
-    assert.equal(article('meta[property="article:modified_time"]').attr('content'), PREPARATION_SAFETY_SLUGS.includes(guide.slug) ? PREPARATION_SAFETY_MODIFIED : PREDEPARTURE_MODIFIED);
+    assert.equal(article('meta[property="article:modified_time"]').attr('content'), PREDEPARTURE_REVIEW_DATES[guide.slug]);
   }
 });

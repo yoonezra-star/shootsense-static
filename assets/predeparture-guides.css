@@ -7,3 +7,5 @@
 .ss-predeparture-guide .ss-source-review ul{list-style:none;padding:0;margin:12px 0 0}
 .ss-predeparture-guide .ss-source-review li{border-top:1px solid #cbded8;padding:14px 0;margin:0}
 .ss-predeparture-guide .ss-source-review li p{margin:8px 0 0}
+.ss-predeparture-guide .ss-emergency-priority{border-left:4px solid #a72b35;background:#fff3f3;color:#5b1e26;padding:16px 18px;margin:20px 0;line-height:1.8;overflow-wrap:anywhere}
+.ss-predeparture-guide .ss-emergency-priority p:last-child{margin-bottom:0}

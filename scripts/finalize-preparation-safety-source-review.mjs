@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
-import { PREPARATION_SAFETY_MODIFIED, PREPARATION_SAFETY_SLUGS } from './predeparture-content.mjs';
+import { PREPARATION_SAFETY_SLUGS, EMERGENCY_MODIFIED, PREDEPARTURE_REVIEW_DATES } from './predeparture-content.mjs';
 import { escapeHtml, writeFileUtf8 } from './lib/static-site-utils.mjs';
 
 export const PREPARATION_SAFETY_REVIEWS = [
@@ -24,21 +24,44 @@ export const PREPARATION_SAFETY_REVIEWS = [
   }
 ];
 
+export const EMERGENCY_SOURCE_REVIEW = {
+  slug: 'honja-yeohaeng-emergency-response', id: 'emergency', label: '긴급 연락·분실 신고 구분', marker: '연락 시도 · 접수 미확인',
+  note: '콜센터 연락 방식·여권 분실·영사조력 원문을 다시 읽었습니다. 실제 통화·신고·출동·문서 발급을 확인한 기록이나 응급처치 지침은 아닙니다.',
+  groups: [
+    { title: '영사 상담 연락 방식', checked: '24시간 상담, 해외 +82-2-3210-0404 일반 유료 전화, 인터넷 환경의 무료전화앱과 상담·통역 업무를 대조했습니다.', limit: '실제 연결·대기시간·통신 요금은 시험하지 않았습니다. 현지 긴급기관 신고나 공관의 방문·발급 시간을 대신하지 않습니다.', links: [['외교부 콜센터 이용 안내', 'https://www.0404.go.kr/bbs/contsPst/MST0000000000105/5/detail'], ['외교부 콜센터 업무 소개', 'https://www.0404.go.kr/bbs/contsPst/MST0000000000104/4/detail']] },
+    { title: '분실 신고와 되찾은 여권', checked: '분실 신고 뒤 즉시 무효화, 해외 공관 신고·새 여권 안내, 현지 경찰 신고 후 되찾은 문서의 출입국 불이익 주의를 읽었습니다.', limit: '개별 공관의 신청 서류·방문 예약·발급일과 다음 여정에서의 문서 인정을 확인한 것은 아닙니다.', links: [['외교부 여권 분실·습득 안내', 'https://passport.go.kr/home/kor/contents.do?menuPos=26']] },
+    { title: '영사조력의 범위', checked: 'FAQ의 보충성·지역 특수성·비용 자기부담 등 지원 원칙을 읽었습니다.', limit: '개별 사건의 법적 권리·비용 지원·보험 보상·환불 여부를 판정하지 않습니다. 기관별 접수 상태 표는 편집 예시입니다.', links: [['외교부 영사조력 FAQ', 'https://www.0404.go.kr/bbs/bbsPst/MST0000000000071/BSC0501/faq/list']] }
+  ]
+};
+
 const serialize = page => page.html().replace(/^[\t ]+$/gm, '').trimEnd() + '\n';
 const latest = (current, proposed) => Date.parse(current) > Date.parse(proposed) ? current : proposed;
 const origin = 'https://shootsense.com';
 
 export async function finalizePreparationSafetySourceReview(root = process.cwd()) {
-  const modified = PREPARATION_SAFETY_MODIFIED;
-  const day = modified.slice(0, 10);
-  for (const review of PREPARATION_SAFETY_REVIEWS) {
+  const reviews = [...PREPARATION_SAFETY_REVIEWS, EMERGENCY_SOURCE_REVIEW];
+  for (const review of reviews) {
+    const modified = PREDEPARTURE_REVIEW_DATES[review.slug];
+    const day = modified.slice(0, 10);
     const file = path.join(root, review.slug, 'index.html');
     const page = load((await fs.readFile(file, 'utf8')).trimEnd());
     if (!page('.ss-post-body').text().includes(review.marker) || page('.ss-trust-note').length !== 1) throw new Error(`Rebuild revised ${review.id} guide first`);
     page(`#ss-${review.id}-source-review`).remove();
     const panel = `<aside id="ss-${review.id}-source-review" class="ss-source-review"><p><strong>${day} 공개 자료 재대조</strong> · ${escapeHtml(review.note)}</p><details><summary>확인한 출처와 남아 있는 조건</summary><ul>${review.groups.map(group => `<li><strong>${escapeHtml(group.title)}</strong><p>${escapeHtml(group.checked)} ${group.links.map(([label, href]) => `<a href="${escapeHtml(href)}">${escapeHtml(label)}</a>`).join(' · ')}</p><p><strong>미확인 범위</strong> ${escapeHtml(group.limit)}</p></li>`).join('')}</ul></details></aside>`;
-    // Keep the room guide's immediate-danger warning ahead of reference details.
-    page('.ss-post-body > p').eq(1).after(panel);
+    if (review.id === 'emergency') {
+      const bodyWarning = page('.ss-post-body > p').first();
+      const urgent = bodyWarning.text().includes('지금 생명·신체에 즉각적인 위험') ? bodyWarning : page('#ss-emergency-priority > p').first();
+      if (!urgent.text().includes('지금 생명·신체에 즉각적인 위험')) throw new Error('Expected immediate-danger warning');
+      const warning = urgent.toString();
+      urgent.remove();
+      page('#ss-emergency-priority').remove();
+      if (page('.ss-post-hero').length !== 1) throw new Error('Expected emergency article header');
+      page('.ss-post-hero').after(`<aside id="ss-emergency-priority" class="ss-emergency-priority">${warning}<p>이 사이트의 문의메일은 실시간 구조·신고 접수 창구가 아닙니다.</p></aside>`);
+      page('.ss-post-body > p').first().after(panel);
+    } else {
+      // Keep the room guide's immediate-danger warning ahead of reference details.
+      page('.ss-post-body > p').eq(1).after(panel);
+    }
     for (const selector of ['meta[property="article:modified_time"]', 'meta[property="og:updated_time"]']) page(selector).attr('content', modified);
     page('script.rank-math-schema').each((_, script) => {
       const schema = JSON.parse(page(script).text());
@@ -54,9 +77,11 @@ export async function finalizePreparationSafetySourceReview(root = process.cwd()
   const homeFile = path.join(root, 'index.html');
   const home = load((await fs.readFile(homeFile, 'utf8')).trimEnd());
   home('#ss-home-preparation-safety-review').remove();
+  home('#ss-home-emergency-review').remove();
   if (home('#ss-home-source-review').length !== 1) throw new Error('Expected home source review');
   home('#ss-home-source-review').append(`<span id="ss-home-preparation-safety-review"> · ${PREPARATION_SAFETY_REVIEWS.map(review => `<a href="/${review.slug}/#ss-${review.id}-source-review">${escapeHtml(review.label)} 재대조</a>`).join(' · ')}</span>`);
-  const homeModified = latest(home('meta[property="og:updated_time"]').attr('content'), modified);
+  home('#ss-home-source-review').append(`<span id="ss-home-emergency-review"> · <a href="/${EMERGENCY_SOURCE_REVIEW.slug}/#ss-emergency-source-review">긴급 연락·분실 신고 재대조</a></span>`);
+  const homeModified = latest(home('meta[property="og:updated_time"]').attr('content'), EMERGENCY_MODIFIED);
   home('meta[property="og:updated_time"]').attr('content', homeModified);
   home('script.rank-math-schema').each((_, script) => {
     const schema = JSON.parse(home(script).text());
@@ -67,8 +92,8 @@ export async function finalizePreparationSafetySourceReview(root = process.cwd()
   for (const name of ['post-sitemap.xml', 'page-sitemap.xml']) {
     const file = path.join(root, name);
     const map = load(await fs.readFile(file, 'utf8'), { xml: true });
-    const targets = name === 'post-sitemap.xml' ? PREPARATION_SAFETY_SLUGS.map(slug => `${origin}/${slug}/`) : [`${origin}/`];
-    for (const url of targets) {
+    const targets = name === 'post-sitemap.xml' ? reviews.map(review => [`${origin}/${review.slug}/`, PREDEPARTURE_REVIEW_DATES[review.slug]]) : [[`${origin}/`, homeModified]];
+    for (const [url, modified] of targets) {
       const entry = map('url').filter((_, node) => map(node).find('loc').text() === url);
       if (entry.length !== 1) throw new Error(`Expected one sitemap entry: ${url}`);
       entry.find('lastmod').text(latest(entry.find('lastmod').text(), modified));
@@ -77,9 +102,9 @@ export async function finalizePreparationSafetySourceReview(root = process.cwd()
   }
   const file = path.join(root, 'sitemap_index.xml');
   const index = load(await fs.readFile(file, 'utf8'), { xml: true });
-  index('sitemap').filter((_, node) => /\/(post|page)-sitemap\.xml$/.test(index(node).find('loc').text())).find('lastmod').each((_, node) => index(node).text(latest(index(node).text(), modified)));
+  index('sitemap').filter((_, node) => /\/(post|page)-sitemap\.xml$/.test(index(node).find('loc').text())).find('lastmod').each((_, node) => index(node).text(latest(index(node).text(), EMERGENCY_MODIFIED)));
   await writeFileUtf8(file, index.xml().trimEnd() + '\n');
-  return { revisedArticles: PREPARATION_SAFETY_SLUGS, sourceLinks: 6, uniqueSourcePages: 4, emergencyGuideRedated: false };
+  return { revisedArticles: reviews.map(review => review.slug), sourceLinks: 10, uniqueSourcePages: 8, separateArticleReviewDates: true };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) console.log(JSON.stringify(await finalizePreparationSafetySourceReview()));

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { load } from 'cheerio';
-import { PREPARATION_SAFETY_MODIFIED, PREDEPARTURE_MODIFIED } from './predeparture-content.mjs';
+import { PREPARATION_SAFETY_MODIFIED } from './predeparture-content.mjs';
 import { PREPARATION_SAFETY_REVIEWS } from './finalize-preparation-safety-source-review.mjs';
 import { ARTICLE_CASES } from '../assets/article-cases.js';
 import { calculateArrival } from '../assets/arrival-math.js';
@@ -59,7 +59,7 @@ test('room guide puts urgent help before sources and never turns a repair reply 
   assert.equal(page('.ss-post-body a[href="/tools/stay-compare/"]').length, 1);
 });
 
-test('worksheets include usable evidence and unresolved-state fields while emergency review stays unchanged', async () => {
+test('preparation and room worksheets include usable evidence and unresolved-state fields', async () => {
   const departure = await fs.readFile('assets/departure-decision-sheet.txt', 'utf8');
   const room = await fs.readFile('assets/room-arrival-check.txt', 'utf8');
   for (const sheet of [departure, room]) assert.match(sheet, /양식 검토: 2026-11-24/);
@@ -68,10 +68,6 @@ test('worksheets include usable evidence and unresolved-state fields while emerg
   assert.match(departure, /그 시한까지 답이 없을 때 변경·보류할 예약/);
   assert.match(room, /수리 예정 회신 -> 문제 발견·조치 예정 \(완료 아님\)/);
   assert.match(room, /객실 번호·출입 코드를 공개/);
-  const emergency = await read('honja-yeohaeng-emergency-response/index.html');
-  assert.equal(emergency('meta[property="article:modified_time"]').attr('content'), PREDEPARTURE_MODIFIED);
-  assert.equal(emergency('.ss-source-review').length, 0);
-  assert.match(await fs.readFile('assets/incident-contact-record.txt', 'utf8'), /2026-10-15/);
 });
 
 test('home and sitemaps reflect only the two refreshed guides without changing historical logs or privacy review', async () => {
@@ -79,7 +75,7 @@ test('home and sitemaps reflect only the two refreshed guides without changing h
   assert.equal(home('#ss-home-preparation-safety-review').length, 1);
   assert.equal(home('#ss-home-preparation-safety-review a').length, 2);
   assert.equal(home('.ss-home-updates > li').first().attr('id'), 'november-recovery-update');
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), PREPARATION_SAFETY_MODIFIED);
+  assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(PREPARATION_SAFETY_MODIFIED));
   const map = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
   assert.equal(map('url').length, 18);
   for (const review of PREPARATION_SAFETY_REVIEWS) assert.equal(map('url').filter((_, node) => map(node).find('loc').text() === `https://shootsense.com/${review.slug}/`).find('lastmod').text(), PREPARATION_SAFETY_MODIFIED);

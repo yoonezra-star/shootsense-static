@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { DINING_GUIDES, DINING_MODIFIED, DINING_SLUG, DINING_SOURCES } from './dining-content.mjs';
-import { PREDEPARTURE_GUIDES, PREDEPARTURE_MODIFIED, PREPARATION_SAFETY_MODIFIED, PREPARATION_SAFETY_SLUGS } from './predeparture-content.mjs';
+import { PREDEPARTURE_GUIDES, PREDEPARTURE_MODIFIED, PREDEPARTURE_REVIEW_DATES } from './predeparture-content.mjs';
 import { BANPONG_LUSHAN_GUIDES, BANPONG_LUSHAN_MODIFIED } from './banpong-lushan-content.mjs';
 
 const guide = DINING_GUIDES[0];
@@ -108,7 +108,7 @@ test('home, category alt text, related titles and sitemap agree without redating
   for (const [guides, modified] of [[PREDEPARTURE_GUIDES, PREDEPARTURE_MODIFIED], [BANPONG_LUSHAN_GUIDES, BANPONG_LUSHAN_MODIFIED]]) {
     for (const previous of guides) {
       const $ = load(await fs.readFile(`${previous.slug}/index.html`, 'utf8'));
-      assert.equal($('meta[property="article:modified_time"]').attr('content'), PREPARATION_SAFETY_SLUGS.includes(previous.slug) ? PREPARATION_SAFETY_MODIFIED : modified);
+      assert.equal($('meta[property="article:modified_time"]').attr('content'), PREDEPARTURE_REVIEW_DATES[previous.slug] || modified);
     }
   }
   const xml = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
