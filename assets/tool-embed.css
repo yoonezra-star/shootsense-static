@@ -1,0 +1,10 @@
+html.ss-tool-embedded{background:#fff}
+.ss-tool-embedded body{background:#fff!important;min-height:0!important}
+.ss-tool-embedded :is(#masthead,.ss-site-footer,#ast-scroll-top,.ss-breadcrumb,.entry-header,.ss-tool-links,.ss-source-note){display:none!important}
+.ss-tool-embedded :is(#content,.site-content,.ast-container,article,.entry-content){margin:0!important;padding:0!important;max-width:none!important;width:100%!important;background:#fff!important;box-shadow:none!important;border:0!important;min-height:0!important}
+.ss-tool-embedded :is(.ss-tool,.ss-trip-tool){max-width:none;padding:4px 4px 16px;margin:0}
+.ss-tool-embedded :is(.ss-tool,.ss-trip-tool) h1{font-size:23px}
+.ss-tool-embedded header{margin-bottom:16px}
+.ss-tool-embedded header>p:not(.ss-eyebrow){display:none}
+.ss-tool-embedded .ss-trip-tool fieldset{padding:16px;margin:16px 0}
+.ss-tool-embedded :is(#ss-arrival-link,#ss-tokyo-analysis-link){display:none}

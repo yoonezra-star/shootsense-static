@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { calculateArrival, arrivalConditions, arrivalText, ARRIVAL_EXAMPLES } from '../assets/arrival-math.js';
 import { ARRIVAL_ROUTE, ARRIVAL_TITLE, ARRIVAL_MODIFIED } from './arrival-check-content.mjs';
+import { BOARD_MODIFIED } from './trip-board-content.mjs';
 const direct = changes => ({ ...ARRIVAL_EXAMPLES.direct, ...changes });
 const scheduled = changes => ({ ...ARRIVAL_EXAMPLES.scheduled, ...changes });
 const read = async route => load(await fs.readFile(`.${route}index.html`, 'utf8'));
@@ -104,7 +105,7 @@ test('new tool has a truthful identity, blank inert fallback, local module and s
   assert.equal($('script[src*="googlesyndication"], ins.adsbygoogle').length, 0);
   const graph = JSON.parse($('script.rank-math-schema').text())['@graph'];
   assert.equal(graph[0].datePublished, ARRIVAL_MODIFIED);
-  assert.equal(graph[0].dateModified, ARRIVAL_MODIFIED);
+  assert.equal(graph[0].dateModified, BOARD_MODIFIED);
   assert.equal(graph[1]['@type'], 'WebApplication');
 });
 test('home, existing tools, analysis, privacy and sitemap expose the new route without duplicates', async () => {
@@ -119,7 +120,7 @@ test('home, existing tools, analysis, privacy and sitemap expose the new route w
   const map = load(await fs.readFile('page-sitemap.xml', 'utf8'), { xml: true });
   const item = map('url').filter((_, n) => map(n).find('loc').text() === 'https://shootsense.com' + ARRIVAL_ROUTE);
   assert.equal(item.length, 1);
-  assert.equal(item.find('lastmod').text(), ARRIVAL_MODIFIED);
+  assert.equal(item.find('lastmod').text(), BOARD_MODIFIED);
   const source = await fs.readFile('assets/arrival-check.js', 'utf8');
   assert.ok(!/fetch\(|XMLHttpRequest|localStorage|sessionStorage|history\.|\.innerHTML\s*=/.test(source));
 });

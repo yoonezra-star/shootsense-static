@@ -1,4 +1,5 @@
 import { calculateDeparture, formatPlannerTime, departureText, DEPARTURE_EXAMPLE, PLANNER_FIELDS } from './departure-math.js';
+import { installToolBoardBridge } from './tool-board-bridge.js';
 
 const form = document.getElementById('departure-form');
 const resultBlock = document.getElementById('departure-results');
@@ -17,6 +18,12 @@ let result = null;
 let example = false;
 const read = () => Object.fromEntries([...form.elements].filter(node => node.name).map(node => [node.name, node.value]));
 function textNode(tag, text) { const node = document.createElement(tag); node.textContent = text; return node; }
+const boardBridge = installToolBoardBridge({ tool: 'departure', read, restore(record) {
+  form.reset();
+  for (const [key, value] of Object.entries(record.inputs)) form.elements.namedItem(key).value = value;
+  example = record.example;
+  if (record.state === 'calculated') render();
+} });
 
 function render() {
   error.textContent = '';
@@ -57,11 +64,12 @@ function render() {
     resultBlock.hidden = false;
     heading.focus({ preventScroll: true });
     resultBlock.scrollIntoView({ block: 'start', behavior: 'auto' });
-  } catch (exception) { result = null; resultBlock.hidden = true; error.textContent = exception.message; }
+    boardBridge.publish('calculated', example);
+  } catch (exception) { result = null; resultBlock.hidden = true; error.textContent = exception.message; boardBridge.publish('error', example); }
 }
 form.addEventListener('submit', event => { event.preventDefault(); render(); });
-for (const event of ['input', 'change']) form.addEventListener(event, () => { result = null; resultBlock.hidden = true; error.textContent = ''; });
-form.addEventListener('reset', () => { result = null; example = false; resultBlock.hidden = true; error.textContent = ''; });
+for (const event of ['input', 'change']) form.addEventListener(event, () => { result = null; resultBlock.hidden = true; error.textContent = ''; boardBridge.publish('dirty', example); });
+form.addEventListener('reset', () => { result = null; example = false; resultBlock.hidden = true; error.textContent = ''; boardBridge.reset(); });
 document.getElementById('departure-example').addEventListener('click', () => {
   const data = { ...DEPARTURE_EXAMPLE, ...(document.getElementById('departure-preset').value === 'early' ? { pickupDeadline: '2026-12-12T14:30' } : {}) };
   for (const [name, value] of Object.entries(data)) form.elements.namedItem(name).value = value;

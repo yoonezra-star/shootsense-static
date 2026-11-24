@@ -1,5 +1,6 @@
 import { compareStays } from './stay-math.js';
 import { TOKYO_COMPARE_INPUTS } from './tokyo-stay-case.js';
+import { installToolBoardBridge } from './tool-board-bridge.js';
 
 const form = document.getElementById('stay-compare-form');
 const results = document.getElementById('comparison-results');
@@ -29,6 +30,19 @@ function read() {
   });
 }
 
+const boardBridge = installToolBoardBridge({ tool: 'stay', read, restore(record) {
+  form.reset();
+  record.inputs.forEach((stay, index) => {
+    const group = form.querySelector(`[data-stay="${index === 0 ? 'a' : 'b'}"]`);
+    for (const [key, value] of Object.entries(stay)) {
+      const field = group.querySelector(`[data-field="${key}"]`);
+      if (key === 'feesConfirmed') field.checked = value; else field.value = value;
+    }
+  });
+  example = record.example;
+  if (record.state === 'calculated') calculate();
+} });
+
 function calculate() {
   error.textContent = '';
   try {
@@ -53,10 +67,12 @@ function calculate() {
     results.hidden = false;
     document.getElementById('comparison-result-title').focus({ preventScroll: true });
     results.scrollIntoView({ behavior: 'auto', block: 'start' });
+    boardBridge.publish('calculated', example);
   } catch (exception) {
     comparison = null;
     results.hidden = true;
     error.textContent = exception.message;
+    boardBridge.publish('error', example);
   }
 }
 
@@ -64,13 +80,14 @@ form.addEventListener('submit', event => {
   event.preventDefault();
   calculate();
 });
-form.addEventListener('input', () => { comparison = null; results.hidden = true; error.textContent = ''; });
-form.addEventListener('change', () => { comparison = null; results.hidden = true; });
+form.addEventListener('input', () => { comparison = null; results.hidden = true; error.textContent = ''; boardBridge.publish('dirty', example); });
+form.addEventListener('change', () => { comparison = null; results.hidden = true; boardBridge.publish('dirty', example); });
 form.addEventListener('reset', () => {
   comparison = null;
   example = false;
   results.hidden = true;
   error.textContent = '';
+  boardBridge.reset();
 });
 
 document.getElementById('load-example').addEventListener('click', () => {

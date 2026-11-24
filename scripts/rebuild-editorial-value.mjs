@@ -229,4 +229,6 @@ const { buildTripLab } = await import('./build-trip-lab.mjs');
 await buildTripLab();
 const { buildArrivalCheck } = await import('./build-arrival-check.mjs');
 await buildArrivalCheck();
+const { buildTripBoard } = await import('./build-trip-board.mjs');
+await buildTripBoard();
 await buildGuideHub();

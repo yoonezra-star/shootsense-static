@@ -1,5 +1,6 @@
 import { calculateArrival, arrivalConditions, arrivalText, arrivalFields, ARRIVAL_LABELS, ARRIVAL_EXAMPLES } from './arrival-math.js';
 import { formatPlannerTime } from './departure-math.js';
+import { installToolBoardBridge } from './tool-board-bridge.js';
 
 const form = document.getElementById('arrival-form');
 const resultBlock = document.getElementById('arrival-results');
@@ -18,6 +19,12 @@ function syncMode(mode = form.elements.namedItem('mode').value) {
   }
 }
 function stale() { result = null; resultBlock.hidden = true; error.textContent = ''; }
+const boardBridge = installToolBoardBridge({ tool: 'arrival', read, restore(record) {
+  form.reset();
+  for (const [key, value] of Object.entries(record.inputs)) form.elements.namedItem(key).value = value;
+  example = record.example; syncMode();
+  if (record.state === 'calculated') render();
+} });
 function render() {
   error.textContent = '';
   try {
@@ -51,12 +58,13 @@ function render() {
     resultBlock.hidden = false;
     title.focus({ preventScroll: true });
     resultBlock.scrollIntoView({ block: 'start', behavior: 'auto' });
-  } catch (exception) { stale(); error.textContent = exception.message; }
+    boardBridge.publish('calculated', example);
+  } catch (exception) { stale(); error.textContent = exception.message; boardBridge.publish('error', example); }
 }
 form.addEventListener('submit', event => { event.preventDefault(); render(); });
-for (const event of ['input', 'change']) form.addEventListener(event, () => { stale(); syncMode(); });
+for (const event of ['input', 'change']) form.addEventListener(event, () => { stale(); syncMode(); boardBridge.publish('dirty', example); });
 // Reset fires before the native radio defaults are restored.
-form.addEventListener('reset', () => { stale(); example = false; record.open = false; syncMode('direct'); });
+form.addEventListener('reset', () => { stale(); example = false; record.open = false; syncMode('direct'); boardBridge.reset(); });
 document.getElementById('arrival-example').addEventListener('click', () => {
   const data = ARRIVAL_EXAMPLES[document.getElementById('arrival-preset').value];
   form.reset();
