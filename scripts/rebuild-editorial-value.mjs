@@ -227,4 +227,6 @@ await reviseEditorialBatch(MATSUDAI_REVISION);
 await applyNovemberRecovery();
 const { buildTripLab } = await import('./build-trip-lab.mjs');
 await buildTripLab();
+const { buildArrivalCheck } = await import('./build-arrival-check.mjs');
+await buildArrivalCheck();
 await buildGuideHub();

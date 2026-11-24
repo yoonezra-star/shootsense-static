@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { calculateDeparture, DEPARTURE_EXAMPLE, departureText, parsePlannerTime, plannerMinutes } from '../assets/departure-math.js';
 import { LAB_MODIFIED, PLANNER_ROUTE, LATE_PAGE, STORAGE_PAGE } from './trip-lab-content.mjs';
+import { ARRIVAL_MODIFIED } from './arrival-check-content.mjs';
 const example = changes => ({ ...DEPARTURE_EXAMPLE, ...changes });
 const read = async route => load(await fs.readFile(`.${route}index.html`, 'utf8'));
 
@@ -77,7 +78,7 @@ test('three new pages have unique identity, complete fallback content, sources a
     for (const link of $('.ss-toc a').toArray()) assert.equal($('[id]').filter((_, n) => $(n).attr('id') === $(link).attr('href').slice(1)).length, 1);
     const graph = JSON.parse($('script.rank-math-schema').text())['@graph'];
     assert.equal(graph[0].datePublished, LAB_MODIFIED);
-    assert.equal(graph[0].dateModified, LAB_MODIFIED);
+    assert.equal(graph[0].dateModified, page.route === STORAGE_PAGE.route ? LAB_MODIFIED : ARRIVAL_MODIFIED);
   }
 });
 test('calculator starts blank and input values are not stored or sent by application code', async () => {

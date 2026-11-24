@@ -8,6 +8,7 @@
     "test:november": "node --test scripts/test-november-recovery.mjs",
     "build:guide-hub": "node scripts/build-guide-hub.mjs",
     "test:guide-hub": "node --test scripts/test-guide-hub.mjs",
+    "test:arrival-check": "node --test scripts/test-arrival-check.mjs",
     "revise:editorial": "node scripts/rebuild-editorial-value.mjs",
     "revise:predeparture": "node scripts/revise-predeparture-guides.mjs",
     "revise:regions": "node scripts/revise-predeparture-guides.mjs --regional",
