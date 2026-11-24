@@ -17,11 +17,13 @@ export function compareStays(inputs) {
   const stays = inputs.map((input, index) => {
     const costs = {
       room: amount(input.room, { required: true }),
-      fees: amount(input.fees),
-      transport: amount(input.transport),
-      other: amount(input.other)
+      fees: String(input.fees ?? '').trim() ? amount(input.fees) : null,
+      transport: String(input.transport ?? '').trim() ? amount(input.transport) : null,
+      other: String(input.other ?? '').trim() ? amount(input.other) : null
     };
+    const missingCosts = Object.keys(costs).filter(key => costs[key] === null);
     const flags = [];
+    for (const key of missingCosts) flags.push(`${{ fees: '추가금', transport: '교통비', other: '기타 비용' }[key]} 금액 미확인`);
     if (!input.feesConfirmed) flags.push('추가비용 미확인');
     if (input.checkin === 'no') flags.push('도착 시각 체크인 불가');
     else if (input.checkin !== 'yes') flags.push('도착 시각 체크인 미확인');
@@ -29,11 +31,21 @@ export function compareStays(inputs) {
       id: index === 0 ? 'a' : 'b',
       name: String(input.name || `숙소 ${index === 0 ? 'A' : 'B'}`).trim().slice(0, 40),
       costs,
-      total: Object.values(costs).reduce((sum, cost) => sum + cost, 0),
+      total: Object.values(costs).reduce((sum, cost) => sum + (cost ?? 0), 0),
+      missingCosts,
       cancellation: String(input.cancellation ?? '').trim() ? amount(input.cancellation) : null,
       flags
     };
   });
-  const difference = Math.abs(stays[0].total - stays[1].total);
-  return { stays, difference, lowerCostId: difference === 0 ? null : stays[0].total < stays[1].total ? 'a' : 'b' };
+  const completeCosts = stays.every(stay => stay.missingCosts.length === 0);
+  const difference = completeCosts ? Math.abs(stays[0].total - stays[1].total) : null;
+  return { stays, completeCosts, difference, lowerCostId: difference === null || difference === 0 ? null : stays[0].total < stays[1].total ? 'a' : 'b' };
+}
+
+export const stayTotalLabel = stay => stay.missingCosts.length ? '입력된 금액 소계 (미확인 비용 제외)' : '이용 시 입력 합계';
+
+export function stayComparisonSummary(comparison) {
+  if (!comparison.completeCosts) return '미확인 비용이 있어 금액 차이·저렴한 후보 판정을 보류합니다. 표시 금액은 입력된 항목의 소계입니다.';
+  const lower = comparison.stays.find(stay => stay.id === comparison.lowerCostId);
+  return lower ? `입력한 비용 합계는 ${lower.name}이 ${comparison.difference.toLocaleString('ko-KR')}원 적습니다.` : '두 숙소의 입력 비용 합계가 같습니다.';
 }

@@ -108,7 +108,7 @@ test('emergency dates advance without redating the other two reviewed guides or 
   const home = await read('index.html');
   assert.equal(home('#ss-home-emergency-review a').length, 1);
   assert.equal(home('.ss-home-updates > li').first().attr('id'), 'november-recovery-update');
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), EMERGENCY_MODIFIED);
+  assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(EMERGENCY_MODIFIED));
   const map = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
   assert.equal(map('url').length, 18);
   assert.equal(map('url').filter((_, node) => map(node).find('loc').text() === `https://shootsense.com/${slug}/`).find('lastmod').text(), EMERGENCY_MODIFIED);

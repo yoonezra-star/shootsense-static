@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { amount, compareStays, MAX_AMOUNT } from '../assets/stay-math.js';
+import { amount, compareStays, MAX_AMOUNT, stayTotalLabel, stayComparisonSummary } from '../assets/stay-math.js';
 
 const stay = changes => ({ name: '숙소', room: '75000', fees: '15000', transport: '18000', other: '0', cancellation: '', checkin: 'unknown', feesConfirmed: false, ...changes });
 
@@ -23,9 +23,36 @@ test('unknown cancellation is different from a confirmed zero loss', () => {
 
 test('empty optional fees and zero-priced stays are accepted without inventing certainty', () => {
   const result = compareStays([stay({ room: '0', fees: '', transport: '', other: '' }), stay({ room: '0', fees: '', transport: '', other: '', checkin: 'no' })]);
-  assert.equal(result.difference, 0);
+  assert.equal(result.difference, null);
+  assert.equal(result.completeCosts, false);
+  assert.equal(result.lowerCostId, null);
+  assert.deepEqual(result.stays[0].missingCosts, ['fees', 'transport', 'other']);
+  assert.equal(result.stays[0].costs.fees, null);
   assert.equal(result.stays[0].total, 0);
   assert.ok(result.stays[1].flags.includes('도착 시각 체크인 불가'));
+});
+
+test('an unknown cost on either candidate suppresses cost ranking even if the known subtotal is lower', () => {
+  for (const index of [0, 1]) for (const field of ['fees', 'transport', 'other']) {
+    const inputs = [stay({ feesConfirmed: true, checkin: 'yes' }), stay({ room: '200000', feesConfirmed: true, checkin: 'yes' })];
+    inputs[index][field] = '';
+    const result = compareStays(inputs);
+    assert.equal(result.difference, null);
+    assert.equal(result.lowerCostId, null);
+    assert.equal(result.stays[index].costs[field], null);
+    assert.match(stayTotalLabel(result.stays[index]), /미확인 비용 제외/);
+    assert.match(stayComparisonSummary(result), /판정을 보류/);
+  }
+});
+
+test('explicit zero restores arithmetic comparison without granting check-in or fee certainty', () => {
+  const result = compareStays([stay({ fees: '0', transport: '0', other: '0', checkin: 'no' }), stay({ room: '80000', fees: '0', transport: '0', other: '0' })]);
+  assert.equal(result.completeCosts, true);
+  assert.equal(result.lowerCostId, 'a');
+  assert.equal(result.difference, 5000);
+  assert.ok(result.stays[0].flags.includes('추가비용 미확인'));
+  assert.ok(result.stays[0].flags.includes('도착 시각 체크인 불가'));
+  assert.match(stayComparisonSummary(result), /5,000원 적습니다/);
 });
 
 test('missing, negative, fractional and unsafe amounts cannot produce a comparison', () => {

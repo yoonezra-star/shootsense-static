@@ -260,3 +260,5 @@ const { syncRegionTaxonomy } = await import('./sync-region-taxonomy.mjs');
 await syncRegionTaxonomy();
 const { finalizePreparationSafetySourceReview } = await import('./finalize-preparation-safety-source-review.mjs');
 await finalizePreparationSafetySourceReview();
+const { finalizeLodgingSourceReview } = await import('./finalize-lodging-source-review.mjs');
+await finalizeLodgingSourceReview();

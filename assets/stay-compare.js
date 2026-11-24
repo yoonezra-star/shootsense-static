@@ -1,4 +1,4 @@
-import { compareStays } from './stay-math.js';
+import { compareStays, stayTotalLabel, stayComparisonSummary } from './stay-math.js';
 import { TOKYO_COMPARE_INPUTS } from './tokyo-stay-case.js';
 import { installToolBoardBridge } from './tool-board-bridge.js';
 import { STAY_PRICE_EXAMPLE, mountArticleCase } from './article-cases.js';
@@ -55,17 +55,17 @@ function calculate() {
       const block = results.querySelector(`[data-result="${stay.id}"]`);
       block.querySelector('[data-output="name"]').textContent = stay.name;
       block.querySelector('[data-output="total"]').textContent = won(stay.total);
-      for (const key of ['room', 'fees', 'transport', 'other']) block.querySelector(`[data-output="${key}"]`).textContent = won(stay.costs[key]);
+      block.querySelector('.ss-home-note').textContent = stayTotalLabel(stay);
+      for (const key of ['room', 'fees', 'transport', 'other']) block.querySelector(`[data-output="${key}"]`).textContent = stay.costs[key] === null ? '미확인' : won(stay.costs[key]);
       block.querySelector('[data-output="cancellation"]').textContent = stay.cancellation === null ? '미확인' : won(stay.cancellation);
       block.querySelector('[data-output="flags"]').textContent = stay.flags.length ? stay.flags.join(' · ') : '추가비용·도착 시각 체크인: 확인함';
       const meter = block.querySelector('meter');
+      meter.hidden = !comparison.completeCosts;
       meter.max = largest;
       meter.value = stay.total;
       meter.setAttribute('aria-label', `${stay.name} 입력 합계 ${won(stay.total)}`);
     }
-    const lower = comparison.stays.find(stay => stay.id === comparison.lowerCostId);
-    const summary = lower ? `입력한 비용 합계는 ${lower.name}이 ${won(comparison.difference)} 적습니다.` : '두 숙소의 입력 비용 합계가 같습니다.';
-    document.getElementById('comparison-summary').textContent = summary;
+    document.getElementById('comparison-summary').textContent = stayComparisonSummary(comparison);
     document.getElementById('comparison-kind').textContent = example ? '가상 사례의 값이 포함된 비교' : '직접 입력한 값의 비교';
     results.hidden = false;
     document.getElementById('comparison-result-title').focus({ preventScroll: true });
@@ -109,8 +109,10 @@ document.getElementById('download-comparison').addEventListener('click', () => {
   if (!comparison) return;
   const lines = ['여행정보엑스퍼트 · 숙소 총비용 비교표', example ? '가상 사례의 값이 포함된 비교' : '직접 입력한 값의 비교', '모든 금액: 원화(KRW), 입력한 예약 기간 전체 기준', ''];
   for (const stay of comparison.stays) {
-    lines.push(stay.name, `숙박비: ${won(stay.costs.room)}`, `별도 추가금: ${won(stay.costs.fees)}`, `교통비: ${won(stay.costs.transport)}`, `기타 비용: ${won(stay.costs.other)}`, `이용 시 입력 합계: ${won(stay.total)}`, `취소 시 손실: ${stay.cancellation === null ? '미확인' : won(stay.cancellation)}`, `확인 상태: ${stay.flags.join(' · ') || '추가비용·체크인 확인함'}`, '');
+    const cost = key => stay.costs[key] === null ? '미확인' : won(stay.costs[key]);
+    lines.push(stay.name, `숙박비: ${cost('room')}`, `별도 추가금: ${cost('fees')}`, `교통비: ${cost('transport')}`, `기타 비용: ${cost('other')}`, `${stayTotalLabel(stay)}: ${won(stay.total)}`, `취소 시 손실: ${stay.cancellation === null ? '미확인' : won(stay.cancellation)}`, `확인 상태: ${stay.flags.join(' · ') || '추가비용·체크인 확인함'}`, '');
   }
+  lines.push(stayComparisonSummary(comparison));
   lines.push('취소 손실은 이용 시 합계에 더하지 않습니다.', '금액 차이는 안전성·숙소 품질·예약 가능 여부의 평가가 아닙니다.', 'https://shootsense.com/tools/stay-compare/');
   const url = URL.createObjectURL(new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/plain;charset=utf-8' }));
   const link = document.createElement('a');

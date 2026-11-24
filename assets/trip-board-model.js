@@ -1,4 +1,4 @@
-import { compareStays } from './stay-math.js';
+import { compareStays, stayTotalLabel, stayComparisonSummary } from './stay-math.js';
 import { calculateArrival, arrivalConditions, ARRIVAL_EXAMPLES } from './arrival-math.js';
 import { calculateDeparture, formatPlannerTime, parsePlannerTime, DEPARTURE_EXAMPLE, PLANNER_FIELDS } from './departure-math.js';
 import { TOKYO_COMPARE_INPUTS } from './tokyo-stay-case.js';
@@ -66,7 +66,7 @@ export function reviewTool(tool, raw) {
     if (record.state === 'error') return { status: 'error', label: '입력 재확인', record, result: null, lines: ['도구에서 입력을 확인하고 다시 계산해야 합니다.'] };
     if (result.complete === false) return { status: 'pending', label: '미확인 항목', record, result: null, lines: result.missing };
     let lines;
-    if (tool === 'stay') lines = result.stays.map(stay => `${stay.name}: 입력 합계 ${stay.total.toLocaleString('ko-KR')}원 · 취소 손실 ${stay.cancellation === null ? '미확인' : stay.cancellation.toLocaleString('ko-KR') + '원'} · ${stay.flags.join(' · ') || '추가비용·체크인 확인함'}`);
+    if (tool === 'stay') lines = [...result.stays.map(stay => `${stay.name}: ${stayTotalLabel(stay)} ${stay.total.toLocaleString('ko-KR')}원 · 취소 손실 ${stay.cancellation === null ? '미확인' : stay.cancellation.toLocaleString('ko-KR') + '원'} · ${stay.flags.join(' · ') || '추가비용·체크인 확인함'}`), stayComparisonSummary(result)];
     else if (tool === 'arrival') {
       const base = result.scenarios[0];
       lines = [`숙소 접수처 도착 가정: ${base.hotelArrival ? formatPlannerTime(base.hotelArrival) : '계산 보류 · 해당편 이후 대안 미확인'}`, `입력한 숙소 도착 마감: ${formatPlannerTime(result.deadline)}`, ...arrivalConditions(base)];
@@ -86,7 +86,7 @@ export function boardOverview(value) {
     for (const flag of chosen.flags) tasks.push(`${chosen.name}: ${flag}`);
     if (chosen.cancellation === null) tasks.push(`${chosen.name}: 취소 손실 미확인`);
     const raw = board.records.stay.inputs[chosen.id === 'a' ? 0 : 1];
-    for (const [key, label] of Object.entries({ fees: '추가금', transport: '교통비', other: '기타 비용' })) if (raw[key] === '') tasks.push(`${chosen.name}: ${label} 미입력 · 입력 합계의 0원 반영을 확정 비용으로 보지 않습니다.`);
+    for (const [key, label] of Object.entries({ fees: '추가금', transport: '교통비', other: '기타 비용' })) if (raw[key] === '') tasks.push(`${chosen.name}: ${label} 미입력 · 소계에서 제외했으며 0원으로 확정하지 않습니다.`);
   }
   if (reviews.arrival.result) {
     for (const s of reviews.arrival.result.scenarios) if (s.atOrAfterService || s.atOrAfterDeadline || s.boardingMargin < 0 || s.hotelMargin < 0) tasks.push(`공항 도착 ${s.delay}분 지연 가정: ${arrivalConditions(s).join(' · ')}`);
