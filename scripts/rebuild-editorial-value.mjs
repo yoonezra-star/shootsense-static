@@ -256,3 +256,5 @@ const { finalizeBanpongLushanSourceReview } = await import('./finalize-banpong-l
 await finalizeBanpongLushanSourceReview();
 const { finalizeSafiMleihaSourceReview } = await import('./finalize-safi-mleiha-source-review.mjs');
 await finalizeSafiMleihaSourceReview();
+const { syncRegionTaxonomy } = await import('./sync-region-taxonomy.mjs');
+await syncRegionTaxonomy();

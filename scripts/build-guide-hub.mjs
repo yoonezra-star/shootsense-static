@@ -6,7 +6,9 @@ import { escapeHtml, writeFileUtf8 } from './lib/static-site-utils.mjs';
 
 export const HUB_ROUTE = '/guides/';
 export const HUB_PUBLISHED = '2026-11-23T23:26:00+09:00';
-export const HUB_MODIFIED = '2026-11-24T13:06:00+09:00';
+export const HUB_MODIFIED = '2026-11-24T19:25:00+09:00';
+// Keep the unchanged privacy notice on its own review date.
+const DIRECTORY_PRIVACY_MODIFIED = '2026-11-24T13:06:00+09:00';
 export const TOOL_DIRECTORY_ROUTE = '/guides/?type=tools';
 export const RELATED_TOOL_LINKS = {
   'honja-yeohaeng-sukso-goreuneun-beop': ['/tools/stay-compare/', '/tools/trip-board/'],
@@ -16,7 +18,7 @@ export const RELATED_TOOL_LINKS = {
   'honja-yeohaeng-gamjeong-gwanri': ['/tools/reservation-deadlines/', '/tools/stay-compare/']
 };
 export const TOPIC_LABELS = { stay: '숙소·예약', prepare: '준비·이동', life: '식사·교류', support: '문제 대응', regional: '지역별 이동' };
-export const REGION_LABELS = { general: '공통', japan: '일본', thailand: '태국', vietnam: '베트남', china: '중국', india: '인도', europe: '유럽', mena: '중동·북아프리카' };
+export const REGION_LABELS = { general: '공통', japan: '일본', thailand: '태국', vietnam: '베트남', china: '중국', india: '인도', europe: '유럽', mena: '중동·북아프리카', morocco: '모로코', uae: '아랍에미리트(UAE)' };
 const META = [
   ['honja-yeohaeng-sukso-goreuneun-beop', 'stay', 'general', '호텔 예약 체크인 취소 환불 추가금'],
   ['honja-yeohaeng-junbi-gijun', 'prepare', 'general', '초보 출발 준비 일정'],
@@ -28,8 +30,8 @@ const META = [
   ['honja-southeast-asia-safety', 'prepare', 'thailand', '방콕 수완나품 공항 택시 철도 Grab'],
   ['honja-yeohaeng-achim-routine', 'prepare', 'japan', '도쿄 짐 보관 체크아웃 출발'],
   ['honja-yeohaeng-social-activity', 'life', 'japan', '도쿄 자원봉사 가이드 투어 교류'],
-  ['구경-대신-산책이-전부였던-샤르자-외곽의-오후', 'regional', 'mena', '샤르자 믈레이하 UAE 경보 예약 보류'],
-  ['관광-코스가-없어-자유로웠던-사피-여행', 'regional', 'mena', '모로코 사피 도자기 박물관 공방'],
+  ['구경-대신-산책이-전부였던-샤르자-외곽의-오후', 'regional', 'uae', '아랍에미리트 United Arab Emirates 샤르자 믈레이하 UAE 중동 경보 예약 보류'],
+  ['관광-코스가-없어-자유로웠던-사피-여행', 'regional', 'morocco', '모로코 Morocco 사피 Safi 북아프리카 도자기 박물관 공방'],
   ['여행자보다-주민이-더-많았던-투이호아의-분위기', 'regional', 'vietnam', '투이호아 닥락 푸옌 공항 역'],
   ['심심함이-여행의-일부가-된-반퐁에서의-며칠', 'regional', 'thailand', '반퐁 시장 기록 귀환'],
   ['추천은-못-해도-기억에서-지워지지-않는-코다이카날', 'regional', 'india', '코다이카날 Kodai Road 관측소 신청'],
@@ -162,10 +164,10 @@ export async function buildGuideHub(root = process.cwd()) {
       const privacyText = '<section id="guide-search-privacy"><h2>가이드 검색과 주소 정보</h2><p>가이드 목록의 검색·분류는 브라우저에서 처리하며 별도 검색 API나 브라우저 저장소로 보내거나 보관하지 않습니다. 검색어·자료 종류·주제·지역의 선택 조건은 페이지 주소에 포함됩니다. 사이트에 적용된 호스팅 서비스의 접속·성능 분석 기능이 해당 주소를 받을 수 있으며, 주소를 다시 열거나 공유할 때도 호스팅 서비스의 접속 요청에 전달될 수 있습니다. 검색어에 이름·연락처·예약번호 등 개인정보를 넣지 마세요. 호스팅 서비스의 접속 정보 처리는 이 정책의 외부 서비스 항목에 따릅니다.</p></section>';
       if (page('#guide-search-privacy').length) page('#guide-search-privacy').replaceWith(privacyText);
       else page('.ss-page').first().append(privacyText);
-      for (const selector of ['meta[property="og:updated_time"]', 'meta[property="article:modified_time"]']) page(selector).attr('content', HUB_MODIFIED);
+      for (const selector of ['meta[property="og:updated_time"]', 'meta[property="article:modified_time"]']) page(selector).attr('content', DIRECTORY_PRIVACY_MODIFIED);
       page('script.rank-math-schema').each((_, script) => {
         const schema = JSON.parse(page(script).text());
-        for (const node of schema['@graph'] || []) if (node.dateModified) node.dateModified = HUB_MODIFIED;
+        for (const node of schema['@graph'] || []) if (node.dateModified) node.dateModified = DIRECTORY_PRIVACY_MODIFIED;
         page(script).text(JSON.stringify(schema));
       });
     }
@@ -200,10 +202,11 @@ export async function buildGuideHub(root = process.cwd()) {
   const mapFile = path.join(root, 'page-sitemap.xml');
   const map = load(await fs.readFile(mapFile, 'utf8'), { xml: true });
   for (const url of [`${origin}${HUB_ROUTE}`, `${origin}/`, `${origin}/privacy-policy/`]) {
+    const modified = url.endsWith('/privacy-policy/') ? DIRECTORY_PRIVACY_MODIFIED : HUB_MODIFIED;
     let item = map('url').filter((_, node) => map(node).find('loc').text() === url);
-    if (!item.length) { map('urlset').append(`<url><loc>${url}</loc><lastmod>${HUB_MODIFIED}</lastmod></url>`); continue; }
+    if (!item.length) { map('urlset').append(`<url><loc>${url}</loc><lastmod>${modified}</lastmod></url>`); continue; }
     if (item.length !== 1) throw new Error('Duplicate directory/home sitemap entry');
-    if (item.find('lastmod').length) item.find('lastmod').text(HUB_MODIFIED); else item.append(`<lastmod>${HUB_MODIFIED}</lastmod>`);
+    if (item.find('lastmod').length) item.find('lastmod').text(modified); else item.append(`<lastmod>${modified}</lastmod>`);
   }
   await writeFileUtf8(mapFile, map.xml().trimEnd() + '\n');
   const indexFile = path.join(root, 'sitemap_index.xml');

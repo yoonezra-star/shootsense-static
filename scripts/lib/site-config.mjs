@@ -25,10 +25,10 @@ export const CATEGORY_MAP = {
       "유럽 여행에서 일정 밀도, 이동 동선, 숙소 위치 판단 기준을 중심으로 정리한 카테고리입니다."
   },
   "middle-east-travel": {
-    name: "중동",
+    name: "중동·북아프리카",
     path: "middle-east-travel/index.html",
     description:
-      "중동 지역의 이동, 체류, 현지 환경 적응에 필요한 실전 정보를 다루는 카테고리입니다."
+      "북아프리카 모로코 사피와 중동 아랍에미리트 샤르자·믈레이하의 자료를 모았습니다. 국가별 여행경보·운영·교통·예약 조건은 서로 구분합니다."
   },
   "southeast-asia-travel": {
     name: "동남아",

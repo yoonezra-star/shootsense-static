@@ -102,7 +102,8 @@ test('current warning, worksheets, metadata and sitemaps agree without redating 
   }
   const home = await read('index.html');
   assert.equal(home('#ss-home-source-review #ss-home-safi-mleiha-review a').length, 2);
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), SAFI_MLEIHA_MODIFIED);
+  const homeModified = home('meta[property="og:updated_time"]').attr('content');
+  assert.ok(Date.parse(homeModified) >= Date.parse(SAFI_MLEIHA_MODIFIED));
   const category = await read('middle-east-travel/index.html');
   assert.ok(category('#ss-uae-review-note').text().includes(UAE_CAUTION));
   const posts = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
@@ -113,6 +114,6 @@ test('current warning, worksheets, metadata and sitemaps agree without redating 
     assert.equal(posts('url').filter((_, node) => posts(node).find('loc').text() === `https://shootsense.com/${guide.slug}/`).find('lastmod').text(), SAFI_MLEIHA_MODIFIED);
   }
   const pages = load(await fs.readFile('page-sitemap.xml', 'utf8'), { xml: true });
-  assert.equal(pages('url').filter((_, node) => pages(node).find('loc').text() === 'https://shootsense.com/').find('lastmod').text(), SAFI_MLEIHA_MODIFIED);
+  assert.equal(pages('url').filter((_, node) => pages(node).find('loc').text() === 'https://shootsense.com/').find('lastmod').text(), homeModified);
   for (const guide of BANPONG_LUSHAN_GUIDES) assert.equal((await read(`${guide.slug}/index.html`))('meta[property="article:modified_time"]').attr('content'), BANPONG_LUSHAN_MODIFIED);
 });

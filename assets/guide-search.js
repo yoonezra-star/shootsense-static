@@ -1,5 +1,5 @@
 export const TOPICS = ['all', 'stay', 'prepare', 'life', 'support', 'regional'];
-export const REGIONS = ['all', 'general', 'japan', 'thailand', 'vietnam', 'china', 'india', 'europe', 'mena'];
+export const REGIONS = ['all', 'general', 'japan', 'thailand', 'vietnam', 'china', 'india', 'europe', 'mena', 'morocco', 'uae'];
 export const CONTENT_TYPES = ['all', 'tools', 'analysis', 'guides'];
 
 export function normalizeQuery(value) {
@@ -9,7 +9,7 @@ export function normalizeQuery(value) {
 export function matchesGuide(guide, { query = '', topic = 'all', region = 'all', type = 'all' } = {}) {
   if (type !== 'all' && guide.type !== type) return false;
   if (topic !== 'all' && guide.topic !== topic) return false;
-  if (region !== 'all' && guide.region !== region) return false;
+  if (region !== 'all' && guide.region !== region && !(region === 'mena' && ['morocco', 'uae'].includes(guide.region))) return false;
   const haystack = normalizeQuery(guide.text);
   return normalizeQuery(query).split(' ').filter(Boolean).every(term => haystack.includes(term));
 }

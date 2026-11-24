@@ -439,7 +439,7 @@ export function ensureMobileReadingLayout($) {
   }
 }
 
-function buildCategoryGuide(categoryKey, category, posts) {
+export function buildCategoryGuide(categoryKey, category, posts) {
   const guide = CATEGORY_GUIDES[categoryKey] || CATEGORY_GUIDES.default;
   const featured = posts.slice(0, 3);
   const links = featured.length
@@ -545,15 +545,15 @@ const CATEGORY_GUIDES = {
     checks: ["철도·버스 파업 또는 운행 변경", "숙소 체크인/수하물 보관 조건", "일요일·공휴일 영업 여부", "야간 귀가 동선과 조명 상태"]
   },
   "middle-east-travel": {
-    title: "중동과 주변 지역을 볼 때의 기준",
+    title: "모로코와 아랍에미리트의 조건을 나눠 읽기",
     lead:
-      "중동 카테고리는 화려한 랜드마크보다 더위, 이동 거리, 사진 촬영 매너, 복장과 생활 리듬처럼 현장에서 바로 영향을 주는 조건을 중심으로 정리합니다.",
+      "모로코 사피의 박물관·공방 방문과 아랍에미리트 믈레이하의 경보·예약 보류는 다른 판단입니다. 같은 분류에 있어도 국가별 경보와 입장·교통 조건을 서로 적용하지 않습니다.",
     cards: [
-      { title: "기후와 시간대", text: "한낮 이동보다 오전·해질녘 동선을 중심으로 체력 소모와 휴식 지점을 함께 봅니다." },
-      { title: "현지 매너", text: "사진 촬영, 복장, 종교·생활 공간에서 조심해야 할 행동을 과장 없이 설명합니다." },
-      { title: "이동 안정성", text: "도보 가능 거리, 택시 이용, 숙소 복귀 방법처럼 혼자 이동할 때의 현실성을 확인합니다." }
+      { title: "모로코 사피", text: "박물관 개관과 공방 방문·포장 수령, 철도 왕복 조건을 각각 확인합니다." },
+      { title: "UAE 샤르자·믈레이하", text: "해당 국가의 여행경보와 기존 예약의 변경·취소 확인을 우선합니다. 같은 경보를 모로코에 적용하지 않습니다." },
+      { title: "국가별 확인", text: "입장권·차량·통화·예약 조건은 각 글의 대상과 확인일을 기준으로 읽습니다. 지역명이 비슷해도 공통 조건이 아닙니다." }
     ],
-    checks: ["방문 시기별 기온과 일몰 시간", "사진 촬영 제한과 복장 기준", "택시·대중교통 이용 방식", "숙소 주변 야간 이동 환경"]
+    checks: ["해당 국가·도시의 최신 경보와 공지", "개별 시설의 확인일·개관·입장 조건", "왕복 교통과 실제 예약 처리 상태", "국가별 통화·날짜·문의 창구"]
   },
   "southeast-asia-travel": {
     title: "동남아 여행지를 판단하는 기준",
