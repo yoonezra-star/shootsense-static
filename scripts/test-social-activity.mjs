@@ -25,7 +25,7 @@ test('social guide has six distinct sections, a single TOC and a private UTF-8 w
   const download = $('.ss-post-body a[download]');
   assert.equal(download.length, 1);
   const sheet = await fs.readFile(`.${download.attr('href')}`, 'utf8');
-  assert.match(sheet, /자료 검토: 2026-10-17/);
+  assert.match(sheet, /자료 검토: 2026-11-24/);
   assert.ok(sheet.includes(`https://shootsense.com/${SOCIAL_ACTIVITY_SLUG}/`));
   assert.match(sheet, /비공개 개인용/);
   assert.match(sheet, /접수: 확인됨 \/ 요청 중 \/ 미확인/);

@@ -246,3 +246,5 @@ const { finalizeBangkokSourceReview } = await import('./finalize-bangkok-source-
 await finalizeBangkokSourceReview();
 const { finalizeDiningSourceReview } = await import('./finalize-dining-source-review.mjs');
 await finalizeDiningSourceReview();
+const { finalizeSocialSourceReview } = await import('./finalize-social-source-review.mjs');
+await finalizeSocialSourceReview();

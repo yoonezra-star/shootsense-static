@@ -50,7 +50,7 @@ test('worksheet, home and sitemaps agree while earlier reviews and original publ
   assert.equal(graph.find(node => node['@type'] === 'BlogPosting').datePublished, '2025-06-04T16:49:56+09:00');
   const home = await read('index.html');
   assert.equal(home('#ss-home-source-review #ss-home-dining-review').length, 1);
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), DINING_MODIFIED);
+  assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(DINING_MODIFIED));
   for (const [slug, modified] of [['honja-yeohaeng-achim-routine', CHECKOUT_MORNING_MODIFIED], ['honja-southeast-asia-safety', BANGKOK_ARRIVAL_MODIFIED]]) {
     assert.equal((await read(`${slug}/index.html`))('meta[property="article:modified_time"]').attr('content'), modified);
   }
