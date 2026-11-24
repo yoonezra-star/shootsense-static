@@ -70,7 +70,7 @@ async function common($, relative) {
   $('.ss-site-footer .meta').filter((_, node) => $(node).text().trim().startsWith('운영 시작')).remove();
   for (const selector of ['#ast-hf-menu-1', '#ast-hf-mobile-menu']) {
     const menu = $(selector);
-    if (menu.length && !menu.find(`a[href="${toolRoute}"]`).length) {
+    if (menu.length && !menu.find('.ss-tools-link').length && !menu.find(`a[href="${toolRoute}"]`).length) {
       const entry = `<li class="menu-item ss-tools-link"><a href="${toolRoute}" class="menu-link">숙소 비교</a></li>`;
       const about = menu.children('li').filter((_, node) => $(node).find('a').attr('href') === '/about/').first();
       if (about.length) about.before(entry); else menu.append(entry);

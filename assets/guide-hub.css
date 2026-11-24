@@ -6,7 +6,8 @@
 .ss-guide-hub p{font-size:16px;line-height:1.8}
 .ss-guide-hub a{color:#086a57;text-underline-offset:3px}
 .ss-guide-hub .ss-eyebrow{font-size:14px;color:#9b542e;font-weight:700;margin:0}
-.ss-guide-filter{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) auto;gap:16px;align-items:end;padding:0 0 24px;border-bottom:1px solid #cddbd2}
+.ss-guide-filter{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:16px;align-items:end;padding:0 0 24px;border-bottom:1px solid #cddbd2}
+.ss-guide-filter label:first-child{grid-column:1/-1}
 .ss-guide-filter label{font-size:14px;font-weight:700;display:block;margin:0;min-width:0}
 .ss-guide-filter input,.ss-guide-filter select{display:block;width:100%;min-width:0;min-height:46px;margin-top:8px;border:1px solid #93aa9d;background:#fff;color:#20352d;border-radius:4px;font:inherit;font-size:16px;padding:10px 12px}
 .ss-guide-filter button{min-height:46px;border:1px solid #537767;background:#fff;color:#214f3e;border-radius:4px;font:inherit;font-size:15px;padding:10px 16px;cursor:pointer}
@@ -22,4 +23,4 @@
 .ss-directory-row p{margin:8px 0 0;color:#43574d}
 .ss-directory-empty{padding:24px 0;border-bottom:1px solid #dce5df}
 .ss-directory-footnote{border-top:2px solid #1c493a;padding-top:20px;margin-top:28px}
-@media(max-width:760px){.ss-guide-hub{padding:18px 18px 32px}.ss-guide-hub h1{font-size:27px}.ss-guide-filter{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}.ss-guide-filter label:first-child{grid-column:1/-1}.ss-guide-filter button{grid-column:1/-1;justify-self:start}.ss-directory-row{grid-template-columns:1fr;gap:8px;padding:22px 0}.ss-directory-label strong{display:inline;margin-right:12px}.ss-guide-hub h2{font-size:19px}}
+@media(max-width:760px){.ss-guide-hub{padding:18px 18px 32px}.ss-guide-hub h1{font-size:27px}.ss-guide-filter{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}.ss-guide-filter label:first-child{grid-column:1/-1}.ss-guide-filter button{width:100%;justify-self:stretch}.ss-directory-row{grid-template-columns:1fr;gap:8px;padding:22px 0}.ss-directory-label strong{display:inline;margin-right:12px}.ss-guide-hub h2{font-size:19px}}

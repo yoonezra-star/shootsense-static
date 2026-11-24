@@ -36,8 +36,8 @@ test('search normalizes unicode, case and whitespace and matches every token rat
 });
 
 test('filter URL allows only known options and bounds untrusted search text', () => {
-  assert.deepEqual(readGuideFilters('?q=도쿄&topic=stay&region=japan'), { query: '도쿄', topic: 'stay', region: 'japan' });
-  assert.deepEqual(readGuideFilters('?topic=wrong&region=wrong'), { query: '', topic: 'all', region: 'all' });
+  assert.deepEqual(readGuideFilters('?q=도쿄&topic=stay&region=japan'), { query: '도쿄', topic: 'stay', region: 'japan', type: 'all' });
+  assert.deepEqual(readGuideFilters('?topic=wrong&region=wrong'), { query: '', topic: 'all', region: 'all', type: 'all' });
   assert.equal(readGuideFilters('?q=' + 'a'.repeat(150)).query.length, 80);
   assert.equal(readGuideFilters('?q=%3Cimg%20src=x%3E').query, '<img src=x>');
 });

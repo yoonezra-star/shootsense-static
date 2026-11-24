@@ -3,11 +3,18 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
 import { escapeHtml, writeFileUtf8 } from './lib/static-site-utils.mjs';
-import { DEADLINE_MODIFIED } from './deadline-content.mjs';
 
 export const HUB_ROUTE = '/guides/';
 export const HUB_PUBLISHED = '2026-11-23T23:26:00+09:00';
-export const HUB_MODIFIED = DEADLINE_MODIFIED;
+export const HUB_MODIFIED = '2026-11-24T13:06:00+09:00';
+export const TOOL_DIRECTORY_ROUTE = '/guides/?type=tools';
+export const RELATED_TOOL_LINKS = {
+  'honja-yeohaeng-sukso-goreuneun-beop': ['/tools/stay-compare/', '/tools/trip-board/'],
+  'honja-yeohaeng-junbi-gijun': ['/tools/arrival-check/', '/tools/trip-board/'],
+  'honja-yeohaeng-junbimul-checklist': ['/tools/trip-board/'],
+  'honja-yeohaeng-achim-routine': ['/tools/departure-check/', '/tools/trip-board/'],
+  'honja-yeohaeng-gamjeong-gwanri': ['/tools/reservation-deadlines/', '/tools/stay-compare/']
+};
 export const TOPIC_LABELS = { stay: '숙소·예약', prepare: '준비·이동', life: '식사·교류', support: '문제 대응', regional: '지역별 이동' };
 export const REGION_LABELS = { general: '공통', japan: '일본', thailand: '태국', vietnam: '베트남', china: '중국', india: '인도', europe: '유럽', mena: '중동·북아프리카' };
 const META = [
@@ -52,7 +59,7 @@ export async function readHubEntries(root = process.cwd()) {
     if (kind === '가이드' && !indexed.has(`/${slug}/`)) throw new Error(`Guide missing from indexed sitemap: ${slug}`);
     const $ = load(await fs.readFile(path.join(root, slug, 'index.html'), 'utf8'));
     if (/noindex/.test($('meta[name="robots"]').attr('content') || '')) throw new Error(`Held page must not enter directory: ${slug}`);
-    entries.push({ href: `/${slug}/`, title: $('h1').first().text(), summary: $('.ss-post-summary p').first().text() || $('meta[name="description"]').attr('content'), topic, region, keywords, kind });
+    entries.push({ href: `/${slug}/`, title: $('h1').first().text(), summary: $('.ss-post-summary p').first().text() || $('meta[name="description"]').attr('content'), topic, region, keywords, kind, type: kind.endsWith('도구') ? 'tools' : kind === '계산 분석' ? 'analysis' : 'guides' });
   }
   if (META.length !== indexed.size) throw new Error('Classify every indexed guide before publishing the directory');
   return entries;
@@ -70,7 +77,7 @@ async function collect(directory) {
     if (ignored.has(entry.name)) continue;
     const file = path.join(directory, entry.name);
     if (entry.isDirectory()) files.push(...await collect(file));
-    else if (entry.name === 'index.html') files.push(file);
+    else if (entry.name === 'index.html' || entry.name === '404.html') files.push(file);
   }
   return files;
 }
@@ -79,6 +86,8 @@ export async function buildGuideHub(root = process.cwd()) {
   const entries = await readHubEntries(root);
   const $ = load((await fs.readFile(path.join(root, 'contact/index.html'), 'utf8')).trimEnd());
   $('.entry-content').html(hubContent(entries));
+  $('#guide-query').closest('label').after('<label for="guide-type">자료 종류<select id="guide-type" name="type" aria-label="자료 종류"><option value="all">전체 자료</option><option value="tools">여행 도구</option><option value="analysis">계산 분석</option><option value="guides">여행 가이드</option></select></label>');
+  $('[data-guide-row]').each((index, node) => $(node).attr('data-type', entries[index].type));
   $('#guide-topic').attr('aria-label', '주제');
   $('#guide-region').attr('aria-label', '지역');
   $('.entry-header').remove();
@@ -117,9 +126,31 @@ export async function buildGuideHub(root = process.cwd()) {
     const html = await fs.readFile(file, 'utf8');
     const page = load(html.trimEnd());
     const relative = path.relative(root, file).replaceAll('\\', '/');
+    const isTool = relative.startsWith('tools/');
+    if (relative === '404.html') {
+      page('.ss-404-tools').remove();
+      page('header nav').prepend(`<a class="ss-404-tools" href="${TOOL_DIRECTORY_ROUTE}">여행 도구</a>`);
+      page('main .links a[href="/travel-tips/"]').attr('href', '/guides/').text('가이드 모아보기');
+      page('main .links').append(`<a class="ss-404-tools" href="${TOOL_DIRECTORY_ROUTE}">여행 도구 찾기</a>`);
+    }
+    if (isTool) {
+      page('#masthead .menu-item').removeClass('current-menu-item current_page_item');
+      page('#masthead .menu-item a[aria-current]').removeAttr('aria-current');
+    }
+    for (const selector of ['#ast-hf-menu-1', '#ast-hf-mobile-menu']) {
+      page(selector).find('.ss-tools-link').slice(1).remove();
+    }
+    page('#masthead .ss-tools-link a').each((_, node) => {
+      const link = page(node);
+      link.attr('href', TOOL_DIRECTORY_ROUTE).text('여행 도구');
+      link.closest('.menu-item').toggleClass('current-menu-item', isTool);
+      if (isTool) link.attr({ target: '_blank', rel: 'noopener', title: '새 탭에서 여행 도구 목록 열기', 'aria-current': 'location' });
+      else link.removeAttr('target rel title aria-current');
+    });
     if (relative === 'index.html') {
       page('#ss-home-directory').remove();
       (page('#ss-home-lab').length ? page('#ss-home-lab') : page('.ss-home-intro')).after(`<section id="ss-home-directory" class="ss-home-band"><h2><a href="/guides/">가이드 모아보기</a></h2><p>예약·준비·식사·문제 대응·지역 이동 자료 ${entries.length}개</p><a class="ss-action ss-action--secondary" href="/guides/">전체 가이드 찾기</a></section>`);
+      page('#ss-home-directory').append(`<p><a id="ss-home-tools-directory" href="${TOOL_DIRECTORY_ROUTE}">여행 도구 ${entries.filter(entry => entry.type === 'tools').length}개 모아보기</a></p>`);
       page('meta[property="og:updated_time"]').attr('content', HUB_MODIFIED);
       page('script.rank-math-schema').each((_, script) => {
         const schema = JSON.parse(page(script).text());
@@ -128,7 +159,7 @@ export async function buildGuideHub(root = process.cwd()) {
       });
     }
     if (relative === 'privacy-policy/index.html') {
-      const privacyText = '<section id="guide-search-privacy"><h2>가이드 검색과 주소 정보</h2><p>가이드 목록의 검색·분류는 브라우저에서 처리하며 별도 검색 API나 브라우저 저장소로 보내거나 보관하지 않습니다. 검색어와 선택 조건은 페이지 주소에 포함됩니다. 사이트에 적용된 호스팅 서비스의 접속·성능 분석 기능이 해당 주소를 받을 수 있으며, 주소를 다시 열거나 공유할 때도 호스팅 서비스의 접속 요청에 전달될 수 있습니다. 검색어에 이름·연락처·예약번호 등 개인정보를 넣지 마세요. 호스팅 서비스의 접속 정보 처리는 이 정책의 외부 서비스 항목에 따릅니다.</p></section>';
+      const privacyText = '<section id="guide-search-privacy"><h2>가이드 검색과 주소 정보</h2><p>가이드 목록의 검색·분류는 브라우저에서 처리하며 별도 검색 API나 브라우저 저장소로 보내거나 보관하지 않습니다. 검색어·자료 종류·주제·지역의 선택 조건은 페이지 주소에 포함됩니다. 사이트에 적용된 호스팅 서비스의 접속·성능 분석 기능이 해당 주소를 받을 수 있으며, 주소를 다시 열거나 공유할 때도 호스팅 서비스의 접속 요청에 전달될 수 있습니다. 검색어에 이름·연락처·예약번호 등 개인정보를 넣지 마세요. 호스팅 서비스의 접속 정보 처리는 이 정책의 외부 서비스 항목에 따릅니다.</p></section>';
       if (page('#guide-search-privacy').length) page('#guide-search-privacy').replaceWith(privacyText);
       else page('.ss-page').first().append(privacyText);
       for (const selector of ['meta[property="og:updated_time"]', 'meta[property="article:modified_time"]']) page(selector).attr('content', HUB_MODIFIED);
@@ -145,7 +176,23 @@ export async function buildGuideHub(root = process.cwd()) {
     }
     page('.ss-site-footer h4').filter((_, node) => page(node).text() === '사이트 안내').next('ul').each((_, node) => {
       if (!page(node).find('a[href="/guides/"]').length) page(node).prepend('<li><a href="/guides/">가이드 찾기</a></li>');
+      if (!page(node).find('a.ss-footer-tools').length) page(node).prepend(`<li><a class="ss-footer-tools" href="${TOOL_DIRECTORY_ROUTE}">여행 도구</a></li>`);
+      const link = page(node).find('a.ss-footer-tools');
+      if (isTool) link.attr({ target: '_blank', rel: 'noopener', title: '새 탭에서 여행 도구 목록 열기' }); else link.removeAttr('target rel title');
     });
+    const related = RELATED_TOOL_LINKS[relative.replace(/\/index\.html$/, '')];
+    if (related && !/noindex/.test(page('meta[name="robots"]').attr('content') || '')) {
+      page('#ss-related-tools').remove();
+      const links = related.map(route => {
+        const entry = entries.find(item => item.href === route && item.type === 'tools');
+        if (!entry) throw new Error(`Missing contextual tool: ${route}`);
+        return `<li><a href="${route}" target="_blank" rel="noopener" title="새 탭에서 열기">${escapeHtml(entry.title)}</a></li>`;
+      }).join('');
+      const nav = `<nav id="ss-related-tools" class="ss-related-tools" aria-label="관련 여행 도구"><p>함께 검토할 여행 도구</p><ul>${links}</ul></nav>`;
+      const anchor = page('.ss-post > .ss-related').first();
+      if (anchor.length) anchor.before(nav); else page('.ss-post').first().append(nav);
+      if (!page('link#ss-tool-discovery-style').length) page('head').append('<link id="ss-tool-discovery-style" rel="stylesheet" href="/assets/tool-discovery.css">');
+    }
     const updated = serialize(page);
     if (updated !== html) await writeFileUtf8(file, updated);
   }

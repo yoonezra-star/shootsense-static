@@ -1,0 +1,6 @@
+.ss-related-tools{border-top:2px solid #1c493a;border-bottom:1px solid #cddbd2;padding:18px 0;margin:28px 0;letter-spacing:0;overflow-wrap:anywhere}
+.ss-related-tools p{margin:0 0 12px;font-weight:700;color:#183e31}
+.ss-related-tools ul{display:flex;flex-wrap:wrap;gap:12px 24px;list-style:none;margin:0;padding:0}
+.ss-related-tools li{min-width:0;margin:0}
+.ss-related-tools a{display:inline-block;min-height:40px;padding:6px 0;color:#086a57;text-underline-offset:3px;line-height:1.8}
+.ss-related-tools a:focus-visible{outline:3px solid #a75e2d;outline-offset:3px}
