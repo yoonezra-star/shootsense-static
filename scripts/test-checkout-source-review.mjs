@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import { load } from 'cheerio';
 import { CHECKOUT_MORNING_SOURCES, CHECKOUT_MORNING_SLUG } from './checkout-morning-content.mjs';
 import { REVIEW_MODIFIED, SOURCE_REVIEW_ROWS } from './finalize-checkout-source-review.mjs';
+import { BANGKOK_ARRIVAL_MODIFIED } from './bangkok-arrival-content.mjs';
 const read = async file => load(await fs.readFile(file, 'utf8'));
 
 test('seven official references use current addresses and both Sagawa language versions', async () => {
@@ -32,13 +33,14 @@ test('review provenance covers seven sources in four bounded groups without chan
 test('article, tool, home and corresponding sitemaps agree on the scoped review timestamp', async () => {
   for (const file of [`${CHECKOUT_MORNING_SLUG}/index.html`, 'tools/departure-check/index.html', 'index.html']) {
     const page = await read(file);
-    assert.equal(page('meta[property="og:updated_time"]').attr('content'), REVIEW_MODIFIED);
+    const expected = file === 'index.html' ? BANGKOK_ARRIVAL_MODIFIED : REVIEW_MODIFIED;
+    assert.equal(page('meta[property="og:updated_time"]').attr('content'), expected);
     const graph = JSON.parse(page('script.rank-math-schema').text())['@graph'];
-    assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === REVIEW_MODIFIED));
+    assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === expected));
   }
   for (const [file, routes] of [['post-sitemap.xml', [`/${CHECKOUT_MORNING_SLUG}/`]], ['page-sitemap.xml', ['/', '/tools/departure-check/']]]) {
     const map = load(await fs.readFile(file, 'utf8'), { xml: true });
-    for (const route of routes) assert.equal(map('url').filter((_, node) => map(node).find('loc').text() === `https://shootsense.com${route}`).find('lastmod').text(), REVIEW_MODIFIED);
+    for (const route of routes) assert.equal(map('url').filter((_, node) => map(node).find('loc').text() === `https://shootsense.com${route}`).find('lastmod').text(), route === '/' ? BANGKOK_ARRIVAL_MODIFIED : REVIEW_MODIFIED);
   }
   const article = await read(`${CHECKOUT_MORNING_SLUG}/index.html`);
   assert.equal(JSON.parse(article('script.rank-math-schema').text())['@graph'].find(node => node['@type'] === 'BlogPosting').datePublished, '2025-06-16T23:14:36+09:00');
@@ -55,5 +57,5 @@ test('worksheet and current homepage note expose the review while other guides r
   assert.match(departure('.ss-source-note').text(), /14:10 게시 원문 재대조/);
   assert.ok(!departure('.ss-source-note').text().includes('현행 조건 미확인'));
   const arrival = await read('honja-southeast-asia-safety/index.html');
-  assert.equal(arrival('meta[property="article:modified_time"]').attr('content'), '2026-10-17T11:22:00+09:00');
+  assert.equal(arrival('meta[property="article:modified_time"]').attr('content'), BANGKOK_ARRIVAL_MODIFIED);
 });

@@ -37,12 +37,15 @@ test('boarding locations and posted service hours do not imply dispatch or a las
   assert.match(body, /내 카드의 현재 결제 성공이나 숙소까지 직통 이동의 증거는 아닙니다/);
 });
 
-test('PIN matching and announced future Airport Pickup remain separate', async () => {
+test('PIN, regular scheduled pickup and announced flight-linked pickup remain separate', async () => {
   const body = (await read())('.ss-post-body').text();
   assert.match(body, /2026-09-21 발표/);
   assert.match(body, /처음에는 특정 기사·차량을 즉시 지정하지 않는 방식/);
   assert.match(body, /대기 구역 A–D/);
   assert.match(body, /4분기 출시 예정.*구역 E/);
+  assert.match(body, /Schedule regular pickup/);
+  assert.match(body, /공식 도움말/);
+  assert.match(body, /미출시를 확정하지도 않습니다/);
   assert.match(body, /내 계정에 이미 출시됐다고 결론 내리지 않습니다/);
   assert.match(body, /발표의 픽업 보장·대기·취소 설명도 모든 Grab 호출에 적용하지 않습니다/);
   assert.match(body, /예약하거나 앱 기능을 실제 시험하지 않았습니다/);
@@ -70,7 +73,7 @@ test('private worksheet retains sources, dates, unknowns and sensitive-data excl
   const download = $('.ss-post-body a[download]');
   assert.equal(download.length, 1);
   const sheet = await fs.readFile(`.${download.attr('href')}`, 'utf8');
-  assert.match(sheet, /자료 검토: 2026-10-17/);
+  assert.match(sheet, /자료 검토: 2026-11-24/);
   assert.ok(sheet.includes(`https://shootsense.com/${BANGKOK_ARRIVAL_SLUG}/`));
   assert.match(sheet, /비공개/);
   assert.match(sheet, /승차 PIN·객실 출입 비밀번호는 적지 마세요/);

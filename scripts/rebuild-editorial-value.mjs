@@ -242,3 +242,5 @@ const { preserveToolNavigation } = await import('./preserve-tool-navigation.mjs'
 await preserveToolNavigation();
 const { finalizeCheckoutSourceReview } = await import('./finalize-checkout-source-review.mjs');
 await finalizeCheckoutSourceReview();
+const { finalizeBangkokSourceReview } = await import('./finalize-bangkok-source-review.mjs');
+await finalizeBangkokSourceReview();
