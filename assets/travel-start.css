@@ -1,0 +1,32 @@
+.ss-home #ss-home-method{font-size:14px;line-height:1.8;color:#53635c;max-width:780px}
+.ss-home #ss-home-start-hub{margin:12px 0 0;font-weight:700}
+#ss-home-review-records{margin:20px 0 0;border-top:1px solid #dce4df;padding-top:8px}
+#ss-home-review-records summary{min-height:44px;padding:10px 0;font-weight:700;cursor:pointer;line-height:1.6}
+#ss-home-source-review .ss-review-date{font-size:14px;color:#53635c;margin:8px 0 12px}
+#ss-home-source-review .ss-review-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;list-style:none;margin:0;padding:0}
+.ss-review-index>li{border-top:1px solid #e1e7e3;padding:12px 0;min-width:0;line-height:1.8;overflow-wrap:anywhere}
+.ss-review-index a{display:block;font-size:14px;padding:3px 0}
+.ss-travel-start-page #main{color:#202e2b;letter-spacing:0}
+.ss-travel-start-page #main *{box-sizing:border-box;letter-spacing:0}
+.ss-travel-start-page .ss-archive-hero{background:transparent;border:0;border-radius:0;box-shadow:none;padding-bottom:20px}
+.ss-travel-start-page .ss-archive-hero h1{color:#182b26;font-size:34px}
+.ss-travel-start-page .ss-archive-hero p{color:#43564e;line-height:1.8}
+.ss-travel-start-page .ss-archive-hero .pill{background:transparent;color:#34756c;border-radius:0;padding:0;font-size:13px}
+.ss-travel-start-page .ss-category-guide{max-width:1200px;padding:0 20px;margin:0 auto 28px;background:transparent;border:0;border-radius:0;box-shadow:none}
+.ss-tips-start-head{padding:20px 0;border-top:2px solid #34756c}
+.ss-tips-start-head h2{font-size:24px;margin:0 0 12px;line-height:1.4}
+.ss-tips-start-head p,.ss-start-routes p{font-size:15px;line-height:1.8;margin:0 0 12px;color:#43564e}
+.ss-start-routes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px;list-style:none;margin:0;padding:0}
+.ss-start-routes>li{padding:22px 0;border-top:1px solid #dce4df;min-width:0}
+.ss-start-routes h3{font-size:19px;line-height:1.5;margin:0 0 10px}
+.ss-start-routes .ss-route-scope{color:#34756c;font-size:13px;font-weight:700;margin:0 0 6px}
+.ss-route-links{display:flex;flex-wrap:wrap;gap:4px 18px;list-style:none;margin:0;padding:0}
+.ss-route-links a,#ss-tips-directory a{display:inline-block;min-height:40px;padding:7px 0;color:#075e52;font-size:15px;font-weight:700;text-underline-offset:3px;overflow-wrap:anywhere}
+#ss-tips-directory{border-top:1px solid #dce4df;padding:16px 0;line-height:1.8}
+#ss-tips-articles-title{max-width:1200px;margin:0 auto 18px;padding:0 20px;font-size:24px;line-height:1.4}
+.ss-travel-start-page a:focus-visible,#ss-home-review-records summary:focus-visible{outline:3px solid #b27a23;outline-offset:3px}
+@media(max-width:720px){
+  #ss-home-source-review .ss-review-index,.ss-start-routes{grid-template-columns:minmax(0,1fr)}
+  .ss-start-routes>li{padding:18px 0}
+  .ss-tips-start-head h2,#ss-tips-articles-title{font-size:22px}
+}

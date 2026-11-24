@@ -97,7 +97,7 @@ test('calculator starts blank and input values are not stored or sent by applica
 });
 test('main flow exposes four roles, local tool and collapsed history once', async () => {
   const $ = await read('/');
-  assert.equal($('.ss-home-intro + #ss-home-lab').length, 1);
+  assert.equal($('.ss-home-intro + [aria-labelledby="home-guides-title"] + #ss-home-lab').length, 1);
   assert.equal($('#ss-home-lab .ss-guide-list > li').length, 4);
   assert.equal($('details.ss-home-history:not([open]) .ss-home-updates').length, 1);
   for (const route of ['/analysis/tokyo-stay-cost/', '/honja-yeohaeng-achim-routine/']) assert.equal((await read(route))('#ss-trip-lab-links').length, 1);

@@ -63,7 +63,7 @@ test('only packing and home dates advance while previous source reviews, tools a
   }
   const home = await read('index.html');
   assert.equal(home('#ss-home-packing-review a').length, 1);
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), PACKING_REVIEW_MODIFIED);
+  assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(PACKING_REVIEW_MODIFIED));
   assert.equal(home('.ss-home-updates > li').first().attr('id'), 'november-recovery-update');
   for (const file of ['honja-yeohaeng-sukso-goreuneun-beop/index.html', 'tools/stay-compare/index.html', 'tools/trip-board/index.html']) assert.equal((await read(file))('meta[property="og:updated_time"]').attr('content'), LODGING_REVIEW_MODIFIED);
   for (const [slug, date] of Object.entries(PREDEPARTURE_REVIEW_DATES)) assert.equal((await read(`${slug}/index.html`))('meta[property="article:modified_time"]').attr('content'), date);

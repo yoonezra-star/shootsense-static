@@ -264,3 +264,5 @@ const { finalizeLodgingSourceReview } = await import('./finalize-lodging-source-
 await finalizeLodgingSourceReview();
 const { finalizePackingSourceReview } = await import('./finalize-packing-source-review.mjs');
 await finalizePackingSourceReview();
+const { refreshStartPages } = await import('./refresh-start-pages.mjs');
+await refreshStartPages();
