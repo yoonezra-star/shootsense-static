@@ -254,3 +254,5 @@ const { finalizeTuyhoaKodaiSourceReview } = await import('./finalize-tuyhoa-koda
 await finalizeTuyhoaKodaiSourceReview();
 const { finalizeBanpongLushanSourceReview } = await import('./finalize-banpong-lushan-source-review.mjs');
 await finalizeBanpongLushanSourceReview();
+const { finalizeSafiMleihaSourceReview } = await import('./finalize-safi-mleiha-source-review.mjs');
+await finalizeSafiMleihaSourceReview();

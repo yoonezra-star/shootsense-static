@@ -22,7 +22,7 @@ for (const guide of SAFI_MLEIHA_GUIDES) {
     assert.equal(files.length, 1);
     const worksheet = await fs.readFile(`.${files[0]}`, 'utf8');
     assert.ok(worksheet.includes(`https://shootsense.com/${guide.slug}/`));
-    assert.match(worksheet, /자료 검토: 2026-10-15/);
+    assert.match(worksheet, /자료 검토: 2026-11-24/);
     assert.match(worksheet, /비공개/);
     assert.ok(!worksheet.includes('\ufffd'));
     const domains = ['www.fnm.ma', 'www.visitmorocco.com', 'www.oncf.ma', 'voyages.oncf.ma', 'www.0404.go.kr', 'culturalmap.gov.ae', 'www.visitsharjah.com', 'www.sharjahmuseums.ae'];

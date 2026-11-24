@@ -10,6 +10,7 @@ import { RECHECKS } from './november-recovery.mjs';
 import { HELD_SAFETY_GUIDES } from './held-safety.mjs';
 import { REGIONAL_GUIDES, REGIONAL_MODIFIED } from './regional-access-content.mjs';
 import { TUYHOA_KODAI_GUIDES, TUYHOA_KODAI_MODIFIED } from './tuyhoa-kodai-content.mjs';
+import { SAFI_MLEIHA_GUIDES, SAFI_MLEIHA_MODIFIED } from './safi-mleiha-content.mjs';
 
 const read = async relative => load(await fs.readFile(relative, 'utf8'));
 
@@ -117,7 +118,7 @@ test('home, existing tool and lodging guide expose the analysis without replacin
 test('partial rechecks remain scoped and do not claim whole-article new verification dates', async () => {
   for (const check of RECHECKS) {
     const $ = await read(`${check.slug}/index.html`);
-    const revised = [[REGIONAL_GUIDES, REGIONAL_MODIFIED], [TUYHOA_KODAI_GUIDES, TUYHOA_KODAI_MODIFIED]].find(([guides]) => guides.some(guide => guide.slug === check.slug));
+    const revised = [[REGIONAL_GUIDES, REGIONAL_MODIFIED], [TUYHOA_KODAI_GUIDES, TUYHOA_KODAI_MODIFIED], [SAFI_MLEIHA_GUIDES, SAFI_MLEIHA_MODIFIED]].find(([guides]) => guides.some(guide => guide.slug === check.slug));
     if (revised) {
       assert.equal($('#ss-november-recheck').length, 0);
       assert.equal($('.ss-source-review').length, 1);

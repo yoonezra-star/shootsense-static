@@ -52,9 +52,9 @@ export async function syncEditorialReferences(root, guides) {
       const warning = guide.categoryWarning;
       if (warning?.path === relative) {
         const markup = `<p id="${escapeHtml(warning.id)}" class="ss-category-safety-note"><strong>${escapeHtml(warning.text)}</strong> <a href="${escapeHtml(warning.url)}">외교부 최신 안내</a></p>`;
-        if (!$(`#${warning.id}`).length) { $('.ss-archive-hero').first().after(markup); changed = true; }
-        else if (!$(`#${warning.id}`).prev().hasClass('ss-archive-hero')) {
-          $(`#${warning.id}`).remove();
+        const current = $(`#${warning.id}`);
+        if (current.length !== 1 || !current.prev().hasClass('ss-archive-hero') || !current.hasClass('ss-category-safety-note') || current.find('strong').text() !== warning.text || current.find('a').length !== 1 || current.find('a').attr('href') !== warning.url) {
+          current.remove();
           $('.ss-archive-hero').first().after(markup);
           changed = true;
         }
