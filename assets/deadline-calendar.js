@@ -1,5 +1,8 @@
 import { DateTime, Duration } from './vendor/luxon.js';
 import { DEADLINE_ZONES, DEADLINE_KINDS, DEADLINE_PROGRESS, DEADLINE_REMINDERS, MAX_DEADLINE_RECORDS, MAX_DEADLINE_BYTES, emptyDeadlineBook, normalizeDeadline, normalizeDeadlineBook, parseDeadlineBook, resolveDeadline, deadlineViews, deadlineCalendar, deadlineText, exampleDeadlineBook } from './deadline-model.js';
+import { mountArticleWorkflow } from './article-workflows.js';
+
+mountArticleWorkflow('deadlines', document.querySelector('.ss-deadline-tool > header'));
 
 let book = emptyDeadlineBook();
 let editingId = null;

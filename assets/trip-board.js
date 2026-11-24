@@ -1,4 +1,7 @@
 import { BOARD_TOOLS, BOARD_TITLES, MAX_BOARD_BYTES, normalizeToolRecord, normalizeBoard, emptyBoard, boardOverview, boardText, parseBoardFile, exampleBoard } from './trip-board-model.js';
+import { mountArticleWorkflow } from './article-workflows.js';
+
+mountArticleWorkflow('board', document.querySelector('.ss-trip-board > header'));
 
 let board = emptyBoard();
 const frames = Object.fromEntries(BOARD_TOOLS.map(tool => [tool, document.getElementById(`board-frame-${tool}`)]));
