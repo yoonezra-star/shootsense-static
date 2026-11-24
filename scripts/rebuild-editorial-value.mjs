@@ -250,3 +250,5 @@ const { finalizeSocialSourceReview } = await import('./finalize-social-source-re
 await finalizeSocialSourceReview();
 const { finalizeRegionalSourceReview } = await import('./finalize-regional-source-review.mjs');
 await finalizeRegionalSourceReview();
+const { finalizeTuyhoaKodaiSourceReview } = await import('./finalize-tuyhoa-kodai-source-review.mjs');
+await finalizeTuyhoaKodaiSourceReview();

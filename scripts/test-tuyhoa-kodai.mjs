@@ -25,7 +25,7 @@ for (const guide of TUYHOA_KODAI_GUIDES) {
     assert.equal(downloads.length, 1);
     const worksheet = await fs.readFile(`.${downloads.attr('href')}`, 'utf8');
     assert.ok(worksheet.includes(`https://shootsense.com/${guide.slug}/`));
-    assert.match(worksheet, /자료 검토: 2026-10-16/);
+    assert.match(worksheet, /자료 검토: 2026-11-24/);
     assert.match(worksheet, /비공개/);
     assert.ok(!worksheet.includes('\ufffd'));
     const allowed = new Set(['daklak.gov.vn', 'vietnam.travel', 'giavere.dsvn.vn', 'dsvn.vn', 'nchmf.gov.vn', 'dindigul.nic.in', 'www.iiap.res.in', 'kso.iiap.res.in', 'tnepass.tn.gov.in']);

@@ -74,13 +74,14 @@ test('worksheets, homepage and sitemap match the batch while earlier article tim
   const home = await read('index.html');
   assert.equal(home('#ss-home-source-review #ss-home-regional-review').length, 1);
   assert.equal(home('#ss-home-regional-review a').length, 2);
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), REGIONAL_MODIFIED);
+  const homeModified = home('meta[property="og:updated_time"]').attr('content');
+  assert.ok(Date.parse(homeModified) >= Date.parse(REGIONAL_MODIFIED));
   const graph = JSON.parse(home('script.rank-math-schema').text())['@graph'];
-  assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === REGIONAL_MODIFIED));
+  assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === homeModified));
   const map = load(await fs.readFile('post-sitemap.xml', 'utf8'), { xml: true });
   assert.equal(map('url').length, 18);
   for (const guide of REGIONAL_GUIDES) assert.equal(map('url').filter((_, node) => map(node).find('loc').text() === `https://shootsense.com/${guide.slug}/`).find('lastmod').text(), REGIONAL_MODIFIED);
   const pageMap = load(await fs.readFile('page-sitemap.xml', 'utf8'), { xml: true });
-  assert.equal(pageMap('url').filter((_, node) => pageMap(node).find('loc').text() === 'https://shootsense.com/').find('lastmod').text(), REGIONAL_MODIFIED);
+  assert.equal(pageMap('url').filter((_, node) => pageMap(node).find('loc').text() === 'https://shootsense.com/').find('lastmod').text(), homeModified);
   assert.equal((await read(`${SOCIAL_ACTIVITY_SLUG}/index.html`))('meta[property="article:modified_time"]').attr('content'), SOCIAL_ACTIVITY_MODIFIED);
 });
