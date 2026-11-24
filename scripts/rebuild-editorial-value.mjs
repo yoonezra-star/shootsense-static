@@ -258,3 +258,5 @@ const { finalizeSafiMleihaSourceReview } = await import('./finalize-safi-mleiha-
 await finalizeSafiMleihaSourceReview();
 const { syncRegionTaxonomy } = await import('./sync-region-taxonomy.mjs');
 await syncRegionTaxonomy();
+const { finalizePreparationSafetySourceReview } = await import('./finalize-preparation-safety-source-review.mjs');
+await finalizePreparationSafetySourceReview();

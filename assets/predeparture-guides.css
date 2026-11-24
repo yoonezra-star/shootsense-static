@@ -1,3 +1,9 @@
 .ss-predeparture-guide .ss-post-summary p{display:block;overflow:visible;-webkit-line-clamp:unset}
 .ss-predeparture-guide .ss-toc ol{padding-left:22px}
 .ss-predeparture-guide .ss-toc a{display:block;min-height:36px;padding:6px 0;line-height:1.7}
+.ss-predeparture-guide .ss-source-review{border-left:3px solid #34756c;padding:14px 16px;margin:20px 0;background:#f1f7f5;color:#233b37;line-height:1.8;overflow-wrap:anywhere}
+.ss-predeparture-guide .ss-source-review p:last-child{margin-bottom:0}
+.ss-predeparture-guide .ss-source-review summary{font-weight:700;min-height:44px;padding:8px 0;cursor:pointer}
+.ss-predeparture-guide .ss-source-review ul{list-style:none;padding:0;margin:12px 0 0}
+.ss-predeparture-guide .ss-source-review li{border-top:1px solid #cbded8;padding:14px 0;margin:0}
+.ss-predeparture-guide .ss-source-review li p{margin:8px 0 0}

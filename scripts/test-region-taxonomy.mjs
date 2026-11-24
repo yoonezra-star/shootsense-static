@@ -107,7 +107,7 @@ test('normal public navigation and article section metadata agree without restor
 test('home and directory dates advance but source review and privacy dates remain independent', async () => {
   const home = await read('index.html');
   assert.equal(home('#ss-home-directory #ss-home-region-review a').length, 2);
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), REGION_TAXONOMY_MODIFIED);
+  assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(REGION_TAXONOMY_MODIFIED));
   for (const slug of [SAFI_SLUG, MLEIHA_SLUG]) {
     const page = await read(`${slug}/index.html`);
     assert.equal(page('meta[property="article:modified_time"]').attr('content'), SAFI_MLEIHA_MODIFIED);
