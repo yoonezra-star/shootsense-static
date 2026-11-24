@@ -42,7 +42,7 @@ test('article and home modification dates advance while checkout remains indepen
   assert.equal(graph.find(node => node['@type'] === 'BlogPosting').datePublished, '2025-05-17T10:07:38+09:00');
   const home = await read('index.html');
   assert.equal(home('#ss-home-source-review #ss-home-bangkok-review').length, 1);
-  assert.equal(home('meta[property="og:updated_time"]').attr('content'), BANGKOK_ARRIVAL_MODIFIED);
+  assert.ok(Date.parse(home('meta[property="og:updated_time"]').attr('content')) >= Date.parse(BANGKOK_ARRIVAL_MODIFIED));
   assert.equal(home('.ss-home-updates > li').first().attr('id'), 'november-recovery-update');
   const checkout = await read('honja-yeohaeng-achim-routine/index.html');
   assert.equal(checkout('meta[property="article:modified_time"]').attr('content'), CHECKOUT_MORNING_MODIFIED);

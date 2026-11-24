@@ -14,6 +14,7 @@
     "test:tool-navigation": "node --test scripts/test-tool-navigation.mjs",
     "test:checkout-source-review": "node --test scripts/test-checkout-source-review.mjs",
     "test:bangkok-source-review": "node --test scripts/test-bangkok-source-review.mjs",
+    "test:dining-source-review": "node --test scripts/test-dining-source-review.mjs",
     "test:arrival-check": "node --test scripts/test-arrival-check.mjs",
     "test:trip-board": "node --test scripts/test-trip-board.mjs",
     "test:deadlines": "node --test scripts/test-deadlines.mjs",

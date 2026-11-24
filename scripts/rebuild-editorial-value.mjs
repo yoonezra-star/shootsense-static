@@ -244,3 +244,5 @@ const { finalizeCheckoutSourceReview } = await import('./finalize-checkout-sourc
 await finalizeCheckoutSourceReview();
 const { finalizeBangkokSourceReview } = await import('./finalize-bangkok-source-review.mjs');
 await finalizeBangkokSourceReview();
+const { finalizeDiningSourceReview } = await import('./finalize-dining-source-review.mjs');
+await finalizeDiningSourceReview();

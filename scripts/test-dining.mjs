@@ -27,7 +27,7 @@ test('dining article has six sections, one unnumbered-label TOC and a private wo
   assert.equal(downloads.length, 1);
   const sheet = await fs.readFile(`.${downloads.attr('href')}`, 'utf8');
   assert.ok(sheet.includes(`https://shootsense.com/${DINING_SLUG}/`));
-  assert.match(sheet, /자료 검토: 2026-10-17/);
+  assert.match(sheet, /자료 검토: 2026-11-24/);
   assert.match(sheet, /비공개/);
   assert.match(sheet, /최종 청구액이나 입장 보장이 아닙니다/);
   assert.ok(!sheet.includes('\ufffd'));

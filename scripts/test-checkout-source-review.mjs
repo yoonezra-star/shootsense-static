@@ -33,14 +33,19 @@ test('review provenance covers seven sources in four bounded groups without chan
 test('article, tool, home and corresponding sitemaps agree on the scoped review timestamp', async () => {
   for (const file of [`${CHECKOUT_MORNING_SLUG}/index.html`, 'tools/departure-check/index.html', 'index.html']) {
     const page = await read(file);
-    const expected = file === 'index.html' ? BANGKOK_ARRIVAL_MODIFIED : REVIEW_MODIFIED;
+    const expected = file === 'index.html' ? page('meta[property="og:updated_time"]').attr('content') : REVIEW_MODIFIED;
+    assert.ok(Date.parse(expected) >= Date.parse(REVIEW_MODIFIED));
     assert.equal(page('meta[property="og:updated_time"]').attr('content'), expected);
     const graph = JSON.parse(page('script.rank-math-schema').text())['@graph'];
     assert.ok(graph.filter(node => node.dateModified).every(node => node.dateModified === expected));
   }
   for (const [file, routes] of [['post-sitemap.xml', [`/${CHECKOUT_MORNING_SLUG}/`]], ['page-sitemap.xml', ['/', '/tools/departure-check/']]]) {
     const map = load(await fs.readFile(file, 'utf8'), { xml: true });
-    for (const route of routes) assert.equal(map('url').filter((_, node) => map(node).find('loc').text() === `https://shootsense.com${route}`).find('lastmod').text(), route === '/' ? BANGKOK_ARRIVAL_MODIFIED : REVIEW_MODIFIED);
+    for (const route of routes) {
+      const modified = map('url').filter((_, node) => map(node).find('loc').text() === `https://shootsense.com${route}`).find('lastmod').text();
+      if (route === '/') assert.ok(Date.parse(modified) >= Date.parse(REVIEW_MODIFIED));
+      else assert.equal(modified, REVIEW_MODIFIED);
+    }
   }
   const article = await read(`${CHECKOUT_MORNING_SLUG}/index.html`);
   assert.equal(JSON.parse(article('script.rank-math-schema').text())['@graph'].find(node => node['@type'] === 'BlogPosting').datePublished, '2025-06-16T23:14:36+09:00');
